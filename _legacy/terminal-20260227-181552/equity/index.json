@@ -1,0 +1,485 @@
+{
+  "generatedAt": "/Users/andrewcarter/Desktop/Forma Strategies Giga File/dapp",
+  "companies": [
+    {
+      "company": "AbbVie Inc.",
+      "slug": "abbvie-inc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Abbott Laboratories",
+      "slug": "abbott-laboratories",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Accenture plc",
+      "slug": "accenture-plc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Alphabet Inc. (Google)",
+      "slug": "alphabet-inc-google",
+      "ticker": "GOOGLE",
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Amazon.com Inc.",
+      "slug": "amazon-com-inc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Ambev S.A.",
+      "slug": "ambev-s-a",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "AppLovin Corporation",
+      "slug": "applovin-corporation",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Apple Inc.",
+      "slug": "apple-inc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "AstraZeneca plc",
+      "slug": "astrazeneca-plc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Bank of America Corp.",
+      "slug": "bank-of-america-corp",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Berkshire Hathaway Inc. B",
+      "slug": "berkshire-hathaway-inc-b",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Broadcom Inc.",
+      "slug": "broadcom-inc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Chevron Corporation",
+      "slug": "chevron-corporation",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Circle Internet Group",
+      "slug": "circle-internet-group",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Cisco Systems Inc.",
+      "slug": "cisco-systems-inc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Coinbase Global Inc.",
+      "slug": "coinbase-global-inc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Comcast Corporation",
+      "slug": "comcast-corporation",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "CrowdStrike Holdings",
+      "slug": "crowdstrike-holdings",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Danaher Corporation",
+      "slug": "danaher-corporation",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Dimensional U.S. Equity ETF",
+      "slug": "dimensional-u-s-equity-etf",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Eli Lilly and Company",
+      "slug": "eli-lilly-and-company",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Exxon Mobil Corporation",
+      "slug": "exxon-mobil-corporation",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "GameStop Corp.",
+      "slug": "gamestop-corp",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Goldman Sachs Group",
+      "slug": "goldman-sachs-group",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Honeywell International",
+      "slug": "honeywell-international",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "IBM Corporation",
+      "slug": "ibm-corporation",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Intel Corporation",
+      "slug": "intel-corporation",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "JPMorgan Chase & Co.",
+      "slug": "jpmorgan-chase-co",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Johnson & Johnson",
+      "slug": "johnson-johnson",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Linde plc",
+      "slug": "linde-plc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Marvell Technology",
+      "slug": "marvell-technology",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Mastercard Incorporated",
+      "slug": "mastercard-incorporated",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "McDonald's Corporation",
+      "slug": "mcdonald-s-corporation",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Medtronic plc",
+      "slug": "medtronic-plc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Merck & Co. Inc.",
+      "slug": "merck-co-inc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Meta Platforms Inc.",
+      "slug": "meta-platforms-inc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "MicroStrategy Incorporated",
+      "slug": "microstrategy-incorporated",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Microsoft Corporation",
+      "slug": "microsoft-corporation",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "NVIDIA Corporation",
+      "slug": "nvidia-corporation",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Oracle Corporation",
+      "slug": "oracle-corporation",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Palantir Technologies",
+      "slug": "palantir-technologies",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Robinhood Markets Inc.",
+      "slug": "robinhood-markets-inc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Tesla Inc.",
+      "slug": "tesla-inc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "The Coca-Cola Company",
+      "slug": "the-coca-cola-company",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "The Home Depot Inc.",
+      "slug": "the-home-depot-inc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "UnitedHealth Group",
+      "slug": "unitedhealth-group",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Visa Inc.",
+      "slug": "visa-inc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    },
+    {
+      "company": "Walmart Inc.",
+      "slug": "walmart-inc",
+      "ticker": null,
+      "has": {
+        "intro": true,
+        "timeline": true,
+        "mr_market": true
+      }
+    }
+  ]
+}

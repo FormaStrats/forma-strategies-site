@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forma Strategies - Product Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0d15;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .flipbook-container {
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+        }
+
+        .flipbook-wrapper {
+            perspective: 2000px;
+            position: relative;
+        }
+
+        .book {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .page {
+            width: 100%;
+            aspect-ratio: 8.5 / 11;
+            background: #ffffff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: left center;
+            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+            backface-visibility: hidden;
+        }
+
+        .page.flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .page-content {
+            width: 100%;
+            height: 100%;
+            padding: 4rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Page 1 - Cover */
+        .page-1 {
+            background: #0a0d15;
+            z-index: 7;
+            overflow: hidden;
+        }
+
+        .cover-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            position: relative;
+        }
+
+        .cover-logo {
+            width: 90%;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 10px 30px rgba(184, 197, 214, 0.3));
+            position: relative;
+            z-index: 2;
+        }
+
+        .cover-mountain {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 45%;
+            background: linear-gradient(to top, rgba(184, 197, 214, 0.04) 0%, transparent 100%);
+            clip-path: polygon(0 100%, 10% 60%, 20% 70%, 30% 50%, 40% 65%, 50% 45%, 60% 60%, 70% 40%, 80% 55%, 90% 35%, 100% 50%, 100% 100%);
+            z-index: 1;
+        }
+
+        .cover-lights {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .light-ray {
+            position: absolute;
+            width: 3px;
+            height: 250px;
+            background: linear-gradient(to bottom, rgba(184, 197, 214, 0.9), rgba(184, 197, 214, 0.3), transparent);
+            filter: blur(2px);
+            animation: lightMove 20s ease-in-out infinite;
+        }
+
+        .light-ray:nth-child(1) {
+            left: 15%;
+            top: -150px;
+            animation-delay: 0s;
+            transform: rotate(-20deg);
+        }
+
+        .light-ray:nth-child(2) {
+            left: 45%;
+            top: -200px;
+            animation-delay: 4s;
+            transform: rotate(-15deg);
+        }
+
+        .light-ray:nth-child(3) {
+            left: 75%;
+            top: -180px;
+            animation-delay: 8s;
+            transform: rotate(-18deg);
+        }
+
+        .light-ray:nth-child(4) {
+            left: 30%;
+            top: -160px;
+            animation-delay: 12s;
+            transform: rotate(-22deg);
+        }
+
+        .light-ray:nth-child(5) {
+            left: 60%;
+            top: -140px;
+            animation-delay: 16s;
+            transform: rotate(-16deg);
+        }
+
+        @keyframes lightMove {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            30% {
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(900px) translateX(80px);
+                opacity: 0.5;
+            }
+            70% {
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Factsheet Pages - Common Styles */
+        .factsheet {
+            background: #ffffff;
+            color: #1a1a1a;
+        }
+
+        .factsheet-header {
+            border-bottom: 3px solid #0a0d15;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .strategy-number {
+            font-size: 0.875rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .strategy-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0a0d15;
+            margin-bottom: 0.5rem;
+        }
+
+        .strategy-type {
+            display: inline-block;
+            padding: 0.375rem 1rem;
+            background: #0a0d15;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 4px;
+        }
+
+        .factsheet-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #0a0d15;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #0a0d15;
+        }
+
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #0a0d15;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .description-text {
+            line-height: 1.7;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .characteristics-list {
+            list-style: none;
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .characteristics-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .characteristics-list li::before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            color: #0a0d15;
+            font-size: 0.75rem;
+        }
+
+        .page-footer {
+            position: absolute;
+            bottom: 2rem;
+            left: 4rem;
+            right: 4rem;
+            font-size: 0.75rem;
+            color: #999;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* V1.0 Launch Page */
+        .launch-page {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            color: #1a1a1a;
+        }
+
+        .launch-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .launch-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0a0d15;
+            margin-bottom: 1rem;
+        }
+
+        .launch-subtitle {
+            font-size: 1.125rem;
+            color: #666;
+        }
+
+        .roadmap-timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #0a0d15, #999);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            top: 0.25rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #0a0d15;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 3px #0a0d15;
+        }
+
+        .timeline-version {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0a0d15;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* Final Page */
+        .final-page {
+            background: #0a0d15;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .final-logo {
+            width: 120px;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .final-title {
+            font-size: 2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #d4dde8 0%, #a8b5c7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .final-text {
+            text-align: center;
+            color: #8a94a6;
+            max-width: 500px;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .final-architecture {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: 
+                linear-gradient(rgba(184, 197, 214, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(184, 197, 214, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .control-btn {
+            padding: 0.875rem 2rem;
+            background: linear-gradient(135deg, #d4dde8 0%, #a8b5c7 100%);
+            color: #0a0d15;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(184, 197, 214, 0.25);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(184, 197, 214, 0.35);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #60a5fa 0%, #4f8fd9 100%);
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(135deg, #4f8fd9 0%, #3b7dc4 100%);
+        }
+
+        .page-indicator {
+            text-align: center;
+            margin-top: 1rem;
+            color: #8a94a6;
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-content {
+                padding: 2rem;
+            }
+            
+            .factsheet-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="flipbook-container">
+        <!-- Download Button -->
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <button id="downloadPdfBtn" style="
+                padding: 0.75rem 1.5rem;
+                background: linear-gradient(135deg, #60a5fa 0%, #4f8fd9 100%);
+                color: #ffffff;
+                border: none;
+                border-radius: 8px;
+                font-family: 'Inter', sans-serif;
+                font-size: 0.9rem;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+                transition: all 0.3s;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+            " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(96, 165, 250, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(96, 165, 250, 0.3)'">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download PDF
+            </button>
+        </div>
+        
+        <div class="flipbook-wrapper">
+            <div class="book" id="book">
+                <!-- Page 1: Cover -->
+                <div class="page page-1" data-page="1">
+                    <div class="page-content">
+                        <div class="cover-lights">
+                            <div class="light-ray"></div>
+                            <div class="light-ray"></div>
+                            <div class="light-ray"></div>
+                            <div class="light-ray"></div>
+                            <div class="light-ray"></div>
+                        </div>
+                        <div class="cover-content">
+                            <img src="FormaStrategiesBanner4k.jpeg" alt="Forma Strategies" class="cover-logo">
+                            <div class="cover-mountain"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 2: Passive Strategy -->
+                <div class="page factsheet" data-page="2">
+                    <div class="page-content">
+                        <div class="factsheet-header">
+                            <div class="strategy-number">Strategy 01</div>
+                            <h1 class="strategy-title">Universe Token Strategy</h1>
+                            <span class="strategy-type">Passive Strategy</span>
+                        </div>
+
+                        <div class="factsheet-grid">
+                            <div class="info-box">
+                                <div class="info-label">Risk Level</div>
+                                <div class="info-value">Low-Moderate</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="info-label">Rebalancing</div>
+                                <div class="info-value">Quarterly</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="info-label">Asset Class</div>
+                                <div class="info-value">Tokenized Equities</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="info-label">Strategy Type</div>
+                                <div class="info-value">Universe Token Strategy</div>
+                            </div>
+                        </div>
+
+                        <div class="section-title">Investment Objective</div>
+                        <p class="description-text">
+                            The Universe Token Strategy provides broad, diversified exposure across the tokenized equity universe. Designed for investors seeking steady growth with reduced volatility through passive allocation across multiple sectors and market capitalizations.
+                        </p>
+
+                        <div class="section-title">Key Characteristics</div>
+                        <ul class="characteristics-list">
+                            <li>Diversified exposure to tokenized stocks across all major sectors</li>
+                            <li>Market-cap weighted allocation methodology</li>
+                            <li>Quarterly rebalancing to maintain target allocations</li>
+                            <li>Low-cost passive management approach</li>
+                            <li>Noncustodial structure with full asset ownership</li>
+                            <li>Real-time transparency via Solana blockchain</li>
+                        </ul>
+
+                        <div class="page-footer">
+                            <span>Forma Strategies LLC |  </span>
+                            <span>Page 2 of 7</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 3: Select Tokenized Stocks -->
+                <div class="page factsheet" data-page="3">
+                    <div class="page-content">
+                        <div class="factsheet-header">
+                            <div class="strategy-number">Strategy 02</div>
+                            <h1 class="strategy-title">Select Tokenized Stocks</h1>
+                            <span class="strategy-type">Active Strategy</span>
+                        </div>
+
+                        <div class="factsheet-grid">
+                            <div class="info-box">
+                                <div class="info-label">Risk Level</div>
+                                <div class="info-value">Moderate</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="info-label">Rebalancing</div>
+                                <div class="info-value">Monthly</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="info-label">Asset Class</div>
+                                <div class="info-value">Tokenized Equities</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="info-label">Strategy Type</div>
+                                <div class="info-value">Active Selection</div>
+                            </div>
+                        </div>
+
+                        <div class="section-title">Investment Objective</div>
+                        <p class="description-text">
+                            A concentrated portfolio of high-conviction tokenized equity positions selected through fundamental analysis and market research. This strategy seeks to outperform broad market indices through active management and tactical allocation.
+                        </p>
+
+                        <div class="section-title">Key Characteristics</div>
+                        <ul class="characteristics-list">
+                            <li>Concentrated allocation in 15-25 high-conviction positions</li>
+                            <li>Active management with monthly rebalancing</li>
+                            <li>Fundamental analysis-driven security selection</li>
+                            <li>Focus on quality companies with strong fundamentals</li>
+                            <li>Dynamic sector allocation based on market conditions</li>
+                            <li>Enhanced return potential through active management</li>
+                        </ul>
+
+                        <div class="page-footer">
+                            <span>Forma Strategies LLC |  </span>
+                            <span>Page 3 of 7</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 4: Pure Growth Strategy -->
+                <div class="page factsheet" data-page="4">
+                    <div class="page-content">
+                        <div class="factsheet-header">
+                            <div class="strategy-number">Strategy 03</div>
+                            <h1 class="strategy-title">Pure Growth Strategy</h1>
+                            <span class="strategy-type">Active Strategy</span>
+                        </div>
+
+                        <div class="factsheet-grid">
+                            <div class="info-box">
+                                <div class="info-label">Risk Level</div>
+                                <div class="info-value">High</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="info-label">Rebalancing</div>
+                                <div class="info-value">Weekly</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="info-label">Asset Class</div>
+                                <div class="info-value">Growth Assets</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="info-label">Strategy Type</div>
+                                <div class="info-value">Aggressive Growth</div>
+                            </div>
+                        </div>
+
+                        <div class="section-title">Investment Objective</div>
+                        <p class="description-text">
+                            An aggressive growth strategy focused on high-growth assets with maximum appreciation potential. This strategy employs dynamic allocation and tactical rebalancing to capitalize on momentum and emerging opportunities in high-growth sectors.
+                        </p>
+
+                        <div class="section-title">Key Characteristics</div>
+                        <ul class="characteristics-list">
+                            <li>Aggressive positioning in high-growth, high-volatility assets</li>
+                            <li>Weekly rebalancing for tactical adjustments</li>
+                            <li>Focus on emerging sectors and disruptive technologies</li>
+                            <li>Momentum-based allocation methodology</li>
+                            <li>Higher risk tolerance for enhanced return potential</li>
+                            <li>Active risk management with stop-loss protocols</li>
+                        </ul>
+
+                        <div class="page-footer">
+                            <span>Forma Strategies LLC |  </span>
+                            <span>Page 4 of 7</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 5: Solana Ecosystem Strategy -->
+                <div class="page factsheet" data-page="5">
+                    <div class="page-content">
+                        <div class="factsheet-header">
+                            <div class="strategy-number">Strategy 04</div>
+                            <h1 class="strategy-title">Solana Ecosystem Strategy</h1>
+                            <span class="strategy-type">Active Strategy</span>
+                        </div>
+
+                        <div class="factsheet-grid">
+                            <div class="info-box">
+                                <div class="info-label">Risk Level</div>
+                                <div class="info-value">High</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="info-label">Rebalancing</div>
+                                <div class="info-value">Bi-Weekly</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="info-label">Asset Class</div>
+                                <div class="info-value">Solana Ecosystem</div>
+                            </div>
+                            <div class="info-box">
+                                <div class="info-label">Strategy Type</div>
+                                <div class="info-value">Ecosystem Focus</div>
+                            </div>
+                        </div>
+
+                        <div class="section-title">Investment Objective</div>
+                        <p class="description-text">
+                            Pure exposure to the Solana ecosystem through strategic allocation across DeFi protocols, infrastructure projects, and emerging Solana-native applications. This strategy captures the growth and innovation of the Solana blockchain ecosystem.
+                        </p>
+
+                        <div class="section-title">Key Characteristics</div>
+                        <ul class="characteristics-list">
+                            <li>100% allocation to Solana ecosystem assets</li>
+                            <li>Diversification across DeFi, infrastructure, and applications</li>
+                            <li>Bi-weekly rebalancing to capture ecosystem dynamics</li>
+                            <li>Focus on proven protocols with strong fundamentals</li>
+                            <li>Early access to emerging Solana projects</li>
+                            <li>Deep integration with Solana DeFi infrastructure</li>
+                        </ul>
+
+                        <div class="page-footer">
+                            <span>Forma Strategies LLC |  </span>
+                            <span>Page 5 of 7</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 6: V1.0 Launch & Roadmap -->
+                <div class="page launch-page" data-page="6">
+                    <div class="page-content">
+                        <div class="launch-header">
+                            <h1 class="launch-title">V1.0 Launch & Roadmap</h1>
+                            <p class="launch-subtitle">Building the Future of Onchain Asset Management</p>
+                        </div>
+
+                        <div class="roadmap-timeline">
+                            <div class="timeline-line"></div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-version">V1.0 - Foundation</div>
+                                <p class="timeline-description">
+                                    Launch of four core strategies (1 passive, 3 active) with full noncustodial infrastructure on Solana. Integration with Jupiter for optimal execution and Helius for enhanced data analytics. Establishing the foundation for institutional-grade onchain asset management.
+                                </p>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-version">V2.0 - Expansion</div>
+                                <p class="timeline-description">
+                                    Introduction of additional specialized strategies based on client feedback and market opportunities. Enhanced portfolio customization features, advanced risk analytics, and expanded tokenized asset coverage. Integration with additional DeFi protocols and liquidity sources.
+                                </p>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-version">V3.0 - Innovation</div>
+                                <p class="timeline-description">
+                                    Launch of proprietary AI-driven strategy optimization, cross-chain capabilities, and institutional-grade portfolio construction tools. Advanced automation features, tax optimization strategies, and comprehensive reporting infrastructure for professional investors.
+                                </p>
+                            </div>
+
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-version">Beyond - Vision</div>
+                                <p class="timeline-description">
+                                    Continuous innovation driven by partner and client needs. Development of new asset classes, advanced derivatives strategies, and enhanced DeFi integration. Building the definitive platform for noncustodial institutional asset management.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="page-footer">
+                            <span>Forma Strategies LLC |  </span>
+                            <span>Page 6 of 7</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 7: Final Page -->
+                <div class="page final-page" data-page="7">
+                    <div class="page-content">
+                        <div class="final-architecture"></div>
+                        <img src="forma-f-logo-large.png" alt="Forma Strategies" class="final-logo">
+                        <h2 class="final-title">The Future is Onchain</h2>
+                        <p class="final-text">
+                            Forma Strategies is pioneering the convergence of institutional asset management and blockchain technology. Experience true ownership, enhanced transparency, and innovative strategies built exclusively on Solana.
+                        </p>
+                        <div style="text-align: center; color: #5a6474; font-size: 0.875rem;">
+                            <p style="margin-bottom: 0.5rem;">Contact Us</p>
+                            <p>United States</p>
+                            <p style="margin-top: 1.5rem; font-size: 0.75rem;">© 2026 Forma Strategies LLC</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="control-btn" id="prevBtn" disabled>← Previous</button>
+            <button class="control-btn download-btn" id="downloadBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.5rem; vertical-align: middle;">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download PDF
+            </button>
+            <button class="control-btn" id="nextBtn">Next →</button>
+        </div>
+        <div class="page-indicator">
+            <span id="pageIndicator">Page 1 of 7</span>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 7;
+        const pages = document.querySelectorAll('.page');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const pageIndicator = document.getElementById('pageIndicator');
+
+        function updateBook() {
+            pages.forEach((page, index) => {
+                const pageNum = index + 1;
+                if (pageNum < currentPage) {
+                    page.classList.add('flipped');
+                    page.style.zIndex = totalPages - pageNum;
+                } else {
+                    page.classList.remove('flipped');
+                    page.style.zIndex = totalPages - pageNum;
+                }
+            });
+
+            // Update controls
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+            pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updateBook();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                updateBook();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentPage < totalPages) {
+                currentPage++;
+                updateBook();
+            } else if (e.key === 'ArrowLeft' && currentPage > 1) {
+                currentPage--;
+                updateBook();
+            }
+        });
+
+        // PDF Download functionality
+        const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        
+        async function generatePDF(button) {
+            // Change button text to show loading
+            const originalText = button.innerHTML;
+            const loadingHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg> Generating...';
+            button.innerHTML = loadingHTML;
+            button.disabled = true;
+            button.style.opacity = '0.7';
+            
+            try {
+                // Wait for libraries to load
+                if (typeof window.jspdf === 'undefined' || typeof html2canvas === 'undefined') {
+                    throw new Error('PDF libraries not loaded. Please refresh the page and try again.');
+                }
+
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'letter');
+                
+                // Get all pages
+                const allPages = document.querySelectorAll('.page');
+                
+                // Ensure all images are loaded first
+                const images = document.querySelectorAll('img');
+                await Promise.all(Array.from(images).map(img => {
+                    if (img.complete) return Promise.resolve();
+                    return new Promise((resolve, reject) => {
+                        img.onload = resolve;
+                        img.onerror = resolve; // Don't fail on image errors
+                    });
+                }));
+                
+                for (let i = 0; i < allPages.length; i++) {
+                    const page = allPages[i];
+                    
+                    // Store original state
+                    const wasFlipped = page.classList.contains('flipped');
+                    const originalZIndex = page.style.zIndex;
+                    const originalTransform = page.style.transform;
+                    const originalPosition = page.style.position;
+                    
+                    // Prepare page for capture
+                    page.classList.remove('flipped');
+                    page.style.position = 'relative';
+                    page.style.transform = 'none';
+                    page.style.zIndex = '9999';
+                    page.style.visibility = 'visible';
+                    
+                    // Wait a moment for styles to apply
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    
+                    // Capture the page as image
+                    const canvas = await html2canvas(page, {
+                        scale: 2,
+                        useCORS: true,
+                        allowTaint: true,
+                        logging: false,
+                        backgroundColor: '#ffffff',
+                        imageTimeout: 0,
+                        removeContainer: true
+                    });
+                    
+                    const imgData = canvas.toDataURL('image/jpeg', 0.92);
+                    
+                    // Add page to PDF
+                    if (i > 0) {
+                        pdf.addPage();
+                    }
+                    
+                    const imgWidth = 215.9; // Letter width in mm
+                    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                    const pageHeight = 279.4; // Letter height in mm
+                    
+                    // Center vertically if image is smaller than page
+                    const yOffset = imgHeight < pageHeight ? (pageHeight - imgHeight) / 2 : 0;
+                    
+                    pdf.addImage(imgData, 'JPEG', 0, yOffset, imgWidth, imgHeight);
+                    
+                    // Restore page state
+                    if (wasFlipped) {
+                        page.classList.add('flipped');
+                    }
+                    page.style.zIndex = originalZIndex;
+                    page.style.transform = originalTransform;
+                    page.style.position = originalPosition;
+                }
+                
+                // Save the PDF
+                pdf.save('Forma Strategies V1.0 Flip Book.pdf');
+                
+                // Restore button
+                button.innerHTML = originalText;
+                button.disabled = false;
+                button.style.opacity = '1';
+                
+                // Restore book display
+                updateBook();
+                
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('There was an error generating the PDF: ' + error.message + '\n\nPlease try refreshing the page and trying again.');
+                button.innerHTML = originalText;
+                button.disabled = false;
+                button.style.opacity = '1';
+            }
+        }
+        
+        // Add event listener to top download button
+        if (downloadPdfBtn) {
+            downloadPdfBtn.addEventListener('click', () => generatePDF(downloadPdfBtn));
+        }
+        
+        // Add event listener to controls download button
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', () => generatePDF(downloadBtn));
+        }
+
+        // Initialize
+        updateBook();
+    </script>
+</body>
+</html>

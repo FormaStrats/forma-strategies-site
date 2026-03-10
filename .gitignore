@@ -1,0 +1,8 @@
+.DS_Store
+*.log
+node_modules/
+.DS_Store
+# Local server artifacts
+*.pid
+# Backups we created during edits
+*.bak-*

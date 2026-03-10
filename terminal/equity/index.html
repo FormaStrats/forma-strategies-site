@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forma Terminal — Equity Research</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0b0b10;
+      --panel:rgba(68,69,84,.10);
+      --border:rgba(127,123,130,.25);
+      --muted:rgba(255,255,255,.72);
+      --muted2:rgba(191,172,181,.78);
+      --link:rgba(127,214,255,.92);
+      --chip:rgba(0,0,0,.20);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(1100px 600px at 20% 0%, rgba(124,58,237,.14), transparent 55%),radial-gradient(900px 540px at 80% 20%, rgba(14,165,233,.10), transparent 50%),var(--bg);color:#fff;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    .wrap{max-width:1200px;margin:0 auto;padding:26px 18px 60px}
+    .top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+    .kicker{font-family:"IBM Plex Sans",Inter;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:rgba(191,172,181,.70)}
+    h1{margin:6px 0 0;font-size:30px;letter-spacing:-.03em}
+    .sub{margin-top:10px;color:var(--muted);line-height:1.55;max-width:80ch}
+    .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#fff;border:1px solid var(--border);background:rgba(0,0,0,.25);padding:10px 12px;border-radius:999px;font-weight:600;font-size:13px}
+    .btn:hover{border-color:rgba(191,172,181,.55);background:rgba(68,69,84,.22)}
+
+    .grid{margin-top:16px;display:grid;grid-template-columns:1fr;gap:12px}
+    .card{border:1px solid var(--border);border-radius:18px;background:var(--panel);padding:16px}
+    .cardTitle{font-family:"IBM Plex Sans",Inter;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(127,123,130,.95)}
+
+    .toolbar{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .search{flex:1;min-width:220px;max-width:520px;border:1px solid rgba(127,123,130,.24);border-radius:14px;padding:10px 12px;background:rgba(0,0,0,.25);color:#fff;outline:none}
+    .count{color:var(--muted2);font-size:12px}
+
+    table{width:100%;border-collapse:separate;border-spacing:0 8px;margin-top:12px}
+    th{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(191,172,181,.70);text-align:left;padding:0 10px}
+    td{padding:12px 10px;background:rgba(0,0,0,.20);border-top:1px solid rgba(127,123,130,.18);border-bottom:1px solid rgba(127,123,130,.18)}
+    tr td:first-child{border-left:1px solid rgba(127,123,130,.18);border-top-left-radius:14px;border-bottom-left-radius:14px}
+    tr td:last-child{border-right:1px solid rgba(127,123,130,.18);border-top-right-radius:14px;border-bottom-right-radius:14px}
+    tr:hover td{background:rgba(68,69,84,.20);border-color:rgba(191,172,181,.35)}
+
+    .name{font-weight:800;letter-spacing:-.01em}
+    .ticker{font-family:"IBM Plex Sans",Inter;color:rgba(255,255,255,.82)}
+    .links{display:flex;gap:10px;flex-wrap:wrap}
+    a.link{color:var(--link);text-decoration:none;font-weight:600;font-size:12px}
+    a.link:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="kicker">Forma Terminal</div>
+        <h1>Equity Research</h1>
+        <div class="sub">Clean, static research library: open a company’s <strong>Intro</strong>, scan the <strong>Timeline</strong>, then check <strong>Mr. Market</strong> for price context.</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn" href="../" target="_blank" rel="noopener noreferrer">Back to Terminal</a>
+        <a class="btn" href="overview.md" target="_blank" rel="noopener noreferrer">Open Markdown Directory</a>
+      </div>
+    </div>
+
+    <section class="card">
+      <div class="cardTitle">Company directory</div>
+      <div class="toolbar">
+        <input class="search" id="q" placeholder="Search company…" autocomplete="off" />
+        <div class="count" id="count">—</div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width:42%">Company</th>
+            <th style="width:12%">Ticker</th>
+            <th>Research</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <script>
+    async function load() {
+      const res = await fetch('index.json');
+      const data = await res.json();
+      return (data.companies || []).map(c => ({
+        company: c.company,
+        slug: c.slug,
+        ticker: c.ticker || '—',
+        has: c.has || {}
+      })).sort((a,b) => (a.company||'').localeCompare(b.company||''));
+    }
+
+    function mkLink(slug, fn, label) {
+      const a = document.createElement('a');
+      a.className = 'link';
+      a.href = `./companies/${slug}/${fn}`;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = label;
+      return a;
+    }
+
+    function render(list) {
+      const tbody = document.getElementById('rows');
+      tbody.innerHTML = '';
+
+      for (const c of list) {
+        const tr = document.createElement('tr');
+
+        const tdName = document.createElement('td');
+        tdName.innerHTML = `<div class="name">${c.company}</div>`;
+
+        const tdTick = document.createElement('td');
+        tdTick.innerHTML = `<div class="ticker">${c.ticker}</div>`;
+
+        const tdLinks = document.createElement('td');
+        const wrap = document.createElement('div');
+        wrap.className = 'links';
+        if (c.has.intro) wrap.appendChild(mkLink(c.slug, 'intro.md', 'Intro'));
+        if (c.has.timeline) wrap.appendChild(mkLink(c.slug, 'timeline.md', 'Timeline'));
+        if (c.has.mr_market) wrap.appendChild(mkLink(c.slug, 'mr_market.md', 'Mr. Market'));
+        tdLinks.appendChild(wrap);
+
+        tr.appendChild(tdName);
+        tr.appendChild(tdTick);
+        tr.appendChild(tdLinks);
+        tbody.appendChild(tr);
+      }
+
+      document.getElementById('count').textContent = `${list.length} companies`;
+    }
+
+    (async () => {
+      const all = await load();
+      render(all);
+      const q = document.getElementById('q');
+      q.addEventListener('input', () => {
+        const s = (q.value || '').toLowerCase().trim();
+        if (!s) return render(all);
+        render(all.filter(c => (c.company||'').toLowerCase().includes(s) || (c.slug||'').toLowerCase().includes(s) || (c.ticker||'').toLowerCase().includes(s)));
+      });
+    })();
+  </script>
+</body>
+</html>
