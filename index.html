@@ -135,7 +135,7 @@
               <g fill="#a9c1ff"><rect x="138" y="44" width="62" height="7" rx="3.5"/><rect x="138" y="58" width="44" height="7" rx="3.5" opacity=".75"/><rect x="138" y="72" width="30" height="7" rx="3.5" opacity=".55"/></g>
             </svg>
             <h3>Choose a strategy</h3>
-            <p>Pick the equal-weight Universe or the research-weighted Select portfolio, then enter any amount from $100.</p>
+            <p>Pick a committee-approved strategy (index, thematic, tracker, multi-asset or active), then enter an amount above its minimum (from $50; $250 for the Total Index).</p>
           </article>
           <article class="how__card">
             <div class="how__n">03</div>
@@ -211,7 +211,7 @@
             <div role="columnheader">Traditional SMA</div>
             <div role="columnheader" class="is-forma">Forma onchain account</div>
           </div>
-          <div class="compare__row" role="row"><div role="rowheader">Minimum</div><div role="cell">$100,000+</div><div role="cell" class="is-forma">$100</div></div>
+          <div class="compare__row" role="row"><div role="rowheader">Minimum</div><div role="cell">$100,000+</div><div role="cell" class="is-forma">From $50</div></div>
           <div class="compare__row" role="row"><div role="rowheader">Custody</div><div role="cell">Custodian bank</div><div role="cell" class="is-forma">Your own wallet</div></div>
           <div class="compare__row" role="row"><div role="rowheader">Settlement</div><div role="cell">T+1</div><div role="cell" class="is-forma">Seconds</div></div>
           <div class="compare__row" role="row"><div role="rowheader">Hours</div><div role="cell">Market hours</div><div role="cell" class="is-forma">24/7/365</div></div>
@@ -226,9 +226,9 @@
     <section class="section" id="strategies">
       <div class="wrap">
         <div class="head reveal">
-          <div class="eyebrow">Strategies · v2.0</div>
-          <h2>Model portfolios, priced live.</h2>
-          <p>Compositions and moves below update from live onchain markets. Deploy any of them straight from the Terminal.</p>
+          <div class="eyebrow">Strategies · approved by the Investment Committee</div>
+          <h2>A catalog of model portfolios, priced live.</h2>
+          <p>Index, thematic, tracker, multi-asset and active strategies. Each live strategy is approved by Forma's Global Investment Committee and held to hard risk limits in code. Compositions and moves update from live onchain markets.</p>
         </div>
         <div class="strats" id="strats">
           <article class="strat reveal" data-strategy="tokenized-stocks-index">
@@ -257,16 +257,13 @@
             <div class="bars" data-field="bars"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
             <a class="btn btn--metal btn--block" href="terminal/?tab=deploy&amp;strategy=select-tokenized-stocks">Deploy Select →</a>
           </article>
-          <article class="strat strat--soon reveal">
-            <div class="strat__top"><span class="tag">Active</span><span class="tag">Coming soon</span></div>
-            <h3>Pure Growth Strategy</h3>
-            <p class="strat__tag">Aggressive positioning in high-growth digital assets with tactical rebalancing.</p>
-          </article>
-          <article class="strat strat--soon reveal">
-            <div class="strat__top"><span class="tag">Active</span><span class="tag">Coming soon</span></div>
-            <h3>Solana Ecosystem Strategy</h3>
-            <p class="strat__tag">Pure exposure to Solana: DeFi, infrastructure and emerging projects.</p>
-          </article>
+        </div>
+        <div class="catalog" id="catalog" hidden>
+          <div class="catalog__head">
+            <span class="catalog__title">More strategies</span>
+            <a class="catalog__all" href="terminal/?tab=deploy">Explore all <span data-live="strategyCount">—</span> in the Terminal →</a>
+          </div>
+          <div class="catalog__list" id="catalogList"></div>
         </div>
       </div>
     </section>
@@ -306,7 +303,7 @@
           <div class="monitor__head">
             <div>
               <div class="eyebrow">Investability monitor · live</div>
-              <h3 class="monitor__title"><span data-live="investable">—</span> of <span data-live="universeSize">65</span> tokenized stocks pass today's liquidity screen</h3>
+              <h3 class="monitor__title"><span data-live="investable">—</span> of <span data-live="universeSize">—</span> tokenized stocks pass today's liquidity screen</h3>
               <p class="monitor__sub">The Universe strategy holds only names with at least $2.5k of onchain liquidity or $5k traded in 24 hours. Watchlist names join automatically as their markets deepen.</p>
             </div>
             <div class="legend">
@@ -347,7 +344,7 @@
           </a>
           <a class="callout" href="terminal/?tab=research">
             <div class="callout__k">Research</div>
-            <div class="callout__v">Equity research, universe data and macro models behind every strategy →</div>
+            <div class="callout__v">Equity research and company profiles behind every strategy →</div>
           </a>
           <a class="callout" href="product-guide-flipbook.html">
             <div class="callout__k">Product guide</div>

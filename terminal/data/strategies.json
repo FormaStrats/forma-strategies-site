@@ -1,516 +1,1738 @@
 [
   {
+    "id": "total-tokenized-stock-index",
+    "code": "FTTI",
+    "name": "Total Tokenized Stock Index Strategy",
+    "shortName": "Total Index",
+    "type": "Passive",
+    "category": "Index",
+    "status": "active",
+    "featured": true,
+    "riskLevel": 3,
+    "tagline": "The largest investable tokenized companies in one deposit, weighted by size.",
+    "description": "Hold the largest tokenized common stocks that pass the onchain liquidity screen, weighted by the size of each underlying company, with an 18% cap per company. Names under 0.5% of the index are left out, and thinly traded names are capped, with the weight they cannot hold kept in SPYx, an S&P 500 ETF token. Holdings are recomputed from live market data at each deploy and rebalance; changes reach your wallet only when you sign them.",
+    "methodology": [
+      "Eligible: every common stock and ADR in Forma's xStocks registry (58 today); ETFs, leveraged funds and preferred stock are excluded.",
+      "Investable today: at least $2,500 of onchain liquidity or $5,000 traded in 24 hours.",
+      "Weighted by each company's full market capitalisation (not float-adjusted), read live from Jupiter's market data for each underlying company.",
+      "Cap: 18% per company, with any excess redistributed pro rata. No sector cap: sector weights follow the companies that pass the screen (technology is about half today).",
+      "Thinly traded names (under $25k of liquidity or $10k of daily volume) are capped at 2% each and 10% combined; the weight they can't hold goes to SPYx, an S&P 500 ETF token, up to 20%.",
+      "Names under 0.5% of the index are left out so no deposit buys dust. Reviewed quarterly by the GIC."
+    ],
+    "construction": "market-cap-screened",
+    "screen": {
+      "minLiquidityUsd": 2500,
+      "minVolume24hUsd": 5000
+    },
+    "weighting": {
+      "maxWeightBps": 1800,
+      "minWeightBps": 50,
+      "thin": {
+        "minLiquidityUsd": 25000,
+        "minVolume24hUsd": 10000,
+        "maxNameBps": 200,
+        "maxTotalBps": 1000
+      },
+      "sleeve": {
+        "symbol": "SPYx",
+        "maxBps": 2000,
+        "mint": "XsoCS1TfEyfFhfvj8EtZ528L3CaKBDBRqRapnBbDF2W"
+      }
+    },
+    "labels": [],
+    "fees": {
+      "deployUsd": 1.3,
+      "rebalanceUsd": 0.25
+    },
+    "cadence": "quarterly",
+    "minDeployUsd": 250,
+    "maxSingleNameBps": 2000,
+    "maxPositions": 50,
+    "disclosures": [
+      "Holds the largest tokenized US-listed companies that pass Forma's liquidity screen, weighted by full company market cap with an 18% cap per company. Technology is about half of the index (51% of holdings on 2026-11-04) because no sector cap applies. It does not own the whole US stock market and is not affiliated with, or designed to track, any index provider's index.",
+      "Up to 20% may be held in SPYx, an S&P 500 ETF token, as a liquidity sleeve for constituents whose onchain markets are thin. Smaller deposits hold fewer names; very small positions are skipped."
+    ],
+    "governance": {
+      "decisionId": "GIC-2026-003",
+      "nextReview": "2026-12-18"
+    },
+    "targets": [
+      {
+        "symbol": "AAPLx",
+        "mint": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp",
+        "weightBps": 173,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "ABBVx",
+        "mint": "XswbinNKyPmzTa5CskMbCPvMW6G5CMnZXZEeQSSQoie",
+        "weightBps": 173,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "ABTx",
+        "mint": "XsHtf5RpxsQ7jeJ9ivNewouZKJHbPxhPoEy6yYvULr7",
+        "weightBps": 173,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "ACNx",
+        "mint": "Xs5UJzmCRQ8DWZjskExdSQDnbE6iLkRu2jjrRAB1JSU",
+        "weightBps": 173,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "AMBRx",
+        "mint": "XsaQTCgebC2KPbf27KUhdv5JFvHhQ4GDAPURwrEhAzb",
+        "weightBps": 173,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "AMZNx",
+        "mint": "Xs3eBt7uRfJX8QUs4suhyU8p2M6DoUDrJyWBa8LLZsg",
+        "weightBps": 173,
+        "sector": "Consumer Discretionary"
+      },
+      {
+        "symbol": "APPx",
+        "mint": "XsPdAVBi8Zc1xvv53k4JcMrQaEDTgkGqKYeh7AYgPHV",
+        "weightBps": 173,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "AVGOx",
+        "mint": "XsgSaSvNSqLTtFuyWPBhK9196Xb9Bbdyjj4fH3cPJGo",
+        "weightBps": 173,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "AZNx",
+        "mint": "Xs3ZFkPYT2BN7qBMqf1j1bfTeTm1rFzEFSsQ1z3wAKU",
+        "weightBps": 173,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "BACx",
+        "mint": "XswsQk4duEQmCbGzfqUUWYmi7pV7xpJ9eEmLHXCaEQP",
+        "weightBps": 173,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "BRK.Bx",
+        "mint": "Xs6B6zawENwAbWVi7w92rjazLuAr5Az59qgWKcNb45x",
+        "weightBps": 173,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "CMCSAx",
+        "mint": "XsvKCaNsxg2GN8jjUmq71qukMJr7Q1c5R2Mk9P8kcS8",
+        "weightBps": 173,
+        "sector": "Communication Services"
+      },
+      {
+        "symbol": "COINx",
+        "mint": "Xs7ZdzSHLU9ftNJsii5fCeJhoRWSC32SQGzGQtePxNu",
+        "weightBps": 173,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "CRCLx",
+        "mint": "XsueG8BtpquVJX9LVLLEGuViXUungE6WmK5YZ3p3bd1",
+        "weightBps": 173,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "CRMx",
+        "mint": "XsczbcQ3zfcgAEt9qHQES8pxKAVG5rujPSHQEXi4kaN",
+        "weightBps": 173,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "CRWDx",
+        "mint": "Xs7xXqkcK7K8urEqGg52SECi79dRp2cEKKuYjUePYDw",
+        "weightBps": 173,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "CSCOx",
+        "mint": "Xsr3pdLQyXvDJBFgpR5nexCEZwXvigb8wbPYp4YoNFf",
+        "weightBps": 173,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "CVXx",
+        "mint": "XsNNMt7WTNA2sV3jrb1NNfNgapxRF5i4i6GcnTRRHts",
+        "weightBps": 173,
+        "sector": "Energy"
+      },
+      {
+        "symbol": "DFDVx",
+        "mint": "Xs2yquAgsHByNzx68WJC55WHjHBvG9JsMB7CWjTLyPy",
+        "weightBps": 173,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "DHRx",
+        "mint": "Xseo8tgCZfkHxWS9xbFYeKFyMSbWEvZGFV1Gh53GtCV",
+        "weightBps": 173,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "GMEx",
+        "mint": "Xsf9mBktVB9BSU5kf4nHxPq5hCBJ2j2ui3ecFGxPRGc",
+        "weightBps": 173,
+        "sector": "Consumer Discretionary"
+      },
+      {
+        "symbol": "GOOGLx",
+        "mint": "XsCPL9dNWBMvFtTmwcCA5v3xWPSMEBCszbQdiLLq6aN",
+        "weightBps": 173,
+        "sector": "Communication Services"
+      },
+      {
+        "symbol": "GSx",
+        "mint": "XsgaUyp4jd1fNBCxgtTKkW64xnnhQcvgaxzsbAq5ZD1",
+        "weightBps": 173,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "HDx",
+        "mint": "XszjVtyhowGjSC5odCqBpW1CtXXwXjYokymrk7fGKD3",
+        "weightBps": 173,
+        "sector": "Consumer Discretionary"
+      },
+      {
+        "symbol": "HONx",
+        "mint": "XsRbLZthfABAPAfumWNEJhPyiKDW6TvDVeAeW7oKqA2",
+        "weightBps": 172,
+        "sector": "Industrials"
+      },
+      {
+        "symbol": "HOODx",
+        "mint": "XsvNBAYkrDRNhA7wPHQfX3ZUXZyZLdnCQDfHZ56bzpg",
+        "weightBps": 172,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "IBMx",
+        "mint": "XspwhyYPdWVM8XBHZnpS9hgyag9MKjLRyE3tVfmCbSr",
+        "weightBps": 172,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "INTCx",
+        "mint": "XshPgPdXFRWB8tP1j82rebb2Q9rPgGX37RuqzohmArM",
+        "weightBps": 172,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "JNJx",
+        "mint": "XsGVi5eo1Dh2zUpic4qACcjuWGjNv8GCt3dm5XcX6Dn",
+        "weightBps": 172,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "JPMx",
+        "mint": "XsMAqkcKsUewDrzVkait4e5u4y8REgtyS7jWgCpLV2C",
+        "weightBps": 172,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "KOx",
+        "mint": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+        "weightBps": 172,
+        "sector": "Consumer Staples"
+      },
+      {
+        "symbol": "LINx",
+        "mint": "XsSr8anD1hkvNMu8XQiVcmiaTP7XGvYu7Q58LdmtE8Z",
+        "weightBps": 172,
+        "sector": "Materials"
+      },
+      {
+        "symbol": "LLYx",
+        "mint": "Xsnuv4omNoHozR6EEW5mXkw8Nrny5rB3jVfLqi6gKMH",
+        "weightBps": 172,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "MAx",
+        "mint": "XsApJFV9MAktqnAc6jqzsHVujxkGm9xcSUffaBoYLKC",
+        "weightBps": 172,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "MCDx",
+        "mint": "XsqE9cRRpzxcGKDXj1BJ7Xmg4GRhZoyY1KpmGSxAWT2",
+        "weightBps": 172,
+        "sector": "Consumer Discretionary"
+      },
+      {
+        "symbol": "MDTx",
+        "mint": "XsDgw22qRLTv5Uwuzn6T63cW69exG41T6gwQhEK22u2",
+        "weightBps": 172,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "METAx",
+        "mint": "Xsa62P5mvPszXL1krVUnU5ar38bBSVcWAB6fmPCo5Zu",
+        "weightBps": 172,
+        "sector": "Communication Services"
+      },
+      {
+        "symbol": "MRKx",
+        "mint": "XsnQnU7AdbRZYe2akqqpibDdXjkieGFfSkbkjX1Sd1X",
+        "weightBps": 172,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "MRVLx",
+        "mint": "XsuxRGDzbLjnJ72v74b7p9VY6N66uYgTCyfwwRjVCJA",
+        "weightBps": 172,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "MSFTx",
+        "mint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+        "weightBps": 172,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "MSTRx",
+        "mint": "XsP7xzNPvEHS1m6qfanPUGjNmdnmsLKEoNAnHjdxxyZ",
+        "weightBps": 172,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "NFLXx",
+        "mint": "XsEH7wWfJJu2ZT3UCFeVfALnVA6CP5ur7Ee11KmzVpL",
+        "weightBps": 172,
+        "sector": "Communication Services"
+      },
+      {
+        "symbol": "NVDAx",
+        "mint": "Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh",
+        "weightBps": 172,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "NVOx",
+        "mint": "XsfAzPzYrYjd4Dpa9BU3cusBsvWfVB9gBcyGC87S57n",
+        "weightBps": 172,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "OPENx",
+        "mint": "XsGtpmjhmC8kyjVSWL4VicGu36ceq9u55PTgF8bhGv6",
+        "weightBps": 172,
+        "sector": "Real Estate"
+      },
+      {
+        "symbol": "ORCLx",
+        "mint": "XsjFwUPiLofddX5cWFHW35GCbXcSu1BCUGfxoQAQjeL",
+        "weightBps": 172,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "PEPx",
+        "mint": "Xsv99frTRUeornyvCfvhnDesQDWuvns1M852Pez91vF",
+        "weightBps": 172,
+        "sector": "Consumer Staples"
+      },
+      {
+        "symbol": "PFEx",
+        "mint": "XsAtbqkAP1HJxy7hFDeq7ok6yM43DQ9mQ1Rh861X8rw",
+        "weightBps": 172,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "PGx",
+        "mint": "XsYdjDjNUygZ7yGKfQaB6TxLh2gC6RRjzLtLAGJrhzV",
+        "weightBps": 172,
+        "sector": "Consumer Staples"
+      },
+      {
+        "symbol": "PLTRx",
+        "mint": "XsoBhf2ufR8fTyNSjqfU71DYGaE6Z3SUGAidpzriAA4",
+        "weightBps": 172,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "PMx",
+        "mint": "Xsba6tUnSjDae2VcopDB6FGGDaxRrewFCDa5hKn5vT3",
+        "weightBps": 172,
+        "sector": "Consumer Staples"
+      },
+      {
+        "symbol": "TMOx",
+        "mint": "Xs8drBWy3Sd5QY3aifG9kt9KFs2K3PGZmx7jWrsrk57",
+        "weightBps": 172,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "TONXx",
+        "mint": "XscE4GUcsYhcyZu5ATiGUMmhxYa1D5fwbpJw4K6K4dp",
+        "weightBps": 172,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "TSLAx",
+        "mint": "XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB",
+        "weightBps": 172,
+        "sector": "Consumer Discretionary"
+      },
+      {
+        "symbol": "UNHx",
+        "mint": "XszvaiXGPwvk2nwb3o9C1CX4K6zH8sez11E6uyup6fe",
+        "weightBps": 172,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "Vx",
+        "mint": "XsqgsbXwWogGJsNcVZ3TyVouy2MbTkfCFhCGGGcQZ2p",
+        "weightBps": 172,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "WMTx",
+        "mint": "Xs151QeqTCiuKtinzfRATnUESM2xTU6V9Wy8Vy538ci",
+        "weightBps": 172,
+        "sector": "Consumer Staples"
+      },
+      {
+        "symbol": "XOMx",
+        "mint": "XsaHND8sHyfMfsWPj6kSdd5VwvCayZvjYgKmmcNL5qh",
+        "weightBps": 172,
+        "sector": "Energy"
+      }
+    ]
+  },
+  {
+    "id": "nancy-pelosi-tokenized-stocks",
+    "code": "FNPT",
+    "name": "Nancy Pelosi Tokenized Stock Strategy",
+    "shortName": "Pelosi",
+    "type": "Active",
+    "category": "Tracker",
+    "status": "active",
+    "featured": true,
+    "riskLevel": 4,
+    "tagline": "Seven stocks disclosed in Rep. Pelosi's STOCK Act filings, at estimated weights.",
+    "description": "Tracks an estimate of the stock positions disclosed in Rep. Nancy Pelosi's public STOCK Act filings (nearly all held in her spouse's accounts), using the seven disclosed names that have liquid tokenized stocks on Solana. Together they are about two-thirds of the estimated disclosed stock value. The GIC rebuilds the target weights after new Periodic Transaction Reports are filed; your holdings change only when you sign a rebalance.",
+    "methodology": [
+      "Source of truth: the House Clerk's annual Financial Disclosure reports and Periodic Transaction Reports (PTRs), cited by filing ID.",
+      "Filings report value ranges, not amounts: positions are estimated from the ranges, known share changes and year-end prices; open call options are counted at their share-equivalent value and held as plain stock.",
+      "Only disclosed names with a liquid tokenized stock are held; positions without one are left out and the held names re-weighted to 100%. Salesforce, CrowdStrike, Visa, Netflix and Comcast are added only by a new GIC decision once their tokens trade deeply enough; nothing is added automatically.",
+      "Caps: 25% per company, 2% minimum per holding. Weights are reviewed after each new filing (event-driven) and changed only by a GIC decision; trades are disclosed up to 45 days after they happen.",
+      "Her term ends January 3, 2027. After her final report the GIC freezes the weights and decides whether to close the strategy or broaden it."
+    ],
+    "construction": "fixed",
+    "screen": null,
+    "weighting": null,
+    "labels": [
+      "Concentrated"
+    ],
+    "fees": {
+      "deployUsd": 1.5,
+      "rebalanceUsd": 0.3
+    },
+    "cadence": "event-driven",
+    "minDeployUsd": 100,
+    "maxSingleNameBps": 2500,
+    "maxPositions": 20,
+    "disclosures": [
+      "Not affiliated with, sponsored by or endorsed by Nancy Pelosi, Paul Pelosi, their family or the U.S. House of Representatives.",
+      "Built solely from public STOCK Act financial-disclosure filings on the House Clerk website. Nearly all disclosed positions are held in her spouse's accounts.",
+      "Filings report value ranges, not exact amounts. Holdings and weights are Forma estimates and can differ materially from the actual portfolio.",
+      "Trades are disclosed up to 45 days after they happen, so this strategy always lags, and prices can move a lot in between.",
+      "About two-thirds of the estimated disclosed stock value can be held (66.6% at launch). Positions without a liquid tokenized stock, such as Salesforce, Bloom Energy, CrowdStrike, Visa and Palo Alto Networks, are left out and the rest scaled up. Call options are held as plain stock; most of the Intel weight stands in for call options.",
+      "Concentrated: about 91% is in five names (Apple, Nvidia, Microsoft, Amazon and Alphabet). Risk 4 of 5.",
+      "Rep. Pelosi's term ends on 2027-01-03, and this strategy stops updating after her final filings. The GIC then freezes the weights and decides whether to close the strategy or broaden it.",
+      "The GIC updates the target weights after new filings, but rebalances reach your wallet only when you sign them."
+    ],
+    "governance": {
+      "decisionId": "GIC-2026-003",
+      "nextReview": "2027-01-04"
+    },
+    "targets": [
+      {
+        "symbol": "AAPLx",
+        "mint": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp",
+        "weightBps": 2169,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "NVDAx",
+        "mint": "Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh",
+        "weightBps": 1793,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "MSFTx",
+        "mint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+        "weightBps": 1776,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "AMZNx",
+        "mint": "Xs3eBt7uRfJX8QUs4suhyU8p2M6DoUDrJyWBa8LLZsg",
+        "weightBps": 1750,
+        "sector": "Consumer Discretionary"
+      },
+      {
+        "symbol": "GOOGLx",
+        "mint": "XsCPL9dNWBMvFtTmwcCA5v3xWPSMEBCszbQdiLLq6aN",
+        "weightBps": 1648,
+        "sector": "Communication Services"
+      },
+      {
+        "symbol": "AVGOx",
+        "mint": "XsgSaSvNSqLTtFuyWPBhK9196Xb9Bbdyjj4fH3cPJGo",
+        "weightBps": 658,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "INTCx",
+        "mint": "XshPgPdXFRWB8tP1j82rebb2Q9rPgGX37RuqzohmArM",
+        "weightBps": 206,
+        "sector": "Information Technology"
+      }
+    ]
+  },
+  {
+    "id": "magnificent-7",
+    "code": "FSVN",
+    "name": "Magnificent 7 Strategy",
+    "shortName": "Mag 7",
+    "type": "Passive",
+    "category": "Thematic",
+    "status": "active",
+    "featured": true,
+    "riskLevel": 4,
+    "tagline": "Equal stakes in Apple, Microsoft, Alphabet, Amazon, Meta, Nvidia and Tesla.",
+    "description": "Equal stakes in Apple, Microsoft, Alphabet, Amazon, Meta, Nvidia and Tesla, reset to one-seventh each every quarter. All seven trade with deep onchain liquidity.",
+    "methodology": [
+      "Holds Apple, Microsoft, Alphabet, Amazon, Meta, Nvidia and Tesla, one-seventh each.",
+      "Reset to equal weight every quarter, or sooner when a holding moves outside 10.7%-17.9% (3.57 points, a quarter of its target).",
+      "Membership changes only by a vote of the GIC."
+    ],
+    "construction": "fixed",
+    "screen": null,
+    "weighting": null,
+    "labels": [
+      "Concentrated"
+    ],
+    "fees": {
+      "deployUsd": 0.99,
+      "rebalanceUsd": 0.2
+    },
+    "cadence": "quarterly",
+    "minDeployUsd": 100,
+    "maxSingleNameBps": 2500,
+    "maxPositions": 7,
+    "disclosures": [
+      "Concentrated: seven companies in three sectors. Much of it overlaps the Total Tokenized Stock Index and the Pelosi tracker.",
+      "Not affiliated with any ETF or index provider that uses the \"Magnificent Seven\" label."
+    ],
+    "governance": {
+      "decisionId": "GIC-2026-003",
+      "nextReview": "2027-02-04"
+    },
+    "targets": [
+      {
+        "symbol": "AAPLx",
+        "mint": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp",
+        "weightBps": 1429,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "MSFTx",
+        "mint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+        "weightBps": 1429,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "GOOGLx",
+        "mint": "XsCPL9dNWBMvFtTmwcCA5v3xWPSMEBCszbQdiLLq6aN",
+        "weightBps": 1429,
+        "sector": "Communication Services"
+      },
+      {
+        "symbol": "AMZNx",
+        "mint": "Xs3eBt7uRfJX8QUs4suhyU8p2M6DoUDrJyWBa8LLZsg",
+        "weightBps": 1429,
+        "sector": "Consumer Discretionary"
+      },
+      {
+        "symbol": "METAx",
+        "mint": "Xsa62P5mvPszXL1krVUnU5ar38bBSVcWAB6fmPCo5Zu",
+        "weightBps": 1428,
+        "sector": "Communication Services"
+      },
+      {
+        "symbol": "NVDAx",
+        "mint": "Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh",
+        "weightBps": 1428,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "TSLAx",
+        "mint": "XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB",
+        "weightBps": 1428,
+        "sector": "Consumer Discretionary"
+      }
+    ]
+  },
+  {
+    "id": "crypto-economy",
+    "code": "FCRY",
+    "name": "Crypto Economy Strategy",
+    "shortName": "Crypto Economy",
+    "type": "Active",
+    "category": "Thematic",
+    "status": "active",
+    "featured": true,
+    "riskLevel": 5,
+    "tagline": "The listed companies that run crypto's rails, plus SOL.",
+    "description": "Own the listed companies whose business is crypto (exchanges and brokers, the USDC issuer and digital-asset treasury companies) as tokenized stocks, with a 14% sleeve of native SOL.",
+    "methodology": [
+      "Holdings: Coinbase, Robinhood, Circle, Strategy (MicroStrategy) and DeFi Development Corp, plus native SOL.",
+      "Caps: 25% per holding (SOL counts as one); companies under $1B in market cap are capped at 5%.",
+      "The GIC adds TON Strategy and Amber International at 2.5% each, funded from the SOL sleeve, once their tokens have traded deeply for 20 trading days.",
+      "Rebalanced monthly; the GIC reviews treasury companies' premium to their crypto holdings and dilution each quarter."
+    ],
+    "construction": "fixed",
+    "screen": null,
+    "weighting": null,
+    "labels": [
+      "Speculative"
+    ],
+    "fees": {
+      "deployUsd": 1.5,
+      "rebalanceUsd": 0.3
+    },
+    "cadence": "monthly",
+    "minDeployUsd": 100,
+    "maxSingleNameBps": 2500,
+    "maxPositions": 10,
+    "disclosures": [
+      "Speculative: moves with crypto prices and can fall sharply. Includes DFDV, a micro-cap whose value depends on its SOL holdings.",
+      "Treasury companies can trade well above or below the value of the crypto they hold, and they can issue new shares. SOL is a crypto asset, not a share."
+    ],
+    "governance": {
+      "decisionId": "GIC-2026-003",
+      "nextReview": "2026-12-04"
+    },
+    "targets": [
+      {
+        "symbol": "COINx",
+        "mint": "Xs7ZdzSHLU9ftNJsii5fCeJhoRWSC32SQGzGQtePxNu",
+        "weightBps": 2250,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "HOODx",
+        "mint": "XsvNBAYkrDRNhA7wPHQfX3ZUXZyZLdnCQDfHZ56bzpg",
+        "weightBps": 2025,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "CRCLx",
+        "mint": "XsueG8BtpquVJX9LVLLEGuViXUungE6WmK5YZ3p3bd1",
+        "weightBps": 2025,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "MSTRx",
+        "mint": "XsP7xzNPvEHS1m6qfanPUGjNmdnmsLKEoNAnHjdxxyZ",
+        "weightBps": 1800,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "SOL",
+        "mint": "So11111111111111111111111111111111111111112",
+        "weightBps": 1400,
+        "sector": "Digital Assets"
+      },
+      {
+        "symbol": "DFDVx",
+        "mint": "Xs2yquAgsHByNzx68WJC55WHjHBvG9JsMB7CWjTLyPy",
+        "weightBps": 500,
+        "sector": "Financials"
+      }
+    ]
+  },
+  {
+    "id": "core-etf-portfolio",
+    "code": "FCEP",
+    "name": "Core ETF Portfolio",
+    "shortName": "Core ETF",
+    "type": "Passive",
+    "category": "Multi-asset",
+    "status": "active",
+    "featured": false,
+    "riskLevel": 3,
+    "tagline": "A one-click core allocation in tokenized ETFs: US large caps, growth and gold.",
+    "description": "A simple core allocation held as tokenized ETFs: the S&P 500, a Nasdaq-100 growth tilt and gold. A planned 15% T-bill sleeve is added by a GIC decision once its token trades deeply enough.",
+    "methodology": [
+      "Strategic target: 50% S&P 500 (SPYx), 20% Nasdaq-100 (QQQx), 15% gold (GLDx) and 15% T-bills (TBLLx).",
+      "TBLLx is not held until the GIC adds it once its token trades deeply enough; until then its 15% is spread pro rata: 58.8% SPYx, 23.5% QQQx and 17.7% GLDx.",
+      "Gold is capped at 20%. Rebalanced quarterly, or when a holding is more than 3 points from its target."
+    ],
+    "construction": "fixed",
+    "screen": null,
+    "weighting": null,
+    "labels": [],
+    "fees": {
+      "deployUsd": 0.99,
+      "rebalanceUsd": 0.2
+    },
+    "cadence": "quarterly",
+    "minDeployUsd": 50,
+    "maxSingleNameBps": 6000,
+    "maxPositions": 5,
+    "disclosures": [
+      "Holds SPYx, QQQx and GLDx today: about 82% US equity and 18% gold. The planned 15% T-bill sleeve is not held; the GIC adds TBLLx once its token trades deeply enough.",
+      "Not affiliated with the sponsors of SPY, QQQ or GLD or with any index provider."
+    ],
+    "governance": {
+      "decisionId": "GIC-2026-003",
+      "nextReview": "2027-02-04"
+    },
+    "targets": [
+      {
+        "symbol": "SPYx",
+        "mint": "XsoCS1TfEyfFhfvj8EtZ528L3CaKBDBRqRapnBbDF2W",
+        "weightBps": 5882,
+        "sector": "Multi-asset"
+      },
+      {
+        "symbol": "QQQx",
+        "mint": "Xs8S1uUs1zvS2p7iwtsG3b6fkhpvmwz4GYU3gWAmWHZ",
+        "weightBps": 2353,
+        "sector": "Multi-asset"
+      },
+      {
+        "symbol": "GLDx",
+        "mint": "Xsv9hRk1z5ystj9MhnA7Lq4vjSsLwzL2nxrwmwtD3re",
+        "weightBps": 1765,
+        "sector": "Commodities"
+      }
+    ]
+  },
+  {
+    "id": "retail-favorites",
+    "code": "FRTL",
+    "name": "Retail Favorites Strategy",
+    "shortName": "Retail Favorites",
+    "type": "Active",
+    "category": "Thematic",
+    "status": "active",
+    "featured": false,
+    "riskLevel": 5,
+    "tagline": "Equal stakes in the stocks retail traders crowd into.",
+    "description": "Equal stakes in heavily traded retail-favourite stocks: Tesla, Palantir, GameStop, Robinhood and Intel. The GIC may add Opendoor and AppLovin once their tokens trade deeply enough.",
+    "methodology": [
+      "Holdings are chosen by the GIC as stocks popular with retail traders, reviewed monthly.",
+      "Equal weight, 25% hard cap per name; rebalanced when a holding drifts outside 15%-25%.",
+      "The GIC adds new names only after their tokens have traded deeply for 20 trading days."
+    ],
+    "construction": "fixed",
+    "screen": null,
+    "weighting": null,
+    "labels": [
+      "Speculative"
+    ],
+    "fees": {
+      "deployUsd": 1.2,
+      "rebalanceUsd": 0.25
+    },
+    "cadence": "monthly",
+    "minDeployUsd": 100,
+    "maxSingleNameBps": 2500,
+    "maxPositions": 7,
+    "disclosures": [
+      "Speculative: these stocks can move 20-30% in a day, and each is a fifth of the basket.",
+      "Dividends are not paid in cash; they are reinvested by increasing your token balance, net of 30% US withholding tax."
+    ],
+    "governance": {
+      "decisionId": "GIC-2026-003",
+      "nextReview": "2026-12-04"
+    },
+    "targets": [
+      {
+        "symbol": "TSLAx",
+        "mint": "XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB",
+        "weightBps": 2000,
+        "sector": "Consumer Discretionary"
+      },
+      {
+        "symbol": "PLTRx",
+        "mint": "XsoBhf2ufR8fTyNSjqfU71DYGaE6Z3SUGAidpzriAA4",
+        "weightBps": 2000,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "GMEx",
+        "mint": "Xsf9mBktVB9BSU5kf4nHxPq5hCBJ2j2ui3ecFGxPRGc",
+        "weightBps": 2000,
+        "sector": "Consumer Discretionary"
+      },
+      {
+        "symbol": "HOODx",
+        "mint": "XsvNBAYkrDRNhA7wPHQfX3ZUXZyZLdnCQDfHZ56bzpg",
+        "weightBps": 2000,
+        "sector": "Financials"
+      },
+      {
+        "symbol": "INTCx",
+        "mint": "XshPgPdXFRWB8tP1j82rebb2Q9rPgGX37RuqzohmArM",
+        "weightBps": 2000,
+        "sector": "Information Technology"
+      }
+    ]
+  },
+  {
     "id": "tokenized-stocks-index",
+    "code": "FUNI",
     "name": "Universe Token Strategy",
     "shortName": "Universe",
     "type": "Passive",
+    "category": "Index",
     "status": "active",
+    "featured": false,
+    "riskLevel": 4,
+    "tagline": "Equal stakes in every investable xStock except leveraged ETFs and preferreds.",
+    "description": "Equal-weight basket across every investable xStock on Solana except leveraged ETFs and preferred stock. A live liquidity screen decides what is investable today; watchlist names join at your next deploy or signed rebalance once they pass it.",
+    "methodology": [
+      "Eligible: every xStock on Solana (common stocks, ADRs and unleveraged ETFs). Leveraged funds and preferred stock are excluded.",
+      "Investable today: onchain liquidity of at least $2,500 or $5,000 traded in the last 24 hours.",
+      "Every investable name gets the same weight; watchlist names join at your next deploy or signed rebalance once they pass the screen.",
+      "Rebalanced quarterly, or sooner when a holding drifts more than 2 points from its target."
+    ],
     "construction": "equal-weight-screened",
     "screen": {
       "minLiquidityUsd": 2500,
       "minVolume24hUsd": 5000
     },
+    "weighting": null,
+    "labels": [],
     "fees": {
       "deployUsd": 1.3,
       "rebalanceUsd": 0.25
     },
     "cadence": "quarterly",
     "minDeployUsd": 100,
+    "maxSingleNameBps": 2000,
+    "maxPositions": 80,
+    "disclosures": [
+      "Equal weighting gives smaller and more volatile companies, including crypto-linked and meme stocks, the same weight as the largest companies."
+    ],
+    "governance": {
+      "decisionId": "GIC-2026-003",
+      "nextReview": "2027-02-04"
+    },
     "targets": [
       {
         "symbol": "AAPLx",
         "mint": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Information Technology"
       },
       {
         "symbol": "ABBVx",
         "mint": "XswbinNKyPmzTa5CskMbCPvMW6G5CMnZXZEeQSSQoie",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Health Care"
       },
       {
         "symbol": "ABTx",
         "mint": "XsHtf5RpxsQ7jeJ9ivNewouZKJHbPxhPoEy6yYvULr7",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Health Care"
       },
       {
         "symbol": "ACNx",
         "mint": "Xs5UJzmCRQ8DWZjskExdSQDnbE6iLkRu2jjrRAB1JSU",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Information Technology"
       },
       {
         "symbol": "AMBRx",
         "mint": "XsaQTCgebC2KPbf27KUhdv5JFvHhQ4GDAPURwrEhAzb",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Financials"
       },
       {
         "symbol": "AMZNx",
         "mint": "Xs3eBt7uRfJX8QUs4suhyU8p2M6DoUDrJyWBa8LLZsg",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Consumer Discretionary"
       },
       {
         "symbol": "APPx",
         "mint": "XsPdAVBi8Zc1xvv53k4JcMrQaEDTgkGqKYeh7AYgPHV",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Information Technology"
       },
       {
         "symbol": "AVGOx",
         "mint": "XsgSaSvNSqLTtFuyWPBhK9196Xb9Bbdyjj4fH3cPJGo",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Information Technology"
       },
       {
         "symbol": "AZNx",
         "mint": "Xs3ZFkPYT2BN7qBMqf1j1bfTeTm1rFzEFSsQ1z3wAKU",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Health Care"
       },
       {
         "symbol": "BACx",
         "mint": "XswsQk4duEQmCbGzfqUUWYmi7pV7xpJ9eEmLHXCaEQP",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Financials"
       },
       {
         "symbol": "BRK.Bx",
         "mint": "Xs6B6zawENwAbWVi7w92rjazLuAr5Az59qgWKcNb45x",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Financials"
       },
       {
         "symbol": "CMCSAx",
         "mint": "XsvKCaNsxg2GN8jjUmq71qukMJr7Q1c5R2Mk9P8kcS8",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Communication Services"
       },
       {
         "symbol": "COINx",
         "mint": "Xs7ZdzSHLU9ftNJsii5fCeJhoRWSC32SQGzGQtePxNu",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Financials"
       },
       {
         "symbol": "CRCLx",
         "mint": "XsueG8BtpquVJX9LVLLEGuViXUungE6WmK5YZ3p3bd1",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Financials"
       },
       {
         "symbol": "CRMx",
         "mint": "XsczbcQ3zfcgAEt9qHQES8pxKAVG5rujPSHQEXi4kaN",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Information Technology"
       },
       {
         "symbol": "CRWDx",
         "mint": "Xs7xXqkcK7K8urEqGg52SECi79dRp2cEKKuYjUePYDw",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Information Technology"
       },
       {
         "symbol": "CSCOx",
         "mint": "Xsr3pdLQyXvDJBFgpR5nexCEZwXvigb8wbPYp4YoNFf",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Information Technology"
       },
       {
         "symbol": "CVXx",
         "mint": "XsNNMt7WTNA2sV3jrb1NNfNgapxRF5i4i6GcnTRRHts",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Energy"
       },
       {
         "symbol": "DFDVx",
         "mint": "Xs2yquAgsHByNzx68WJC55WHjHBvG9JsMB7CWjTLyPy",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Financials"
       },
       {
         "symbol": "DHRx",
         "mint": "Xseo8tgCZfkHxWS9xbFYeKFyMSbWEvZGFV1Gh53GtCV",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Health Care"
       },
       {
         "symbol": "GLDx",
         "mint": "Xsv9hRk1z5ystj9MhnA7Lq4vjSsLwzL2nxrwmwtD3re",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Commodities"
       },
       {
         "symbol": "GMEx",
         "mint": "Xsf9mBktVB9BSU5kf4nHxPq5hCBJ2j2ui3ecFGxPRGc",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Consumer Discretionary"
       },
       {
         "symbol": "GOOGLx",
         "mint": "XsCPL9dNWBMvFtTmwcCA5v3xWPSMEBCszbQdiLLq6aN",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Communication Services"
       },
       {
         "symbol": "GSx",
         "mint": "XsgaUyp4jd1fNBCxgtTKkW64xnnhQcvgaxzsbAq5ZD1",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Financials"
       },
       {
         "symbol": "HDx",
         "mint": "XszjVtyhowGjSC5odCqBpW1CtXXwXjYokymrk7fGKD3",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Consumer Discretionary"
       },
       {
         "symbol": "HONx",
         "mint": "XsRbLZthfABAPAfumWNEJhPyiKDW6TvDVeAeW7oKqA2",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Industrials"
       },
       {
         "symbol": "HOODx",
         "mint": "XsvNBAYkrDRNhA7wPHQfX3ZUXZyZLdnCQDfHZ56bzpg",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Financials"
       },
       {
         "symbol": "IBMx",
         "mint": "XspwhyYPdWVM8XBHZnpS9hgyag9MKjLRyE3tVfmCbSr",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Information Technology"
       },
       {
         "symbol": "INTCx",
         "mint": "XshPgPdXFRWB8tP1j82rebb2Q9rPgGX37RuqzohmArM",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Information Technology"
       },
       {
         "symbol": "JNJx",
         "mint": "XsGVi5eo1Dh2zUpic4qACcjuWGjNv8GCt3dm5XcX6Dn",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Health Care"
       },
       {
         "symbol": "JPMx",
         "mint": "XsMAqkcKsUewDrzVkait4e5u4y8REgtyS7jWgCpLV2C",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Financials"
       },
       {
         "symbol": "KOx",
         "mint": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Consumer Staples"
       },
       {
         "symbol": "LINx",
         "mint": "XsSr8anD1hkvNMu8XQiVcmiaTP7XGvYu7Q58LdmtE8Z",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Materials"
       },
       {
         "symbol": "LLYx",
         "mint": "Xsnuv4omNoHozR6EEW5mXkw8Nrny5rB3jVfLqi6gKMH",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Health Care"
       },
       {
         "symbol": "MAx",
         "mint": "XsApJFV9MAktqnAc6jqzsHVujxkGm9xcSUffaBoYLKC",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Financials"
       },
       {
         "symbol": "MCDx",
         "mint": "XsqE9cRRpzxcGKDXj1BJ7Xmg4GRhZoyY1KpmGSxAWT2",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Consumer Discretionary"
       },
       {
         "symbol": "MDTx",
         "mint": "XsDgw22qRLTv5Uwuzn6T63cW69exG41T6gwQhEK22u2",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Health Care"
       },
       {
         "symbol": "METAx",
         "mint": "Xsa62P5mvPszXL1krVUnU5ar38bBSVcWAB6fmPCo5Zu",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Communication Services"
       },
       {
         "symbol": "MRKx",
         "mint": "XsnQnU7AdbRZYe2akqqpibDdXjkieGFfSkbkjX1Sd1X",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Health Care"
       },
       {
         "symbol": "MRVLx",
         "mint": "XsuxRGDzbLjnJ72v74b7p9VY6N66uYgTCyfwwRjVCJA",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Information Technology"
       },
       {
         "symbol": "MSFTx",
         "mint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Information Technology"
       },
       {
         "symbol": "MSTRx",
         "mint": "XsP7xzNPvEHS1m6qfanPUGjNmdnmsLKEoNAnHjdxxyZ",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Information Technology"
       },
       {
         "symbol": "NFLXx",
         "mint": "XsEH7wWfJJu2ZT3UCFeVfALnVA6CP5ur7Ee11KmzVpL",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Communication Services"
       },
       {
         "symbol": "NVDAx",
         "mint": "Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Information Technology"
       },
       {
         "symbol": "NVOx",
         "mint": "XsfAzPzYrYjd4Dpa9BU3cusBsvWfVB9gBcyGC87S57n",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Health Care"
       },
       {
         "symbol": "OPENx",
         "mint": "XsGtpmjhmC8kyjVSWL4VicGu36ceq9u55PTgF8bhGv6",
-        "weightBps": 154
+        "weightBps": 159,
+        "sector": "Real Estate"
       },
       {
         "symbol": "ORCLx",
         "mint": "XsjFwUPiLofddX5cWFHW35GCbXcSu1BCUGfxoQAQjeL",
-        "weightBps": 154
+        "weightBps": 158,
+        "sector": "Information Technology"
       },
       {
         "symbol": "PEPx",
         "mint": "Xsv99frTRUeornyvCfvhnDesQDWuvns1M852Pez91vF",
-        "weightBps": 154
+        "weightBps": 158,
+        "sector": "Consumer Staples"
       },
       {
         "symbol": "PFEx",
         "mint": "XsAtbqkAP1HJxy7hFDeq7ok6yM43DQ9mQ1Rh861X8rw",
-        "weightBps": 154
+        "weightBps": 158,
+        "sector": "Health Care"
       },
       {
         "symbol": "PGx",
         "mint": "XsYdjDjNUygZ7yGKfQaB6TxLh2gC6RRjzLtLAGJrhzV",
-        "weightBps": 154
+        "weightBps": 158,
+        "sector": "Consumer Staples"
       },
       {
         "symbol": "PLTRx",
         "mint": "XsoBhf2ufR8fTyNSjqfU71DYGaE6Z3SUGAidpzriAA4",
-        "weightBps": 154
+        "weightBps": 158,
+        "sector": "Information Technology"
       },
       {
         "symbol": "PMx",
         "mint": "Xsba6tUnSjDae2VcopDB6FGGDaxRrewFCDa5hKn5vT3",
-        "weightBps": 154
+        "weightBps": 158,
+        "sector": "Consumer Staples"
       },
       {
         "symbol": "QQQx",
         "mint": "Xs8S1uUs1zvS2p7iwtsG3b6fkhpvmwz4GYU3gWAmWHZ",
-        "weightBps": 154
+        "weightBps": 158,
+        "sector": "Multi-asset"
       },
       {
         "symbol": "SPYx",
         "mint": "XsoCS1TfEyfFhfvj8EtZ528L3CaKBDBRqRapnBbDF2W",
-        "weightBps": 154
-      },
-      {
-        "symbol": "STRCx",
-        "mint": "Xs78JED6PFZxWc2wCEPspZW9kL3Se5J7L5TChKgsidH",
-        "weightBps": 154
+        "weightBps": 158,
+        "sector": "Multi-asset"
       },
       {
         "symbol": "TBLLx",
         "mint": "XsqBC5tcVQLYt8wqGCHRnAUUecbRYXoJCReD6w7QEKp",
-        "weightBps": 153
+        "weightBps": 158,
+        "sector": "Fixed Income"
       },
       {
         "symbol": "TMOx",
         "mint": "Xs8drBWy3Sd5QY3aifG9kt9KFs2K3PGZmx7jWrsrk57",
-        "weightBps": 153
+        "weightBps": 158,
+        "sector": "Health Care"
       },
       {
         "symbol": "TONXx",
         "mint": "XscE4GUcsYhcyZu5ATiGUMmhxYa1D5fwbpJw4K6K4dp",
-        "weightBps": 153
-      },
-      {
-        "symbol": "TQQQx",
-        "mint": "XsjQP3iMAaQ3kQScQKthQpx9ALRbjKAjQtHg6TFomoc",
-        "weightBps": 153
+        "weightBps": 158,
+        "sector": "Financials"
       },
       {
         "symbol": "TSLAx",
         "mint": "XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB",
-        "weightBps": 153
+        "weightBps": 158,
+        "sector": "Consumer Discretionary"
       },
       {
         "symbol": "UNHx",
         "mint": "XszvaiXGPwvk2nwb3o9C1CX4K6zH8sez11E6uyup6fe",
-        "weightBps": 153
+        "weightBps": 158,
+        "sector": "Health Care"
       },
       {
         "symbol": "VTIx",
         "mint": "XsssYEQjzxBCFgvYFFNuhJFBeHNdLWYeUSP8F45cDr9",
-        "weightBps": 153
+        "weightBps": 158,
+        "sector": "Multi-asset"
       },
       {
         "symbol": "Vx",
         "mint": "XsqgsbXwWogGJsNcVZ3TyVouy2MbTkfCFhCGGGcQZ2p",
-        "weightBps": 153
+        "weightBps": 158,
+        "sector": "Financials"
       },
       {
         "symbol": "WMTx",
         "mint": "Xs151QeqTCiuKtinzfRATnUESM2xTU6V9Wy8Vy538ci",
-        "weightBps": 153
+        "weightBps": 158,
+        "sector": "Consumer Staples"
       },
       {
         "symbol": "XOMx",
         "mint": "XsaHND8sHyfMfsWPj6kSdd5VwvCayZvjYgKmmcNL5qh",
-        "weightBps": 153
+        "weightBps": 158,
+        "sector": "Energy"
       }
     ]
   },
   {
     "id": "select-tokenized-stocks",
+    "code": "FSEL",
     "name": "Select Token Strategy",
     "shortName": "Select",
     "type": "Active",
+    "category": "Active",
     "status": "active",
+    "featured": false,
+    "riskLevel": 4,
+    "tagline": "High-conviction tokenized equities, research-weighted.",
+    "description": "A concentrated, research-driven model of 17 positions sized by Forma conviction: mega-caps, payments networks, energy and digital-asset exposure. About 41% of the target weight, including every payments name, is in tokens with thin onchain markets, so a deploy today can hold far fewer than 17 positions.",
+    "methodology": [
+      "Holdings and weights are set by Forma research (STS model) and approved by the GIC.",
+      "Positions are sized by conviction, capped at 25% per name and 50% per sector.",
+      "Rebalanced monthly, or when a holding drifts more than 1.5 points from target.",
+      "Thinly traded names are bought only within the price-protection limit; otherwise their allocation waits in USDC."
+    ],
     "construction": "conviction",
     "screen": null,
+    "weighting": null,
+    "labels": [],
     "fees": {
       "deployUsd": 1.91,
       "rebalanceUsd": 0.28
     },
     "cadence": "monthly",
     "minDeployUsd": 100,
+    "maxSingleNameBps": 2500,
+    "maxPositions": 25,
+    "disclosures": [
+      "About 41% of the target weight (Home Depot, Cisco, JPMorgan, Marvell, Linde, Mastercard and Visa) is in tokens with thin onchain markets, each under $1.5k of liquidity on 2026-11-04. Those positions are bought only within your price protection; otherwise their allocation waits in USDC. The GIC is reviewing the strategy."
+    ],
+    "governance": {
+      "decisionId": "GIC-2026-002",
+      "nextReview": "2027-01-04"
+    },
     "targets": [
       {
         "symbol": "AAPLx",
         "mint": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp",
-        "weightBps": 2000
+        "weightBps": 2000,
+        "sector": "Information Technology"
       },
       {
         "symbol": "AMZNx",
         "mint": "Xs3eBt7uRfJX8QUs4suhyU8p2M6DoUDrJyWBa8LLZsg",
-        "weightBps": 1000
+        "weightBps": 1000,
+        "sector": "Consumer Discretionary"
       },
       {
         "symbol": "HDx",
         "mint": "XszjVtyhowGjSC5odCqBpW1CtXXwXjYokymrk7fGKD3",
-        "weightBps": 1000
+        "weightBps": 1000,
+        "sector": "Consumer Discretionary"
       },
       {
         "symbol": "MSTRx",
         "mint": "XsP7xzNPvEHS1m6qfanPUGjNmdnmsLKEoNAnHjdxxyZ",
-        "weightBps": 1000
+        "weightBps": 1000,
+        "sector": "Information Technology"
       },
       {
         "symbol": "CRCLx",
         "mint": "XsueG8BtpquVJX9LVLLEGuViXUungE6WmK5YZ3p3bd1",
-        "weightBps": 700
+        "weightBps": 700,
+        "sector": "Financials"
       },
       {
         "symbol": "CSCOx",
         "mint": "Xsr3pdLQyXvDJBFgpR5nexCEZwXvigb8wbPYp4YoNFf",
-        "weightBps": 700
+        "weightBps": 700,
+        "sector": "Information Technology"
       },
       {
         "symbol": "JPMx",
         "mint": "XsMAqkcKsUewDrzVkait4e5u4y8REgtyS7jWgCpLV2C",
-        "weightBps": 700
+        "weightBps": 700,
+        "sector": "Financials"
       },
       {
         "symbol": "MRVLx",
         "mint": "XsuxRGDzbLjnJ72v74b7p9VY6N66uYgTCyfwwRjVCJA",
-        "weightBps": 570
+        "weightBps": 570,
+        "sector": "Information Technology"
       },
       {
         "symbol": "SOL",
         "mint": "So11111111111111111111111111111111111111112",
-        "weightBps": 455
+        "weightBps": 455,
+        "sector": "Digital Assets"
       },
       {
         "symbol": "LINx",
         "mint": "XsSr8anD1hkvNMu8XQiVcmiaTP7XGvYu7Q58LdmtE8Z",
-        "weightBps": 425
+        "weightBps": 425,
+        "sector": "Materials"
       },
       {
         "symbol": "MAx",
         "mint": "XsApJFV9MAktqnAc6jqzsHVujxkGm9xcSUffaBoYLKC",
-        "weightBps": 350
+        "weightBps": 350,
+        "sector": "Financials"
       },
       {
         "symbol": "Vx",
         "mint": "XsqgsbXwWogGJsNcVZ3TyVouy2MbTkfCFhCGGGcQZ2p",
-        "weightBps": 350
+        "weightBps": 350,
+        "sector": "Financials"
       },
       {
         "symbol": "XOMx",
         "mint": "XsaHND8sHyfMfsWPj6kSdd5VwvCayZvjYgKmmcNL5qh",
-        "weightBps": 200
+        "weightBps": 200,
+        "sector": "Energy"
       },
       {
         "symbol": "CVXx",
         "mint": "XsNNMt7WTNA2sV3jrb1NNfNgapxRF5i4i6GcnTRRHts",
-        "weightBps": 200
+        "weightBps": 200,
+        "sector": "Energy"
       },
       {
         "symbol": "UNHx",
         "mint": "XszvaiXGPwvk2nwb3o9C1CX4K6zH8sez11E6uyup6fe",
-        "weightBps": 150
+        "weightBps": 150,
+        "sector": "Health Care"
       },
       {
         "symbol": "NVDAx",
         "mint": "Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh",
-        "weightBps": 100
+        "weightBps": 100,
+        "sector": "Information Technology"
       },
       {
         "symbol": "TSLAx",
         "mint": "XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB",
-        "weightBps": 100
+        "weightBps": 100,
+        "sector": "Consumer Discretionary"
+      }
+    ]
+  },
+  {
+    "id": "ai-infrastructure",
+    "code": "FAII",
+    "name": "AI Infrastructure Strategy",
+    "shortName": "AI Infrastructure",
+    "type": "Active",
+    "category": "Thematic",
+    "status": "in-review",
+    "featured": false,
+    "riskLevel": 4,
+    "tagline": "The companies building AI's backbone: chips, networking and AI cloud.",
+    "description": "Own the companies building the physical and software backbone of AI (accelerators, custom silicon, networking and AI cloud) rather than the apps that use it.",
+    "methodology": [
+      "Curated by the GIC; 25% cap per company; quarterly review.",
+      "The GIC votes on opening it once at least six holdings trade at Tier A/B depth (at least $25k of liquidity and $10k of daily volume) on 20-day medians, at least 65% of the target weight is investable and per-deposit capacity is at least $500."
+    ],
+    "construction": "fixed",
+    "screen": null,
+    "weighting": null,
+    "labels": [
+      "Concentrated"
+    ],
+    "fees": {
+      "deployUsd": 1.3,
+      "rebalanceUsd": 0.25
+    },
+    "cadence": "quarterly",
+    "minDeployUsd": 100,
+    "maxSingleNameBps": 2500,
+    "maxPositions": 12,
+    "disclosures": [],
+    "governance": {
+      "decisionId": null,
+      "nextReview": "2026-12-04"
+    },
+    "targets": [
+      {
+        "symbol": "NVDAx",
+        "mint": "Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh",
+        "weightBps": 2250,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "AVGOx",
+        "mint": "XsgSaSvNSqLTtFuyWPBhK9196Xb9Bbdyjj4fH3cPJGo",
+        "weightBps": 2000,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "MSFTx",
+        "mint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+        "weightBps": 1650,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "PLTRx",
+        "mint": "XsoBhf2ufR8fTyNSjqfU71DYGaE6Z3SUGAidpzriAA4",
+        "weightBps": 1200,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "MRVLx",
+        "mint": "XsuxRGDzbLjnJ72v74b7p9VY6N66uYgTCyfwwRjVCJA",
+        "weightBps": 1000,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "CSCOx",
+        "mint": "Xsr3pdLQyXvDJBFgpR5nexCEZwXvigb8wbPYp4YoNFf",
+        "weightBps": 800,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "IBMx",
+        "mint": "XspwhyYPdWVM8XBHZnpS9hgyag9MKjLRyE3tVfmCbSr",
+        "weightBps": 600,
+        "sector": "Information Technology"
+      },
+      {
+        "symbol": "ORCLx",
+        "mint": "XsjFwUPiLofddX5cWFHW35GCbXcSu1BCUGfxoQAQjeL",
+        "weightBps": 500,
+        "sector": "Information Technology"
+      }
+    ]
+  },
+  {
+    "id": "blue-chip-dividend",
+    "code": "FBCD",
+    "name": "Blue-Chip Dividend Strategy",
+    "shortName": "Dividend",
+    "type": "Active",
+    "category": "Income",
+    "status": "in-review",
+    "featured": false,
+    "riskLevel": 3,
+    "tagline": "Mature, cash-generative large caps with long dividend records.",
+    "description": "Hold mature, cash-generative large caps with long dividend records. Tokenized stocks reinvest dividends into the token balance, so this is a dividend-quality, total-return strategy rather than a cash payout.",
+    "methodology": [
+      "Twelve dividend leaders, 15% cap per company and 50% per sector.",
+      "The GIC votes on opening it once at least six holdings trade at Tier A/B depth (at least $25k of liquidity and $10k of daily volume) on 20-day medians, at least 65% of the target weight is investable and per-deposit capacity is at least $500."
+    ],
+    "construction": "fixed",
+    "screen": null,
+    "weighting": null,
+    "labels": [],
+    "fees": {
+      "deployUsd": 1.3,
+      "rebalanceUsd": 0.25
+    },
+    "cadence": "quarterly",
+    "minDeployUsd": 100,
+    "maxSingleNameBps": 1500,
+    "maxPositions": 15,
+    "disclosures": [
+      "Dividends are not paid in cash: they are reinvested into your token balance net of 30% US withholding tax."
+    ],
+    "governance": {
+      "decisionId": null,
+      "nextReview": "2026-12-04"
+    },
+    "targets": [
+      {
+        "symbol": "MCDx",
+        "mint": "XsqE9cRRpzxcGKDXj1BJ7Xmg4GRhZoyY1KpmGSxAWT2",
+        "weightBps": 1200,
+        "sector": "Consumer Discretionary"
+      },
+      {
+        "symbol": "KOx",
+        "mint": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+        "weightBps": 1100,
+        "sector": "Consumer Staples"
+      },
+      {
+        "symbol": "XOMx",
+        "mint": "XsaHND8sHyfMfsWPj6kSdd5VwvCayZvjYgKmmcNL5qh",
+        "weightBps": 1000,
+        "sector": "Energy"
+      },
+      {
+        "symbol": "JNJx",
+        "mint": "XsGVi5eo1Dh2zUpic4qACcjuWGjNv8GCt3dm5XcX6Dn",
+        "weightBps": 900,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "PEPx",
+        "mint": "Xsv99frTRUeornyvCfvhnDesQDWuvns1M852Pez91vF",
+        "weightBps": 800,
+        "sector": "Consumer Staples"
+      },
+      {
+        "symbol": "PGx",
+        "mint": "XsYdjDjNUygZ7yGKfQaB6TxLh2gC6RRjzLtLAGJrhzV",
+        "weightBps": 800,
+        "sector": "Consumer Staples"
+      },
+      {
+        "symbol": "HDx",
+        "mint": "XszjVtyhowGjSC5odCqBpW1CtXXwXjYokymrk7fGKD3",
+        "weightBps": 800,
+        "sector": "Consumer Discretionary"
+      },
+      {
+        "symbol": "CVXx",
+        "mint": "XsNNMt7WTNA2sV3jrb1NNfNgapxRF5i4i6GcnTRRHts",
+        "weightBps": 800,
+        "sector": "Energy"
+      },
+      {
+        "symbol": "ABBVx",
+        "mint": "XswbinNKyPmzTa5CskMbCPvMW6G5CMnZXZEeQSSQoie",
+        "weightBps": 800,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "PMx",
+        "mint": "Xsba6tUnSjDae2VcopDB6FGGDaxRrewFCDa5hKn5vT3",
+        "weightBps": 700,
+        "sector": "Consumer Staples"
+      },
+      {
+        "symbol": "UNHx",
+        "mint": "XszvaiXGPwvk2nwb3o9C1CX4K6zH8sez11E6uyup6fe",
+        "weightBps": 600,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "WMTx",
+        "mint": "Xs151QeqTCiuKtinzfRATnUESM2xTU6V9Wy8Vy538ci",
+        "weightBps": 500,
+        "sector": "Consumer Staples"
+      }
+    ]
+  },
+  {
+    "id": "healthcare-leaders",
+    "code": "FHLT",
+    "name": "Healthcare Leaders Strategy",
+    "shortName": "Healthcare",
+    "type": "Passive",
+    "category": "Thematic",
+    "status": "in-review",
+    "featured": false,
+    "riskLevel": 4,
+    "tagline": "The largest pharma, managed-care and medtech companies, weighted by size.",
+    "description": "Own the largest pharma, managed-care, medtech and life-science-tools companies that have tokenized shares, weighted by market cap with a 15% cap per company.",
+    "methodology": [
+      "Market-cap weighted with a 15% cap per company.",
+      "The GIC votes on opening it once at least six holdings trade at Tier A/B depth (at least $25k of liquidity and $10k of daily volume) on 20-day medians, at least 65% of the target weight is investable and per-deposit capacity is at least $500."
+    ],
+    "construction": "market-cap-screened",
+    "screen": {
+      "minLiquidityUsd": 2500,
+      "minVolume24hUsd": 5000
+    },
+    "weighting": {
+      "maxWeightBps": 1500,
+      "minWeightBps": 200
+    },
+    "labels": [
+      "Concentrated"
+    ],
+    "fees": {
+      "deployUsd": 1.3,
+      "rebalanceUsd": 0.25
+    },
+    "cadence": "quarterly",
+    "minDeployUsd": 100,
+    "maxSingleNameBps": 2500,
+    "maxPositions": 12,
+    "disclosures": [],
+    "governance": {
+      "decisionId": null,
+      "nextReview": "2026-12-04"
+    },
+    "targets": [
+      {
+        "symbol": "LLYx",
+        "mint": "Xsnuv4omNoHozR6EEW5mXkw8Nrny5rB3jVfLqi6gKMH",
+        "weightBps": 834,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "JNJx",
+        "mint": "XsGVi5eo1Dh2zUpic4qACcjuWGjNv8GCt3dm5XcX6Dn",
+        "weightBps": 834,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "ABBVx",
+        "mint": "XswbinNKyPmzTa5CskMbCPvMW6G5CMnZXZEeQSSQoie",
+        "weightBps": 834,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "UNHx",
+        "mint": "XszvaiXGPwvk2nwb3o9C1CX4K6zH8sez11E6uyup6fe",
+        "weightBps": 834,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "MRKx",
+        "mint": "XsnQnU7AdbRZYe2akqqpibDdXjkieGFfSkbkjX1Sd1X",
+        "weightBps": 833,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "AZNx",
+        "mint": "Xs3ZFkPYT2BN7qBMqf1j1bfTeTm1rFzEFSsQ1z3wAKU",
+        "weightBps": 833,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "TMOx",
+        "mint": "Xs8drBWy3Sd5QY3aifG9kt9KFs2K3PGZmx7jWrsrk57",
+        "weightBps": 833,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "ABTx",
+        "mint": "XsHtf5RpxsQ7jeJ9ivNewouZKJHbPxhPoEy6yYvULr7",
+        "weightBps": 833,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "NVOx",
+        "mint": "XsfAzPzYrYjd4Dpa9BU3cusBsvWfVB9gBcyGC87S57n",
+        "weightBps": 833,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "PFEx",
+        "mint": "XsAtbqkAP1HJxy7hFDeq7ok6yM43DQ9mQ1Rh861X8rw",
+        "weightBps": 833,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "DHRx",
+        "mint": "Xseo8tgCZfkHxWS9xbFYeKFyMSbWEvZGFV1Gh53GtCV",
+        "weightBps": 833,
+        "sector": "Health Care"
+      },
+      {
+        "symbol": "MDTx",
+        "mint": "XsDgw22qRLTv5Uwuzn6T63cW69exG41T6gwQhEK22u2",
+        "weightBps": 833,
+        "sector": "Health Care"
       }
     ]
   },
   {
     "id": "solana-ecosystem",
+    "code": "FSOL",
     "name": "Solana Ecosystem Strategy",
     "shortName": "Ecosystem",
     "type": "Active",
+    "category": "Thematic",
     "status": "draft",
+    "featured": false,
+    "riskLevel": 5,
+    "tagline": "Pure exposure to Solana: DeFi, infrastructure and emerging projects.",
+    "description": "A basket of Solana-native tokens (SOL, JUP, JTO, PYTH and others) researched and weighted by the committee.",
+    "methodology": [
+      "Holdings selected from Solana-native tokens after issuer and liquidity diligence."
+    ],
     "construction": "conviction",
     "screen": null,
+    "weighting": null,
+    "labels": [],
     "fees": {
       "deployUsd": 1.3,
-      "rebalanceUsd": 0.47
+      "rebalanceUsd": 0.4
     },
     "cadence": "biweekly",
-    "minDeployUsd": 50,
-    "targets": [
-      {
-        "symbol": "SOL",
-        "mint": "So11111111111111111111111111111111111111112",
-        "weightBps": 2500
-      },
-      {
-        "symbol": "JUP",
-        "mint": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
-        "weightBps": 1500
-      },
-      {
-        "symbol": "JTO",
-        "mint": "jtojtomepa8beP8AuQc6eXt5FriJwfFMwQx2v2f9mCL",
-        "weightBps": 1500
-      },
-      {
-        "symbol": "BONK",
-        "mint": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
-        "weightBps": 1000
-      },
-      {
-        "symbol": "PYTH",
-        "mint": "HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3",
-        "weightBps": 1000
-      },
-      {
-        "symbol": "RNDR",
-        "mint": "rndrizKT3MK1iimdxRdWabcF7Zy79oB6dW4r6uN1v4x",
-        "weightBps": 750
-      },
-      {
-        "symbol": "HNT",
-        "mint": "hntyVP6YFm1Hg25TN9WGLqM12b8TQmcknX9Tz8gVtLw",
-        "weightBps": 750
-      },
-      {
-        "symbol": "ORCA",
-        "mint": "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE",
-        "weightBps": 750
-      },
-      {
-        "symbol": "RAY",
-        "mint": "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R",
-        "weightBps": 750
-      },
-      {
-        "symbol": "WIF",
-        "mint": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
-        "weightBps": 500
-      }
-    ]
+    "minDeployUsd": 100,
+    "maxSingleNameBps": 2500,
+    "maxPositions": 25,
+    "disclosures": [],
+    "governance": {
+      "decisionId": null,
+      "nextReview": "2027-02-04"
+    },
+    "targets": []
+  },
+  {
+    "id": "pure-growth",
+    "code": "FGRO",
+    "name": "Pure Growth Strategy",
+    "shortName": "Growth",
+    "type": "Active",
+    "category": "Active",
+    "status": "draft",
+    "featured": false,
+    "riskLevel": 5,
+    "tagline": "Aggressive positioning in high-growth assets with tactical rebalancing.",
+    "description": "A high-growth, actively rebalanced portfolio. Mandate and holdings are being defined by the committee.",
+    "methodology": [
+      "Mandate under development."
+    ],
+    "construction": "conviction",
+    "screen": null,
+    "weighting": null,
+    "labels": [],
+    "fees": {
+      "deployUsd": 1.3,
+      "rebalanceUsd": 0.4
+    },
+    "cadence": "weekly",
+    "minDeployUsd": 100,
+    "maxSingleNameBps": 2500,
+    "maxPositions": 25,
+    "disclosures": [],
+    "governance": {
+      "decisionId": null,
+      "nextReview": "2027-02-04"
+    },
+    "targets": []
   }
 ]
