@@ -1,0 +1,398 @@
+[
+  {
+    "symbol": "AAPLx",
+    "mint": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp",
+    "assetClass": "stock",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "ABBVx",
+    "mint": "XswbinNKyPmzTa5CskMbCPvMW6G5CMnZXZEeQSSQoie",
+    "assetClass": "stock",
+    "sector": "Health Care"
+  },
+  {
+    "symbol": "ABTx",
+    "mint": "XsHtf5RpxsQ7jeJ9ivNewouZKJHbPxhPoEy6yYvULr7",
+    "assetClass": "stock",
+    "sector": "Health Care"
+  },
+  {
+    "symbol": "ACNx",
+    "mint": "Xs5UJzmCRQ8DWZjskExdSQDnbE6iLkRu2jjrRAB1JSU",
+    "assetClass": "stock",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "AMBRx",
+    "mint": "XsaQTCgebC2KPbf27KUhdv5JFvHhQ4GDAPURwrEhAzb",
+    "assetClass": "stock",
+    "sector": "Financials"
+  },
+  {
+    "symbol": "AMZNx",
+    "mint": "Xs3eBt7uRfJX8QUs4suhyU8p2M6DoUDrJyWBa8LLZsg",
+    "assetClass": "stock",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "symbol": "APPx",
+    "mint": "XsPdAVBi8Zc1xvv53k4JcMrQaEDTgkGqKYeh7AYgPHV",
+    "assetClass": "stock",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "AVGOx",
+    "mint": "XsgSaSvNSqLTtFuyWPBhK9196Xb9Bbdyjj4fH3cPJGo",
+    "assetClass": "stock",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "AZNx",
+    "mint": "Xs3ZFkPYT2BN7qBMqf1j1bfTeTm1rFzEFSsQ1z3wAKU",
+    "assetClass": "stock",
+    "sector": "Health Care"
+  },
+  {
+    "symbol": "BACx",
+    "mint": "XswsQk4duEQmCbGzfqUUWYmi7pV7xpJ9eEmLHXCaEQP",
+    "assetClass": "stock",
+    "sector": "Financials"
+  },
+  {
+    "symbol": "BRK.Bx",
+    "mint": "Xs6B6zawENwAbWVi7w92rjazLuAr5Az59qgWKcNb45x",
+    "assetClass": "stock",
+    "sector": "Financials"
+  },
+  {
+    "symbol": "CMCSAx",
+    "mint": "XsvKCaNsxg2GN8jjUmq71qukMJr7Q1c5R2Mk9P8kcS8",
+    "assetClass": "stock",
+    "sector": "Communication Services"
+  },
+  {
+    "symbol": "COINx",
+    "mint": "Xs7ZdzSHLU9ftNJsii5fCeJhoRWSC32SQGzGQtePxNu",
+    "assetClass": "stock",
+    "sector": "Financials"
+  },
+  {
+    "symbol": "CRCLx",
+    "mint": "XsueG8BtpquVJX9LVLLEGuViXUungE6WmK5YZ3p3bd1",
+    "assetClass": "stock",
+    "sector": "Financials"
+  },
+  {
+    "symbol": "CRMx",
+    "mint": "XsczbcQ3zfcgAEt9qHQES8pxKAVG5rujPSHQEXi4kaN",
+    "assetClass": "stock",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "CRWDx",
+    "mint": "Xs7xXqkcK7K8urEqGg52SECi79dRp2cEKKuYjUePYDw",
+    "assetClass": "stock",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "CSCOx",
+    "mint": "Xsr3pdLQyXvDJBFgpR5nexCEZwXvigb8wbPYp4YoNFf",
+    "assetClass": "stock",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "CVXx",
+    "mint": "XsNNMt7WTNA2sV3jrb1NNfNgapxRF5i4i6GcnTRRHts",
+    "assetClass": "stock",
+    "sector": "Energy"
+  },
+  {
+    "symbol": "DFDVx",
+    "mint": "Xs2yquAgsHByNzx68WJC55WHjHBvG9JsMB7CWjTLyPy",
+    "assetClass": "stock",
+    "sector": "Financials"
+  },
+  {
+    "symbol": "DHRx",
+    "mint": "Xseo8tgCZfkHxWS9xbFYeKFyMSbWEvZGFV1Gh53GtCV",
+    "assetClass": "stock",
+    "sector": "Health Care"
+  },
+  {
+    "symbol": "GLDx",
+    "mint": "Xsv9hRk1z5ystj9MhnA7Lq4vjSsLwzL2nxrwmwtD3re",
+    "assetClass": "commodity-etf",
+    "sector": "Commodities"
+  },
+  {
+    "symbol": "GMEx",
+    "mint": "Xsf9mBktVB9BSU5kf4nHxPq5hCBJ2j2ui3ecFGxPRGc",
+    "assetClass": "stock",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "symbol": "GOOGLx",
+    "mint": "XsCPL9dNWBMvFtTmwcCA5v3xWPSMEBCszbQdiLLq6aN",
+    "assetClass": "stock",
+    "sector": "Communication Services"
+  },
+  {
+    "symbol": "GSx",
+    "mint": "XsgaUyp4jd1fNBCxgtTKkW64xnnhQcvgaxzsbAq5ZD1",
+    "assetClass": "stock",
+    "sector": "Financials"
+  },
+  {
+    "symbol": "HDx",
+    "mint": "XszjVtyhowGjSC5odCqBpW1CtXXwXjYokymrk7fGKD3",
+    "assetClass": "stock",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "symbol": "HONx",
+    "mint": "XsRbLZthfABAPAfumWNEJhPyiKDW6TvDVeAeW7oKqA2",
+    "assetClass": "stock",
+    "sector": "Industrials"
+  },
+  {
+    "symbol": "HOODx",
+    "mint": "XsvNBAYkrDRNhA7wPHQfX3ZUXZyZLdnCQDfHZ56bzpg",
+    "assetClass": "stock",
+    "sector": "Financials"
+  },
+  {
+    "symbol": "IBMx",
+    "mint": "XspwhyYPdWVM8XBHZnpS9hgyag9MKjLRyE3tVfmCbSr",
+    "assetClass": "stock",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "INTCx",
+    "mint": "XshPgPdXFRWB8tP1j82rebb2Q9rPgGX37RuqzohmArM",
+    "assetClass": "stock",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "JNJx",
+    "mint": "XsGVi5eo1Dh2zUpic4qACcjuWGjNv8GCt3dm5XcX6Dn",
+    "assetClass": "stock",
+    "sector": "Health Care"
+  },
+  {
+    "symbol": "JPMx",
+    "mint": "XsMAqkcKsUewDrzVkait4e5u4y8REgtyS7jWgCpLV2C",
+    "assetClass": "stock",
+    "sector": "Financials"
+  },
+  {
+    "symbol": "KOx",
+    "mint": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+    "assetClass": "stock",
+    "sector": "Consumer Staples"
+  },
+  {
+    "symbol": "LINx",
+    "mint": "XsSr8anD1hkvNMu8XQiVcmiaTP7XGvYu7Q58LdmtE8Z",
+    "assetClass": "stock",
+    "sector": "Materials"
+  },
+  {
+    "symbol": "LLYx",
+    "mint": "Xsnuv4omNoHozR6EEW5mXkw8Nrny5rB3jVfLqi6gKMH",
+    "assetClass": "stock",
+    "sector": "Health Care"
+  },
+  {
+    "symbol": "MAx",
+    "mint": "XsApJFV9MAktqnAc6jqzsHVujxkGm9xcSUffaBoYLKC",
+    "assetClass": "stock",
+    "sector": "Financials"
+  },
+  {
+    "symbol": "MCDx",
+    "mint": "XsqE9cRRpzxcGKDXj1BJ7Xmg4GRhZoyY1KpmGSxAWT2",
+    "assetClass": "stock",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "symbol": "MDTx",
+    "mint": "XsDgw22qRLTv5Uwuzn6T63cW69exG41T6gwQhEK22u2",
+    "assetClass": "stock",
+    "sector": "Health Care"
+  },
+  {
+    "symbol": "METAx",
+    "mint": "Xsa62P5mvPszXL1krVUnU5ar38bBSVcWAB6fmPCo5Zu",
+    "assetClass": "stock",
+    "sector": "Communication Services"
+  },
+  {
+    "symbol": "MRKx",
+    "mint": "XsnQnU7AdbRZYe2akqqpibDdXjkieGFfSkbkjX1Sd1X",
+    "assetClass": "stock",
+    "sector": "Health Care"
+  },
+  {
+    "symbol": "MRVLx",
+    "mint": "XsuxRGDzbLjnJ72v74b7p9VY6N66uYgTCyfwwRjVCJA",
+    "assetClass": "stock",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "MSFTx",
+    "mint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+    "assetClass": "stock",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "MSTRx",
+    "mint": "XsP7xzNPvEHS1m6qfanPUGjNmdnmsLKEoNAnHjdxxyZ",
+    "assetClass": "stock",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "NFLXx",
+    "mint": "XsEH7wWfJJu2ZT3UCFeVfALnVA6CP5ur7Ee11KmzVpL",
+    "assetClass": "stock",
+    "sector": "Communication Services"
+  },
+  {
+    "symbol": "NVDAx",
+    "mint": "Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh",
+    "assetClass": "stock",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "NVOx",
+    "mint": "XsfAzPzYrYjd4Dpa9BU3cusBsvWfVB9gBcyGC87S57n",
+    "assetClass": "stock",
+    "sector": "Health Care"
+  },
+  {
+    "symbol": "OPENx",
+    "mint": "XsGtpmjhmC8kyjVSWL4VicGu36ceq9u55PTgF8bhGv6",
+    "assetClass": "stock",
+    "sector": "Real Estate"
+  },
+  {
+    "symbol": "ORCLx",
+    "mint": "XsjFwUPiLofddX5cWFHW35GCbXcSu1BCUGfxoQAQjeL",
+    "assetClass": "stock",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "PEPx",
+    "mint": "Xsv99frTRUeornyvCfvhnDesQDWuvns1M852Pez91vF",
+    "assetClass": "stock",
+    "sector": "Consumer Staples"
+  },
+  {
+    "symbol": "PFEx",
+    "mint": "XsAtbqkAP1HJxy7hFDeq7ok6yM43DQ9mQ1Rh861X8rw",
+    "assetClass": "stock",
+    "sector": "Health Care"
+  },
+  {
+    "symbol": "PGx",
+    "mint": "XsYdjDjNUygZ7yGKfQaB6TxLh2gC6RRjzLtLAGJrhzV",
+    "assetClass": "stock",
+    "sector": "Consumer Staples"
+  },
+  {
+    "symbol": "PLTRx",
+    "mint": "XsoBhf2ufR8fTyNSjqfU71DYGaE6Z3SUGAidpzriAA4",
+    "assetClass": "stock",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "PMx",
+    "mint": "Xsba6tUnSjDae2VcopDB6FGGDaxRrewFCDa5hKn5vT3",
+    "assetClass": "stock",
+    "sector": "Consumer Staples"
+  },
+  {
+    "symbol": "QQQx",
+    "mint": "Xs8S1uUs1zvS2p7iwtsG3b6fkhpvmwz4GYU3gWAmWHZ",
+    "assetClass": "etf",
+    "sector": "Multi-asset"
+  },
+  {
+    "symbol": "SPYx",
+    "mint": "XsoCS1TfEyfFhfvj8EtZ528L3CaKBDBRqRapnBbDF2W",
+    "assetClass": "etf",
+    "sector": "Multi-asset"
+  },
+  {
+    "symbol": "STRCx",
+    "mint": "Xs78JED6PFZxWc2wCEPspZW9kL3Se5J7L5TChKgsidH",
+    "assetClass": "preferred",
+    "sector": "Information Technology"
+  },
+  {
+    "symbol": "TBLLx",
+    "mint": "XsqBC5tcVQLYt8wqGCHRnAUUecbRYXoJCReD6w7QEKp",
+    "assetClass": "treasury-etf",
+    "sector": "Fixed Income"
+  },
+  {
+    "symbol": "TMOx",
+    "mint": "Xs8drBWy3Sd5QY3aifG9kt9KFs2K3PGZmx7jWrsrk57",
+    "assetClass": "stock",
+    "sector": "Health Care"
+  },
+  {
+    "symbol": "TONXx",
+    "mint": "XscE4GUcsYhcyZu5ATiGUMmhxYa1D5fwbpJw4K6K4dp",
+    "assetClass": "stock",
+    "sector": "Financials"
+  },
+  {
+    "symbol": "TQQQx",
+    "mint": "XsjQP3iMAaQ3kQScQKthQpx9ALRbjKAjQtHg6TFomoc",
+    "assetClass": "leveraged-etf",
+    "sector": "Multi-asset"
+  },
+  {
+    "symbol": "TSLAx",
+    "mint": "XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB",
+    "assetClass": "stock",
+    "sector": "Consumer Discretionary"
+  },
+  {
+    "symbol": "UNHx",
+    "mint": "XszvaiXGPwvk2nwb3o9C1CX4K6zH8sez11E6uyup6fe",
+    "assetClass": "stock",
+    "sector": "Health Care"
+  },
+  {
+    "symbol": "VTIx",
+    "mint": "XsssYEQjzxBCFgvYFFNuhJFBeHNdLWYeUSP8F45cDr9",
+    "assetClass": "etf",
+    "sector": "Multi-asset"
+  },
+  {
+    "symbol": "Vx",
+    "mint": "XsqgsbXwWogGJsNcVZ3TyVouy2MbTkfCFhCGGGcQZ2p",
+    "assetClass": "stock",
+    "sector": "Financials"
+  },
+  {
+    "symbol": "WMTx",
+    "mint": "Xs151QeqTCiuKtinzfRATnUESM2xTU6V9Wy8Vy538ci",
+    "assetClass": "stock",
+    "sector": "Consumer Staples"
+  },
+  {
+    "symbol": "XOMx",
+    "mint": "XsaHND8sHyfMfsWPj6kSdd5VwvCayZvjYgKmmcNL5qh",
+    "assetClass": "stock",
+    "sector": "Energy"
+  },
+  {
+    "symbol": "SOL",
+    "mint": "So11111111111111111111111111111111111111112",
+    "assetClass": "digital-asset",
+    "sector": "Digital Assets"
+  }
+]
