@@ -1,89 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="./forma-favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Forma Terminal — Onchain Separate Accounts</title>
+    <meta name="description" content="Deploy institutional-grade tokenized stock portfolios to your own Solana wallet in three clicks. Self-custodied, flat fees, 24/7/365." />
+    <meta name="theme-color" content="#04060B" />
+    <link rel="icon" type="image/svg+xml" href="./brand/forma-mark-flat.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./brand/icon-32.png" />
+    <link rel="apple-touch-icon" href="./brand/icon-180.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Forma Terminal — Onchain Separate Accounts" />
+    <meta property="og:description" content="Institutional tokenized stock portfolios delivered to your wallet in minutes. Self-custodied. Flat fees. 24/7/365." />
+    <meta property="og:image" content="https://formastrats.github.io/forma-strategies-site/brand/og-1200x630.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@FormaStrats" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://api.jup.ag" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Montserrat:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>Forma Terminal</title>
-    <script type="module" crossorigin src="./assets/index-EDOPeErY.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-LPPKxFST.css">
-  
-    <style>
-      /* Annual Research Pass — Coming Soon tape overlay (demo) */
-      .forma-coming-soon-tape{position:absolute;inset:0;pointer-events:none;}
-      .forma-coming-soon-tape .tape{
-        position:absolute;left:-10%;top:34%;width:120%;
-        transform:rotate(-9deg);
-        background:repeating-linear-gradient(135deg, rgba(245,158,11,0.92) 0 14px, rgba(253,230,138,0.92) 14px 28px);
-        border-top:1px solid rgba(0,0,0,0.25);
-        border-bottom:1px solid rgba(0,0,0,0.25);
-        box-shadow:0 16px 50px rgba(0,0,0,0.55);
-        padding:14px 18px;
-        display:flex;align-items:center;justify-content:center;gap:14px;
-        font-family: "IBM Plex Sans", Inter, system-ui;
-        letter-spacing: .22em;
-        text-transform: uppercase;
-        color: rgba(0,0,0,0.85);
-        font-weight: 800;
-        font-size: 12px;
-      }
-      .forma-coming-soon-tape .tape span{background:rgba(0,0,0,0.10);padding:6px 10px;border-radius:999px;border:1px solid rgba(0,0,0,0.12)}
-    </style>
-    <script>
-      // Inject construction tape over the Annual Research Pass modal CTAs (Coming Soon)
-      (function(){
-        const seen = new WeakSet();
-        const mo = new MutationObserver(() => {
-          const modals = Array.from(document.querySelectorAll('div'))
-            .filter(el => !seen.has(el) && el.textContent && el.textContent.includes('Annual Research Pass'));
-
-          for (const m of modals) {
-            // try to find the modal card container (the one with rounded corners + border)
-            const card = m.closest('div');
-            if (!card) continue;
-
-            // find the closest element that looks like the dialog panel (contains the heading)
-            let panel = m;
-            for (let i=0;i<6;i++) {
-              if (panel && panel.className && String(panel.className).includes('rounded-2xl')) break;
-              panel = panel.parentElement;
-            }
-            if (!panel) continue;
-            if (seen.has(panel)) continue;
-            seen.add(panel);
-
-            panel.style.position = panel.style.position || 'relative';
-
-            // Add tape
-            const tapeWrap = document.createElement('div');
-            tapeWrap.className = 'forma-coming-soon-tape';
-            tapeWrap.innerHTML = '<div class="tape"><span>Coming soon</span> <span>Wallet subscribe</span> <span>Magic Eden secondary</span></div>';
-            panel.appendChild(tapeWrap);
-
-            // Visually discourage clicking the primary CTA row
-            const buttons = panel.querySelectorAll('button, a');
-            buttons.forEach(b => {
-              const txt = (b.textContent || '').toLowerCase();
-              if (txt.includes('mint annual pass') || txt.includes('buy on magic eden') || txt.includes('connect your solana wallet')) {
-                b.style.opacity = '0.55';
-                b.style.filter = 'grayscale(0.2)';
-                b.style.pointerEvents = 'none';
-              }
-            });
-          }
-        });
-        mo.observe(document.documentElement, {subtree:true, childList:true});
-      })();
-    </script>
-
+    <script type="module" crossorigin src="./assets/index-mR6-fT3f.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/solana-BcOYObtG.js">
+    <link rel="modulepreload" crossorigin href="./assets/charts-CYRsMC6c.js">
+    <link rel="modulepreload" crossorigin href="./assets/wallets-Bd8Ox2xr.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-CtT4Ma1B.css">
   </head>
   <body>
     <div id="root"></div>
+    <noscript>Forma Terminal needs JavaScript to connect your wallet.</noscript>
   </body>
 </html>

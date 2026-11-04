@@ -1,0 +1,516 @@
+[
+  {
+    "id": "tokenized-stocks-index",
+    "name": "Universe Token Strategy",
+    "shortName": "Universe",
+    "type": "Passive",
+    "status": "active",
+    "construction": "equal-weight-screened",
+    "screen": {
+      "minLiquidityUsd": 2500,
+      "minVolume24hUsd": 5000
+    },
+    "fees": {
+      "deployUsd": 1.3,
+      "rebalanceUsd": 0.25
+    },
+    "cadence": "quarterly",
+    "minDeployUsd": 100,
+    "targets": [
+      {
+        "symbol": "AAPLx",
+        "mint": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp",
+        "weightBps": 154
+      },
+      {
+        "symbol": "ABBVx",
+        "mint": "XswbinNKyPmzTa5CskMbCPvMW6G5CMnZXZEeQSSQoie",
+        "weightBps": 154
+      },
+      {
+        "symbol": "ABTx",
+        "mint": "XsHtf5RpxsQ7jeJ9ivNewouZKJHbPxhPoEy6yYvULr7",
+        "weightBps": 154
+      },
+      {
+        "symbol": "ACNx",
+        "mint": "Xs5UJzmCRQ8DWZjskExdSQDnbE6iLkRu2jjrRAB1JSU",
+        "weightBps": 154
+      },
+      {
+        "symbol": "AMBRx",
+        "mint": "XsaQTCgebC2KPbf27KUhdv5JFvHhQ4GDAPURwrEhAzb",
+        "weightBps": 154
+      },
+      {
+        "symbol": "AMZNx",
+        "mint": "Xs3eBt7uRfJX8QUs4suhyU8p2M6DoUDrJyWBa8LLZsg",
+        "weightBps": 154
+      },
+      {
+        "symbol": "APPx",
+        "mint": "XsPdAVBi8Zc1xvv53k4JcMrQaEDTgkGqKYeh7AYgPHV",
+        "weightBps": 154
+      },
+      {
+        "symbol": "AVGOx",
+        "mint": "XsgSaSvNSqLTtFuyWPBhK9196Xb9Bbdyjj4fH3cPJGo",
+        "weightBps": 154
+      },
+      {
+        "symbol": "AZNx",
+        "mint": "Xs3ZFkPYT2BN7qBMqf1j1bfTeTm1rFzEFSsQ1z3wAKU",
+        "weightBps": 154
+      },
+      {
+        "symbol": "BACx",
+        "mint": "XswsQk4duEQmCbGzfqUUWYmi7pV7xpJ9eEmLHXCaEQP",
+        "weightBps": 154
+      },
+      {
+        "symbol": "BRK.Bx",
+        "mint": "Xs6B6zawENwAbWVi7w92rjazLuAr5Az59qgWKcNb45x",
+        "weightBps": 154
+      },
+      {
+        "symbol": "CMCSAx",
+        "mint": "XsvKCaNsxg2GN8jjUmq71qukMJr7Q1c5R2Mk9P8kcS8",
+        "weightBps": 154
+      },
+      {
+        "symbol": "COINx",
+        "mint": "Xs7ZdzSHLU9ftNJsii5fCeJhoRWSC32SQGzGQtePxNu",
+        "weightBps": 154
+      },
+      {
+        "symbol": "CRCLx",
+        "mint": "XsueG8BtpquVJX9LVLLEGuViXUungE6WmK5YZ3p3bd1",
+        "weightBps": 154
+      },
+      {
+        "symbol": "CRMx",
+        "mint": "XsczbcQ3zfcgAEt9qHQES8pxKAVG5rujPSHQEXi4kaN",
+        "weightBps": 154
+      },
+      {
+        "symbol": "CRWDx",
+        "mint": "Xs7xXqkcK7K8urEqGg52SECi79dRp2cEKKuYjUePYDw",
+        "weightBps": 154
+      },
+      {
+        "symbol": "CSCOx",
+        "mint": "Xsr3pdLQyXvDJBFgpR5nexCEZwXvigb8wbPYp4YoNFf",
+        "weightBps": 154
+      },
+      {
+        "symbol": "CVXx",
+        "mint": "XsNNMt7WTNA2sV3jrb1NNfNgapxRF5i4i6GcnTRRHts",
+        "weightBps": 154
+      },
+      {
+        "symbol": "DFDVx",
+        "mint": "Xs2yquAgsHByNzx68WJC55WHjHBvG9JsMB7CWjTLyPy",
+        "weightBps": 154
+      },
+      {
+        "symbol": "DHRx",
+        "mint": "Xseo8tgCZfkHxWS9xbFYeKFyMSbWEvZGFV1Gh53GtCV",
+        "weightBps": 154
+      },
+      {
+        "symbol": "GLDx",
+        "mint": "Xsv9hRk1z5ystj9MhnA7Lq4vjSsLwzL2nxrwmwtD3re",
+        "weightBps": 154
+      },
+      {
+        "symbol": "GMEx",
+        "mint": "Xsf9mBktVB9BSU5kf4nHxPq5hCBJ2j2ui3ecFGxPRGc",
+        "weightBps": 154
+      },
+      {
+        "symbol": "GOOGLx",
+        "mint": "XsCPL9dNWBMvFtTmwcCA5v3xWPSMEBCszbQdiLLq6aN",
+        "weightBps": 154
+      },
+      {
+        "symbol": "GSx",
+        "mint": "XsgaUyp4jd1fNBCxgtTKkW64xnnhQcvgaxzsbAq5ZD1",
+        "weightBps": 154
+      },
+      {
+        "symbol": "HDx",
+        "mint": "XszjVtyhowGjSC5odCqBpW1CtXXwXjYokymrk7fGKD3",
+        "weightBps": 154
+      },
+      {
+        "symbol": "HONx",
+        "mint": "XsRbLZthfABAPAfumWNEJhPyiKDW6TvDVeAeW7oKqA2",
+        "weightBps": 154
+      },
+      {
+        "symbol": "HOODx",
+        "mint": "XsvNBAYkrDRNhA7wPHQfX3ZUXZyZLdnCQDfHZ56bzpg",
+        "weightBps": 154
+      },
+      {
+        "symbol": "IBMx",
+        "mint": "XspwhyYPdWVM8XBHZnpS9hgyag9MKjLRyE3tVfmCbSr",
+        "weightBps": 154
+      },
+      {
+        "symbol": "INTCx",
+        "mint": "XshPgPdXFRWB8tP1j82rebb2Q9rPgGX37RuqzohmArM",
+        "weightBps": 154
+      },
+      {
+        "symbol": "JNJx",
+        "mint": "XsGVi5eo1Dh2zUpic4qACcjuWGjNv8GCt3dm5XcX6Dn",
+        "weightBps": 154
+      },
+      {
+        "symbol": "JPMx",
+        "mint": "XsMAqkcKsUewDrzVkait4e5u4y8REgtyS7jWgCpLV2C",
+        "weightBps": 154
+      },
+      {
+        "symbol": "KOx",
+        "mint": "XsaBXg8dU5cPM6ehmVctMkVqoiRG2ZjMo1cyBJ3AykQ",
+        "weightBps": 154
+      },
+      {
+        "symbol": "LINx",
+        "mint": "XsSr8anD1hkvNMu8XQiVcmiaTP7XGvYu7Q58LdmtE8Z",
+        "weightBps": 154
+      },
+      {
+        "symbol": "LLYx",
+        "mint": "Xsnuv4omNoHozR6EEW5mXkw8Nrny5rB3jVfLqi6gKMH",
+        "weightBps": 154
+      },
+      {
+        "symbol": "MAx",
+        "mint": "XsApJFV9MAktqnAc6jqzsHVujxkGm9xcSUffaBoYLKC",
+        "weightBps": 154
+      },
+      {
+        "symbol": "MCDx",
+        "mint": "XsqE9cRRpzxcGKDXj1BJ7Xmg4GRhZoyY1KpmGSxAWT2",
+        "weightBps": 154
+      },
+      {
+        "symbol": "MDTx",
+        "mint": "XsDgw22qRLTv5Uwuzn6T63cW69exG41T6gwQhEK22u2",
+        "weightBps": 154
+      },
+      {
+        "symbol": "METAx",
+        "mint": "Xsa62P5mvPszXL1krVUnU5ar38bBSVcWAB6fmPCo5Zu",
+        "weightBps": 154
+      },
+      {
+        "symbol": "MRKx",
+        "mint": "XsnQnU7AdbRZYe2akqqpibDdXjkieGFfSkbkjX1Sd1X",
+        "weightBps": 154
+      },
+      {
+        "symbol": "MRVLx",
+        "mint": "XsuxRGDzbLjnJ72v74b7p9VY6N66uYgTCyfwwRjVCJA",
+        "weightBps": 154
+      },
+      {
+        "symbol": "MSFTx",
+        "mint": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX",
+        "weightBps": 154
+      },
+      {
+        "symbol": "MSTRx",
+        "mint": "XsP7xzNPvEHS1m6qfanPUGjNmdnmsLKEoNAnHjdxxyZ",
+        "weightBps": 154
+      },
+      {
+        "symbol": "NFLXx",
+        "mint": "XsEH7wWfJJu2ZT3UCFeVfALnVA6CP5ur7Ee11KmzVpL",
+        "weightBps": 154
+      },
+      {
+        "symbol": "NVDAx",
+        "mint": "Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh",
+        "weightBps": 154
+      },
+      {
+        "symbol": "NVOx",
+        "mint": "XsfAzPzYrYjd4Dpa9BU3cusBsvWfVB9gBcyGC87S57n",
+        "weightBps": 154
+      },
+      {
+        "symbol": "OPENx",
+        "mint": "XsGtpmjhmC8kyjVSWL4VicGu36ceq9u55PTgF8bhGv6",
+        "weightBps": 154
+      },
+      {
+        "symbol": "ORCLx",
+        "mint": "XsjFwUPiLofddX5cWFHW35GCbXcSu1BCUGfxoQAQjeL",
+        "weightBps": 154
+      },
+      {
+        "symbol": "PEPx",
+        "mint": "Xsv99frTRUeornyvCfvhnDesQDWuvns1M852Pez91vF",
+        "weightBps": 154
+      },
+      {
+        "symbol": "PFEx",
+        "mint": "XsAtbqkAP1HJxy7hFDeq7ok6yM43DQ9mQ1Rh861X8rw",
+        "weightBps": 154
+      },
+      {
+        "symbol": "PGx",
+        "mint": "XsYdjDjNUygZ7yGKfQaB6TxLh2gC6RRjzLtLAGJrhzV",
+        "weightBps": 154
+      },
+      {
+        "symbol": "PLTRx",
+        "mint": "XsoBhf2ufR8fTyNSjqfU71DYGaE6Z3SUGAidpzriAA4",
+        "weightBps": 154
+      },
+      {
+        "symbol": "PMx",
+        "mint": "Xsba6tUnSjDae2VcopDB6FGGDaxRrewFCDa5hKn5vT3",
+        "weightBps": 154
+      },
+      {
+        "symbol": "QQQx",
+        "mint": "Xs8S1uUs1zvS2p7iwtsG3b6fkhpvmwz4GYU3gWAmWHZ",
+        "weightBps": 154
+      },
+      {
+        "symbol": "SPYx",
+        "mint": "XsoCS1TfEyfFhfvj8EtZ528L3CaKBDBRqRapnBbDF2W",
+        "weightBps": 154
+      },
+      {
+        "symbol": "STRCx",
+        "mint": "Xs78JED6PFZxWc2wCEPspZW9kL3Se5J7L5TChKgsidH",
+        "weightBps": 154
+      },
+      {
+        "symbol": "TBLLx",
+        "mint": "XsqBC5tcVQLYt8wqGCHRnAUUecbRYXoJCReD6w7QEKp",
+        "weightBps": 153
+      },
+      {
+        "symbol": "TMOx",
+        "mint": "Xs8drBWy3Sd5QY3aifG9kt9KFs2K3PGZmx7jWrsrk57",
+        "weightBps": 153
+      },
+      {
+        "symbol": "TONXx",
+        "mint": "XscE4GUcsYhcyZu5ATiGUMmhxYa1D5fwbpJw4K6K4dp",
+        "weightBps": 153
+      },
+      {
+        "symbol": "TQQQx",
+        "mint": "XsjQP3iMAaQ3kQScQKthQpx9ALRbjKAjQtHg6TFomoc",
+        "weightBps": 153
+      },
+      {
+        "symbol": "TSLAx",
+        "mint": "XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB",
+        "weightBps": 153
+      },
+      {
+        "symbol": "UNHx",
+        "mint": "XszvaiXGPwvk2nwb3o9C1CX4K6zH8sez11E6uyup6fe",
+        "weightBps": 153
+      },
+      {
+        "symbol": "VTIx",
+        "mint": "XsssYEQjzxBCFgvYFFNuhJFBeHNdLWYeUSP8F45cDr9",
+        "weightBps": 153
+      },
+      {
+        "symbol": "Vx",
+        "mint": "XsqgsbXwWogGJsNcVZ3TyVouy2MbTkfCFhCGGGcQZ2p",
+        "weightBps": 153
+      },
+      {
+        "symbol": "WMTx",
+        "mint": "Xs151QeqTCiuKtinzfRATnUESM2xTU6V9Wy8Vy538ci",
+        "weightBps": 153
+      },
+      {
+        "symbol": "XOMx",
+        "mint": "XsaHND8sHyfMfsWPj6kSdd5VwvCayZvjYgKmmcNL5qh",
+        "weightBps": 153
+      }
+    ]
+  },
+  {
+    "id": "select-tokenized-stocks",
+    "name": "Select Token Strategy",
+    "shortName": "Select",
+    "type": "Active",
+    "status": "active",
+    "construction": "conviction",
+    "screen": null,
+    "fees": {
+      "deployUsd": 1.91,
+      "rebalanceUsd": 0.28
+    },
+    "cadence": "monthly",
+    "minDeployUsd": 100,
+    "targets": [
+      {
+        "symbol": "AAPLx",
+        "mint": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp",
+        "weightBps": 2000
+      },
+      {
+        "symbol": "AMZNx",
+        "mint": "Xs3eBt7uRfJX8QUs4suhyU8p2M6DoUDrJyWBa8LLZsg",
+        "weightBps": 1000
+      },
+      {
+        "symbol": "HDx",
+        "mint": "XszjVtyhowGjSC5odCqBpW1CtXXwXjYokymrk7fGKD3",
+        "weightBps": 1000
+      },
+      {
+        "symbol": "MSTRx",
+        "mint": "XsP7xzNPvEHS1m6qfanPUGjNmdnmsLKEoNAnHjdxxyZ",
+        "weightBps": 1000
+      },
+      {
+        "symbol": "CRCLx",
+        "mint": "XsueG8BtpquVJX9LVLLEGuViXUungE6WmK5YZ3p3bd1",
+        "weightBps": 700
+      },
+      {
+        "symbol": "CSCOx",
+        "mint": "Xsr3pdLQyXvDJBFgpR5nexCEZwXvigb8wbPYp4YoNFf",
+        "weightBps": 700
+      },
+      {
+        "symbol": "JPMx",
+        "mint": "XsMAqkcKsUewDrzVkait4e5u4y8REgtyS7jWgCpLV2C",
+        "weightBps": 700
+      },
+      {
+        "symbol": "MRVLx",
+        "mint": "XsuxRGDzbLjnJ72v74b7p9VY6N66uYgTCyfwwRjVCJA",
+        "weightBps": 570
+      },
+      {
+        "symbol": "SOL",
+        "mint": "So11111111111111111111111111111111111111112",
+        "weightBps": 455
+      },
+      {
+        "symbol": "LINx",
+        "mint": "XsSr8anD1hkvNMu8XQiVcmiaTP7XGvYu7Q58LdmtE8Z",
+        "weightBps": 425
+      },
+      {
+        "symbol": "MAx",
+        "mint": "XsApJFV9MAktqnAc6jqzsHVujxkGm9xcSUffaBoYLKC",
+        "weightBps": 350
+      },
+      {
+        "symbol": "Vx",
+        "mint": "XsqgsbXwWogGJsNcVZ3TyVouy2MbTkfCFhCGGGcQZ2p",
+        "weightBps": 350
+      },
+      {
+        "symbol": "XOMx",
+        "mint": "XsaHND8sHyfMfsWPj6kSdd5VwvCayZvjYgKmmcNL5qh",
+        "weightBps": 200
+      },
+      {
+        "symbol": "CVXx",
+        "mint": "XsNNMt7WTNA2sV3jrb1NNfNgapxRF5i4i6GcnTRRHts",
+        "weightBps": 200
+      },
+      {
+        "symbol": "UNHx",
+        "mint": "XszvaiXGPwvk2nwb3o9C1CX4K6zH8sez11E6uyup6fe",
+        "weightBps": 150
+      },
+      {
+        "symbol": "NVDAx",
+        "mint": "Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh",
+        "weightBps": 100
+      },
+      {
+        "symbol": "TSLAx",
+        "mint": "XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB",
+        "weightBps": 100
+      }
+    ]
+  },
+  {
+    "id": "solana-ecosystem",
+    "name": "Solana Ecosystem Strategy",
+    "shortName": "Ecosystem",
+    "type": "Active",
+    "status": "draft",
+    "construction": "conviction",
+    "screen": null,
+    "fees": {
+      "deployUsd": 1.3,
+      "rebalanceUsd": 0.47
+    },
+    "cadence": "biweekly",
+    "minDeployUsd": 50,
+    "targets": [
+      {
+        "symbol": "SOL",
+        "mint": "So11111111111111111111111111111111111111112",
+        "weightBps": 2500
+      },
+      {
+        "symbol": "JUP",
+        "mint": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+        "weightBps": 1500
+      },
+      {
+        "symbol": "JTO",
+        "mint": "jtojtomepa8beP8AuQc6eXt5FriJwfFMwQx2v2f9mCL",
+        "weightBps": 1500
+      },
+      {
+        "symbol": "BONK",
+        "mint": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+        "weightBps": 1000
+      },
+      {
+        "symbol": "PYTH",
+        "mint": "HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3",
+        "weightBps": 1000
+      },
+      {
+        "symbol": "RNDR",
+        "mint": "rndrizKT3MK1iimdxRdWabcF7Zy79oB6dW4r6uN1v4x",
+        "weightBps": 750
+      },
+      {
+        "symbol": "HNT",
+        "mint": "hntyVP6YFm1Hg25TN9WGLqM12b8TQmcknX9Tz8gVtLw",
+        "weightBps": 750
+      },
+      {
+        "symbol": "ORCA",
+        "mint": "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE",
+        "weightBps": 750
+      },
+      {
+        "symbol": "RAY",
+        "mint": "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R",
+        "weightBps": 750
+      },
+      {
+        "symbol": "WIF",
+        "mint": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
+        "weightBps": 500
+      }
+    ]
+  }
+]
