@@ -1,0 +1,14 @@
+{
+  "name": "Forma Strategies",
+  "short_name": "Forma",
+  "description": "The onchain separate account: tokenized stock portfolios delivered to your wallet.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#04060B",
+  "theme_color": "#04060B",
+  "icons": [
+    { "src": "brand/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "brand/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "brand/forma-mark-flat.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
