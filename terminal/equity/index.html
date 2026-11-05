@@ -6,80 +6,64 @@
   <title>Forma Terminal — Equity Research</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,300;0,400;1,300&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
+    /* Forma "Sterling": black, graphite, porcelain white and polished silver (matches the Terminal). */
     :root{
-      --bg:#0b0b10;
-      --panel:rgba(68,69,84,.10);
-      --panel2:rgba(0,0,0,.22);
-      --border:rgba(127,123,130,.32);
-      --muted:rgba(255,255,255,.70);
-      --muted2:rgba(191,172,181,.72);
-      --lilac:rgba(192,132,252,.95);
-      --link:rgba(192,132,252,.92);
+      --bg:#0a0a0b;
+      --panel:#17171a;
+      --line:rgba(255,255,255,.08);
+      --line2:rgba(255,255,255,.14);
+      --steel:#8e8e96;
+      --mist:#b9b9c0;
+      --silver:#e4e4e8;
+      --white:#f4f4f5;
+      --sans:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      --serif:"Noto Serif Display",Georgia,"Times New Roman",serif;
     }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:#fff;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    body{margin:0;background:var(--bg);color:var(--white);font-family:var(--sans);-webkit-font-smoothing:antialiased}
 
-    .wrap{max-width:1200px;margin:0 auto;padding:22px 18px 60px}
+    .wrap{max-width:1200px;margin:0 auto;padding:24px 16px 64px}
 
-    .hero{
-      position:relative;
-      border:1px solid var(--border);
-      border-radius:22px;
-      overflow:hidden;
-      background:#000;
-    }
-    .hero::before{
-      content:"";
-      position:absolute;inset:0;
-      background-image:url(../forma-bg.jpeg);
-      background-size:cover;
-      background-position:center;
-      filter:saturate(1.05);
-      transform:scale(1.02);
-      opacity:.95;
-    }
-    .hero::after{
-      content:"";
-      position:absolute;inset:0;
-      background:rgba(0,0,0,.82);
-    }
-    .heroInner{position:relative;padding:18px 18px 16px}
+    .hero{border:1px solid var(--line);border-radius:4px;background:var(--panel)}
+    .heroInner{padding:28px 28px 24px}
 
-    .kicker{font-family:"IBM Plex Sans",Inter;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:rgba(192,132,252,.80)}
-    h1{margin:10px 0 0;font-size:28px;letter-spacing:-.03em}
-    .sub{margin-top:10px;color:var(--muted);line-height:1.55;max-width:88ch}
+    .kicker{font:500 11.5px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--steel)}
+    h1{margin:12px 0 0;font-family:var(--serif);font-weight:300;font-size:40px;line-height:1.05;letter-spacing:-.015em}
+    .sub{margin-top:12px;color:rgba(255,255,255,.7);line-height:1.6;max-width:78ch}
+    .sub strong{color:var(--white);font-weight:500}
 
-    .actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#fff;border:1px solid rgba(127,123,130,.38);background:rgba(0,0,0,.25);padding:10px 12px;border-radius:999px;font-weight:700;font-size:13px}
-    .btn:hover{border-color:rgba(192,132,252,.55);background:rgba(68,69,84,.22)}
-    .btnPrimary{border-color:rgba(192,132,252,.55);background:rgba(192,132,252,.12);color:rgba(192,132,252,.95)}
+    .actions{margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--silver);border:1px solid rgba(255,255,255,.22);background:transparent;padding:10px 14px;border-radius:2px;font-weight:500;font-size:13.5px;transition:background .15s,border-color .15s,color .15s}
+    .btn:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.06);color:#fff}
+    .btnPrimary{color:var(--bg);border-color:rgba(255,255,255,.55);background:linear-gradient(180deg,#f7f7f8 0%,#d2d2d7 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+    .btnPrimary:hover{color:var(--bg);background:linear-gradient(180deg,#fff 0%,#dcdce0 100%)}
 
-    .card{margin-top:14px;border:1px solid var(--border);border-radius:22px;background:rgba(68,69,84,.10);overflow:hidden}
-    .cardTop{padding:14px 16px;border-bottom:1px solid rgba(127,123,130,.24);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .cardTitle{font-family:"IBM Plex Sans",Inter;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(127,123,130,.95)}
+    .card{margin-top:16px;border:1px solid var(--line);border-radius:4px;background:var(--panel);overflow:hidden}
+    .cardTop{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .cardTitle{font:500 11.5px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--steel)}
 
-    .toolbar{padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .search{flex:1;min-width:220px;max-width:520px;border:1px solid rgba(127,123,130,.28);border-radius:14px;padding:10px 12px;background:rgba(0,0,0,.25);color:#fff;outline:none}
-    .search:focus{border-color:rgba(192,132,252,.55)}
-    .count{color:var(--muted2);font-size:12px}
+    .toolbar{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .search{flex:1;min-width:220px;max-width:520px;border:1px solid rgba(255,255,255,.12);border-radius:2px;padding:10px 12px;background:rgba(255,255,255,.02);color:#fff;font:inherit;font-size:14px;outline:none}
+    .search::placeholder{color:rgba(255,255,255,.5)}
+    .search:focus{border-color:rgba(255,255,255,.4)}
+    .count{color:var(--steel);font:400 12px var(--mono)}
 
-    table{width:100%;border-collapse:separate;border-spacing:0 10px;padding:0 10px 14px}
-    th{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(191,172,181,.62);text-align:left;padding:0 10px}
-    td{padding:12px 10px;background:rgba(0,0,0,.22);border-top:1px solid rgba(127,123,130,.18);border-bottom:1px solid rgba(127,123,130,.18)}
-    tr td:first-child{border-left:1px solid rgba(127,123,130,.18);border-top-left-radius:16px;border-bottom-left-radius:16px}
-    tr td:last-child{border-right:1px solid rgba(127,123,130,.18);border-top-right-radius:16px;border-bottom-right-radius:16px}
-    tr:hover td{background:rgba(68,69,84,.22);border-color:rgba(192,132,252,.18)}
+    table{width:100%;border-collapse:collapse}
+    th{font:500 11.5px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--steel);text-align:left;padding:10px 20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+    td{padding:12px 20px;border-bottom:1px solid rgba(255,255,255,.05)}
+    tr:hover td{background:rgba(255,255,255,.02)}
 
-    .name{font-weight:800;letter-spacing:-.01em}
-    .ticker{font-family:"IBM Plex Sans",Inter;color:rgba(255,255,255,.82)}
-    .links{display:flex;gap:10px;flex-wrap:wrap}
-    a.link{color:var(--link);text-decoration:none;font-weight:800;font-size:12px}
-    a.link:hover{text-decoration:underline}
+    .name{font-weight:500}
+    .ticker{font-family:var(--mono);font-size:13px;color:var(--mist)}
+    .links{display:flex;gap:14px;flex-wrap:wrap}
+    a.link{color:var(--silver);text-decoration:none;font-weight:500;font-size:13px}
+    a.link:hover{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.3);text-underline-offset:3px}
 
-    .footnote{padding:0 16px 14px;color:rgba(191,172,181,.60);font-size:12px;line-height:1.5}
-    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;color:rgba(255,255,255,.78)}
+    .footnote{padding:16px 20px;color:var(--steel);font-size:12px;line-height:1.5}
+    code{font-family:var(--mono);color:var(--silver)}
   </style>
 </head>
 <body>

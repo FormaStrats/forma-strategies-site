@@ -1,66 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="120 104 280 296" width="560" height="592" role="img" aria-label="Forma Strategies">
   <title>Forma Strategies</title>
   <defs>
-    <!-- Brushed-metal face: bright top edge falling to cool silver -->
-    <linearGradient id="fm-metal" x1="0" y1="0" x2="0.18" y2="1">
+    <!-- Polished silver face: bright top, darker band, light return at the bottom edge -->
+    <linearGradient id="fm-face" x1="0" y1="0" x2="0.16" y2="1">
       <stop offset="0" stop-color="#FFFFFF"/>
-      <stop offset="0.38" stop-color="#F1F4F8"/>
-      <stop offset="0.72" stop-color="#D3D9E2"/>
-      <stop offset="1" stop-color="#AEB7C4"/>
+      <stop offset="0.42" stop-color="#E3E3E7"/>
+      <stop offset="0.68" stop-color="#A6A6AE"/>
+      <stop offset="1" stop-color="#EEEEF1"/>
     </linearGradient>
-    <linearGradient id="fm-metal-dim" x1="0" y1="0" x2="0.12" y2="1">
-      <stop offset="0" stop-color="#E4E8EE"/>
-      <stop offset="0.5" stop-color="#C2C9D3"/>
-      <stop offset="1" stop-color="#8F99A8"/>
+    <!-- Extruded side, read as the thickness of the bar -->
+    <linearGradient id="fm-side" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#76767E"/>
+      <stop offset="1" stop-color="#3A3A40"/>
     </linearGradient>
-    <!-- Diagonal sheen that sweeps across all three bars -->
-    <linearGradient id="fm-sheen" x1="0" y1="0" x2="1" y2="0.35">
-      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
-      <stop offset="0.42" stop-color="#FFFFFF" stop-opacity="0"/>
-      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.55"/>
-      <stop offset="0.58" stop-color="#FFFFFF" stop-opacity="0"/>
-      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
-    </linearGradient>
-    <!-- Electric-blue rim light behind the right and lower edges -->
-    <filter id="fm-glow" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
-      <feGaussianBlur stdDeviation="7"/>
-    </filter>
-    <filter id="fm-glow-tight" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-      <feGaussianBlur stdDeviation="2.2"/>
-    </filter>
-    <clipPath id="fm-bars">
+  </defs>
+  <g transform="translate(-3 4)">
+    <g fill="url(#fm-side)" transform="translate(6 6)">
       <polygon points="150,186 368,131.5 368,185.5 150,240"/>
       <polygon points="150,262 328,217.5 328,261.5 150,306"/>
       <polygon points="150,328 210,313 210,357 150,372"/>
-    </clipPath>
-  </defs>
-
-  <!-- Soft blue halo (offset down-right, like the banner's rim light) -->
-  <g transform="translate(4 4)" fill="#3D7BFF" opacity="0.85" filter="url(#fm-glow)">
-    <polygon points="150,186 368,131.5 368,185.5 150,240"/>
-    <polygon points="150,262 328,217.5 328,261.5 150,306"/>
-    <polygon points="150,328 210,313 210,357 150,372"/>
-  </g>
-  <g transform="translate(2.2 2.2)" fill="#8DB6FF" opacity="0.9" filter="url(#fm-glow-tight)">
-    <polygon points="150,186 368,131.5 368,185.5 150,240"/>
-    <polygon points="150,262 328,217.5 328,261.5 150,306"/>
-    <polygon points="150,328 210,313 210,357 150,372"/>
-  </g>
-
-  <!-- Bars -->
-  <polygon points="150,186 368,131.5 368,185.5 150,240" fill="url(#fm-metal)"/>
-  <polygon points="150,262 207,247.75 207,291.75 150,306" fill="url(#fm-metal)"/>
-  <polygon points="207,247.75 328,217.5 328,261.5 207,291.75" fill="url(#fm-metal-dim)"/>
-  <polygon points="150,328 210,313 210,357 150,372" fill="url(#fm-metal)"/>
-
-  <!-- Sheen + crisp edges -->
-  <rect x="140" y="120" width="240" height="260" fill="url(#fm-sheen)" clip-path="url(#fm-bars)" opacity="0.6"/>
-  <g fill="none" stroke-linejoin="round">
-    <polyline points="150,186 368,131.5" stroke="#FFFFFF" stroke-width="1.6" opacity="0.95"/>
-    <polyline points="150,262 328,217.5" stroke="#FFFFFF" stroke-width="1.4" opacity="0.9"/>
-    <polyline points="150,328 210,313" stroke="#FFFFFF" stroke-width="1.4" opacity="0.9"/>
-    <polyline points="368,131.5 368,185.5 150,240" stroke="#9CC2FF" stroke-width="1.2" opacity="0.85"/>
-    <polyline points="328,217.5 328,261.5 150,306" stroke="#9CC2FF" stroke-width="1.2" opacity="0.8"/>
-    <polyline points="210,313 210,357 150,372" stroke="#9CC2FF" stroke-width="1.2" opacity="0.8"/>
+    </g>
+    <g fill="url(#fm-face)">
+      <polygon points="150,186 368,131.5 368,185.5 150,240"/>
+      <polygon points="150,262 328,217.5 328,261.5 150,306"/>
+      <polygon points="150,328 210,313 210,357 150,372"/>
+    </g>
+    <g fill="none" stroke="#FFFFFF" stroke-opacity="0.9" stroke-width="1.6" stroke-linecap="round">
+      <polyline points="150,186 368,131.5"/>
+      <polyline points="150,262 328,217.5"/>
+      <polyline points="150,328 210,313"/>
+    </g>
   </g>
 </svg>
