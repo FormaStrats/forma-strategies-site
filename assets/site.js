@@ -13,6 +13,23 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
+  // ── Phone menu ─────────────────────────────────────────────────────────
+  var menuBtn = document.querySelector('.nav__menu'), sheet = document.getElementById('navSheet');
+  function setMenu(open, refocus) {
+    if (!menuBtn || !sheet) return;
+    sheet.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.textContent = open ? 'Close' : 'Menu';
+    if (nav) nav.classList.toggle('is-open', open);
+    if (!open && refocus) menuBtn.focus();
+  }
+  if (menuBtn && sheet) {
+    menuBtn.addEventListener('click', function () { setMenu(sheet.hidden); });
+    sheet.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !sheet.hidden) setMenu(false, true); });
+    window.addEventListener('resize', function () { if (window.innerWidth >= 768 && !sheet.hidden) setMenu(false); });
+  }
+
   // ── Reveal on scroll ───────────────────────────────────────────────────
   var revealables = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
@@ -26,14 +43,7 @@
     revealables.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  // ── Hero field (native resolution) ─────────────────────────────────────
-  var canvas = document.getElementById('heroField');
-  if (canvas && window.FormaField) {
-    try {
-      window.FormaField.create(canvas, { ribbonY: 0.7, intensity: 1, strands: 76, particles: 340 });
-      requestAnimationFrame(function () { setTimeout(function () { canvas.classList.add('is-live'); }, 120); });
-    } catch (e) { /* poster image stays visible */ }
-  }
+  // The hero's chrome mark is a separate module (assets/forma-chrome.js), started from index.html.
 
   // ── Helpers ────────────────────────────────────────────────────────────
   function $(sel, root) { return (root || document).querySelector(sel); }
@@ -45,14 +55,36 @@
   function compactUsd(n) {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 1 }).format(n);
   }
-  function pct(n) { return (n >= 0 ? '+' : '') + n.toFixed(2) + '%'; }
-  function setLive(key, html) { $all('[data-live="' + key + '"]').forEach(function (el) { el.innerHTML = html; }); }
+  function pct(n) { return (n >= 0 ? '+' : '−') + Math.abs(n).toFixed(2) + '%'; }
+  // A market move, shown in steel with an arrow rather than in red or green.
+  function move(n) {
+    if (n == null || !isFinite(n)) return '—';
+    var up = n >= 0;
+    return '<span class="mv ' + (up ? 'mv--up' : 'mv--down') + '"><span aria-hidden="true">' + (up ? '▲' : '▼') + '</span><span class="sr-only">' + (up ? 'up ' : 'down ') + '</span>' + Math.abs(n).toFixed(2) + '%</span>';
+  }
+  function setLive(key, html) { $all('[data-live="' + key + '"]').forEach(function (el) { if (el.innerHTML !== html) el.innerHTML = html; }); }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
+  function delay(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
 
-  function getJSON(url) {
-    return fetch(url, { headers: { Accept: 'application/json' } }).then(function (r) {
+  // Retries rate limits and server errors (honouring Retry-After) and times out hung requests, so a busy API
+  // never turns into missing numbers. Callers treat a final failure as "no data", never as zero.
+  function getJSON(url, attempt) {
+    attempt = attempt || 0;
+    var ctrl = typeof AbortController === 'function' ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 15000) : 0;
+    function retry(after) { return delay(after).then(function () { return getJSON(url, attempt + 1); }); }
+    return fetch(url, { headers: { Accept: 'application/json' }, signal: ctrl ? ctrl.signal : undefined }).then(function (r) {
+      clearTimeout(timer);
+      if ((r.status === 429 || r.status >= 500) && attempt < 3) {
+        var ra = Number(r.headers.get('Retry-After'));
+        return retry((isFinite(ra) && ra > 0 ? ra * 1000 : [1000, 2500, 5000][attempt]) + Math.random() * 400);
+      }
       if (!r.ok) throw new Error(r.status + ' ' + url);
       return r.json();
+    }, function (err) {
+      clearTimeout(timer);
+      if (attempt < 2) return retry(1200 * (attempt + 1));
+      throw err;
     });
   }
   function chunk(arr, n) { var out = []; for (var i = 0; i < arr.length; i += n) out.push(arr.slice(i, i + n)); return out; }
@@ -60,19 +92,23 @@
   // ── US market session (America/New_York) ───────────────────────────────
   var HOLIDAYS = ['2026-01-01', '2026-01-19', '2026-02-16', '2026-04-03', '2026-05-25', '2026-06-19', '2026-07-03', '2026-09-07', '2026-11-26', '2026-12-25',
     '2027-01-01', '2027-01-18', '2027-02-15', '2027-03-26', '2027-05-31', '2027-06-18', '2027-07-05', '2027-09-06', '2027-11-25', '2027-12-24'];
+  // 1:00pm ET early closes, as in the Terminal (dapp/src/lib/market.ts).
+  var EARLY_CLOSE = ['2026-11-27', '2026-12-24', '2027-11-26'];
   function session() {
     var f = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false, weekday: 'short' });
     var p = {}; f.formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
     var key = p.year + '-' + p.month + '-' + p.day;
     var h = Number(p.hour) % 24, m = Number(p.minute), mins = h * 60 + m;
+    var close = EARLY_CLOSE.indexOf(key) !== -1 ? 780 : 960;
     if (p.weekday === 'Sat' || p.weekday === 'Sun') return 'Weekend';
     if (HOLIDAYS.indexOf(key) !== -1) return 'Holiday';
-    if (mins >= 570 && mins < 960) return '<span class="up">Open</span>';
+    if (mins >= 570 && mins < close) return '<span class="session-dot" aria-hidden="true"></span>Open';
     if (mins >= 240 && mins < 570) return 'Pre-market';
-    if (mins >= 960 && mins < 1200) return 'After hours';
+    if (mins >= close && mins < 1200) return 'After hours';
     return 'Overnight';
   }
   setLive('session', session());
+  setInterval(function () { setLive('session', session()); }, 60000);
 
   // ── Data ───────────────────────────────────────────────────────────────
   var state = { strategies: null, universe: null, prices: {}, tokens: {} };
@@ -85,8 +121,10 @@
     return getJSON('terminal/data/universe.json').then(function (u) { return Array.isArray(u) && u.length ? u : null; }).catch(function () { return null; });
   }
 
+  // All or nothing: if any chunk still fails after retries, the whole load fails and the page keeps its last good
+  // state. A partial price set would make strategies look like they hold one or two names.
   function loadPrices(mints) {
-    return Promise.all(chunk(mints, 50).map(function (g) { return getJSON(JUP + '/price/v3?ids=' + g.join(',')).catch(function () { return {}; }); }))
+    return Promise.all(chunk(mints, 50).map(function (g) { return getJSON(JUP + '/price/v3?ids=' + g.join(',')); }))
       .then(function (parts) { var out = {}; parts.forEach(function (p) { Object.keys(p || {}).forEach(function (k) { out[k] = p[k]; }); }); return out; });
   }
 
@@ -99,7 +137,7 @@
   }
 
   function loadTokens(mints) {
-    return Promise.all(chunk(mints, 100).map(function (g) { return getJSON(JUP + '/tokens/v2/search?query=' + g.join(',')).catch(function () { return []; }); }))
+    return Promise.all(chunk(mints, 100).map(function (g) { return getJSON(JUP + '/tokens/v2/search?query=' + g.join(',')); }))
       .then(function (parts) {
         var out = {};
         parts.forEach(function (list) { (list || []).forEach(function (t) { if (t && t.id) out[t.id] = t; }); });
@@ -314,110 +352,130 @@
   }
 
   // ── Renderers ──────────────────────────────────────────────────────────
-  function renderStatbar() {
-    var sol = state.prices[SOL];
-    if (sol) {
-      var ch = sol.priceChange24h || 0;
-      setLive('sol', usd(sol.usdPrice) + '<small class="' + (ch >= 0 ? 'up' : 'down') + '">' + pct(ch) + '</small>');
-    }
-    // xStocks live: every xStock in the Terminal's registry with a market price (the Universe strategy's targets if the
-    // registry file is missing), so names a strategy leaves out by mandate still count.
-    var uni = universeStrategy();
-    var xs = state.universe ? state.universe.filter(function (t) { return t.mint !== SOL && t.assetClass !== 'digital-asset'; }) : uni && uni.targets;
-    if (xs) setLive('tracked', String(xs.filter(function (t) { return markOf(t.mint) != null; }).length));
-    if (uni) {
-      var c = constituents(uni);
-      var liq = uni.targets.reduce(function (a, t) { return a + liquidityOf(t.mint); }, 0);
-      setLive('investable', String(c.included.length));
-      setLive('universeSize', String(uni.targets.length));
-      setLive('liquidity', compactUsd(liq));
-    }
-  }
-
-  function renderTape() {
-    var track = $('#tape');
-    if (!track || !state.strategies) return;
-    var mints = {};
-    state.strategies.forEach(function (s) {
-      if (s.status !== 'active') return; // live products only
-      s.targets.forEach(function (t) { if (t.mint !== SOL) mints[t.mint] = t.symbol; });
-    });
-    var rows = Object.keys(mints).filter(function (m) { return markOf(m) != null; })
-      .sort(function (a, b) { return liquidityOf(b) - liquidityOf(a); })
-      .slice(0, 36)
-      .map(function (m) {
-        var ch = changeOf(m);
-        var icon = iconOf(m);
-        return '<span class="tick">' +
-          (icon ? '<img src="' + esc(icon) + '" alt="" width="26" height="26" loading="lazy" decoding="async" />' : '') +
-          '<b>' + esc(mints[m]) + '</b><span class="px">' + usd(markOf(m)) + '</span>' +
-          (ch == null ? '' : '<span class="ch ' + (ch >= 0 ? 'up' : 'down') + '">' + pct(ch) + '</span>') + '</span>';
-      }).join('');
-    if (!rows) return;
-    track.innerHTML = rows + rows; // duplicated for a seamless loop
-  }
-
-  function universeStrategy() {
-    return state.strategies && (state.strategies.find(function (s) { return s.id === 'tokenized-stocks-index'; })
-      || state.strategies.find(function (s) { return s.construction === 'equal-weight-screened'; }));
-  }
-
+  // The homepage picks its own showcase (the Terminal's `featured` flags drive the Terminal's ordering).
+  var SITE_FEATURED = ['total-tokenized-stock-index', 'core-etf-portfolio', 'magnificent-7', 'crypto-economy'];
+  var BAR_SCALE_BPS = 2500; // every card's bars share one scale: a full bar is a 25% weight
   var CADENCE = { weekly: 'Weekly', biweekly: 'Bi-weekly', monthly: 'Monthly', quarterly: 'Quarterly', 'event-driven': 'Event-driven' };
   var WEIGHT_LABEL = { 'equal-weight-screened': 'Equal weight · investable today', 'market-cap-screened': 'Market-cap weight · largest holdings', conviction: 'Top positions · conviction weight', fixed: 'Top positions · model weight' };
   var SKELETONS = '<div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div>';
 
   function liveStrategies() { return (state.strategies || []).filter(function (s) { return s.status === 'active'; }); }
+  function universeStrategy() {
+    return state.strategies && (state.strategies.find(function (s) { return s.id === 'tokenized-stocks-index'; })
+      || state.strategies.find(function (s) { return s.construction === 'equal-weight-screened'; }));
+  }
+
+  // Strategies that reference a person or a third-party label say they are not affiliated, on every surface.
+  // Mirrors affiliationNotes() in the Terminal (lib/strategyStats.ts): short disclosures whole, long ones cut to
+  // the sentence that says so (split only after a lowercase letter or digit, so "U.S. House" stays intact).
+  function affiliationNotes(s) {
+    var re = /not affiliated/i;
+    return (s.disclosures || []).filter(function (d) { return re.test(d); }).map(function (d) {
+      if (d.length <= 160) return d;
+      var hit = d.replace(/([a-z0-9]\.)\s+(?=[A-Z])/g, '$1\n').split('\n').filter(function (x) { return re.test(x); })[0];
+      return hit || d;
+    });
+  }
+
+  // Facts from the catalog itself render as soon as strategies.json arrives, before any market data.
+  function renderCatalogFacts() {
+    var live = liveStrategies();
+    if (!live.length) return;
+    setLive('strategyCount', String(live.length));
+    var mins = live.map(function (s) { return Number(s.minDeployUsd); }).filter(function (n) { return n > 0; });
+    if (mins.length) setLive('minDeploy', usd(Math.min.apply(null, mins), 0));
+  }
+
+  function renderStatbar() {
+    var uni = universeStrategy();
+    if (!uni) return;
+    var n = constituents(uni).included.length;
+    setLive('investableOf', n + '<small> of ' + uni.targets.length + '</small>');
+    setLive('investable', String(n));
+    setLive('universeSize', String(uni.targets.length));
+  }
+
+  var tapeBand = document.getElementById('tapeBand');
+  var pauseBtn = tapeBand && tapeBand.querySelector('.tape__pause');
+  if (pauseBtn) pauseBtn.addEventListener('click', function () {
+    var paused = !tapeBand.classList.contains('is-paused');
+    tapeBand.classList.toggle('is-paused', paused);
+    pauseBtn.setAttribute('aria-pressed', paused ? 'true' : 'false');
+    pauseBtn.setAttribute('aria-label', paused ? 'Play live prices' : 'Pause live prices');
+  });
+
+  function renderTape() {
+    var track = $('#tape');
+    if (!track || !state.strategies) return;
+    var mints = {};
+    liveStrategies().forEach(function (s) { s.targets.forEach(function (t) { if (t.mint !== SOL) mints[t.mint] = t.symbol; }); });
+    var rows = Object.keys(mints).filter(function (m) { return markOf(m) != null; })
+      .sort(function (a, b) { return liquidityOf(b) - liquidityOf(a); })
+      .slice(0, 36)
+      .map(function (m) {
+        var ch = changeOf(m);
+        return '<span class="tick"><b>' + esc(mints[m]) + '</b><span class="px">' + usd(markOf(m)) + '</span>' + (ch == null ? '' : move(ch)) + '</span>';
+      }).join('');
+    if (!rows) return;
+    // The second copy only makes the loop seamless, so assistive technology skips it.
+    track.innerHTML = '<div class="tape__set">' + rows + '</div><div class="tape__set" aria-hidden="true">' + rows + '</div>';
+    if (tapeBand) tapeBand.hidden = false;
+  }
+
+  function tagsFor(s) {
+    return (s.code ? '<span class="tag tag--code">' + esc(s.code) + '</span>' : '') +
+      '<span class="tag">' + esc(s.category || s.type) + '</span>' +
+      (s.labels || []).map(function (l) { return '<span class="tag tag--risk">' + esc(l) + '</span>'; }).join('') +
+      '<span class="tag">' + esc(CADENCE[s.cadence] || s.cadence) + ' rebalance</span>';
+  }
+
+  function cardHTML(s) {
+    var href = 'terminal/?tab=deploy&strategy=' + encodeURIComponent(s.id);
+    return '<article class="strat reveal" data-strategy="' + esc(s.id) + '">' +
+      '<div class="strat__top">' + tagsFor(s) + '</div>' +
+      '<h3 id="st-' + esc(s.id) + '">' + esc(s.name) + '</h3>' +
+      '<p class="strat__tag">' + esc(s.tagline || '') + '</p>' +
+      '<div class="strat__stats">' +
+        '<div><div class="k">Positions</div><div class="v" data-field="positions">—</div></div>' +
+        '<div><div class="k">24h move</div><div class="v" data-field="move">—</div></div>' +
+        '<div><div class="k">Risk</div><div class="v">' + esc(s.riskLevel) + '/5</div></div>' +
+        '<div><div class="k">Minimum</div><div class="v">' + usd(Number(s.minDeployUsd), 0) + '</div></div>' +
+      '</div>' +
+      '<div class="strat__label">' + esc(WEIGHT_LABEL[s.construction] || 'Top positions') + '</div>' +
+      '<div class="bars" data-field="bars">' + SKELETONS + '</div>' +
+      '<div class="strat__notes">' + affiliationNotes(s).map(function (n) { return '<p class="strat__note">' + esc(n) + '</p>'; }).join('') + '</div>' +
+      '<a class="strat__link" href="' + href + '">Open <span class="sr-only">' + esc(s.name) + ' </span>in the Terminal <span aria-hidden="true">→</span></a></article>';
+  }
 
   function buildCatalog() {
-    // Strategies that reference a person or a third-party label say they are not affiliated, on every surface.
-    // Mirrors affiliationNotes() in the Terminal (lib/strategyStats.ts): short disclosures whole, long ones cut to
-    // the sentence that says so (split only after a lowercase letter or digit, so "U.S. House" stays intact).
-    function affiliationNotes(s) {
-      var re = /not affiliated/i;
-      return (s.disclosures || []).filter(function (d) { return re.test(d); }).map(function (d) {
-        if (d.length <= 160) return d;
-        var hit = d.replace(/([a-z0-9]\.)\s+(?=[A-Z])/g, '$1\n').split('\n').filter(function (x) { return re.test(x); })[0];
-        return hit || d;
-      });
-    }
     var grid = $('#strats');
     if (!grid || grid.__built || !state.strategies) return;
     var live = liveStrategies();
     if (!live.length) return;
     grid.__built = true;
-    var featured = live.filter(function (s) { return s.featured; });
+    var featured = SITE_FEATURED.map(function (id) { return live.find(function (s) { return s.id === id; }); }).filter(Boolean);
     if (featured.length < 2) featured = live.slice(0, 4);
-    featured = featured.slice(0, 4);
-    grid.innerHTML = featured.map(function (s) {
-      var href = 'terminal/?tab=deploy&strategy=' + encodeURIComponent(s.id);
-      return '<article class="strat reveal" data-strategy="' + esc(s.id) + '">' +
-        '<div class="strat__top"><span class="tag tag--accent">' + esc(s.category || s.type) + '</span><span class="tag">' + esc(CADENCE[s.cadence] || s.cadence) + ' rebalance</span>' + (s.code ? '<span class="tag tag--code">' + esc(s.code) + '</span>' : '') + '</div>' +
-        '<h3>' + esc(s.name) + '</h3>' +
-        '<p class="strat__tag">' + esc(s.tagline || '') + '</p>' +
-        affiliationNotes(s).map(function (n) { return '<p class="strat__note">' + esc(n) + '</p>'; }).join('') +
-        '<div class="strat__stats"><div><div class="k">Positions</div><div class="v" data-field="positions">—</div></div><div><div class="k">24h basket</div><div class="v" data-field="move">—</div></div><div><div class="k">Deploy fee</div><div class="v">' + usd(s.fees.deployUsd) + '</div></div></div>' +
-        '<div class="strat__label">' + esc(WEIGHT_LABEL[s.construction] || 'Top positions') + '</div>' +
-        '<div class="bars" data-field="bars">' + SKELETONS + '</div>' +
-        '<a class="btn btn--metal btn--block" href="' + href + '">Deploy ' + esc(s.shortName) + ' →</a></article>';
-    }).join('');
-    // The generated cards reveal like the static ones did: the weight bars only fill once a card is .is-visible.
+    grid.innerHTML = featured.map(cardHTML).join('');
     $all('.strat', grid).forEach(function (el) { if (io) io.observe(el); else el.classList.add('is-visible'); });
 
+    // Live strategies only; strategies in committee review get one line, and drafts stay off the public site.
     var rest = live.filter(function (s) { return featured.indexOf(s) === -1; });
-    var review = (state.strategies || []).filter(function (s) { return s.status === 'in-review' || s.status === 'draft'; });
-    var box = $('#catalog'), list = $('#catalogList');
-    setLive('strategyCount', String(live.length));
-    if (!box || !list || (!rest.length && !review.length)) return;
+    var review = state.strategies.filter(function (s) { return s.status === 'in-review'; });
+    var box = $('#catalog'), list = $('#catalogList'), rv = $('#catalogReview');
+    if (!box || !list) return;
     list.innerHTML = rest.map(function (s) {
-      return '<a class="catalog__row" data-row="' + esc(s.id) + '" href="terminal/?tab=deploy&strategy=' + encodeURIComponent(s.id) + '">' +
+      var meta = [s.category, 'Risk ' + s.riskLevel + '/5'].concat(s.labels || []).concat(['From ' + usd(Number(s.minDeployUsd), 0)]);
+      return '<a class="catalog__row" href="terminal/?tab=deploy&strategy=' + encodeURIComponent(s.id) + '">' +
         '<span class="catalog__code">' + esc(s.code || '') + '</span>' +
-        '<span class="catalog__main"><span class="catalog__name">' + esc(s.name) + '</span><span class="catalog__meta">' + esc(s.category) + ' · Risk ' + esc(s.riskLevel) + '/5 · ' + esc(s.tagline || '') + '</span></span>' +
-        '<span class="catalog__move" data-field="move">—</span></a>';
-    }).join('') + review.map(function (s) {
-      return '<div class="catalog__row catalog__row--review"><span class="catalog__code">' + esc(s.code || '') + '</span>' +
-        '<span class="catalog__main"><span class="catalog__name">' + esc(s.name) + '</span><span class="catalog__meta">' + (s.status === 'draft' ? 'Draft' : 'In committee review') + ' · ' + esc(s.category) + '</span></span><span class="catalog__move"></span></div>';
+        '<span class="catalog__main"><span class="catalog__name">' + esc(s.name) + '</span><span class="catalog__meta">' + esc(meta.join(' · ')) + '</span>' +
+        affiliationNotes(s).map(function (n) { return '<span class="catalog__note">' + esc(n) + '</span>'; }).join('') + '</span>' +
+        '<span class="catalog__go" aria-hidden="true">Open →</span></a>';
     }).join('');
-    box.hidden = false;
+    if (rv && review.length) {
+      rv.innerHTML = '<b>In committee review</b>' + esc(review.map(function (s) { return s.name.replace(/ Strategy$/, ''); }).join(', '));
+      rv.hidden = false;
+    }
+    box.hidden = !(rest.length || review.length);
   }
 
   function basketMove(s) {
@@ -429,42 +487,33 @@
   function renderStrategies() {
     if (!state.strategies) return;
     buildCatalog();
-    $all('[data-row]').forEach(function (row) {
-      var s = state.strategies.find(function (x) { return x.id === row.getAttribute('data-row'); });
-      var mv = s && row.querySelector('[data-field="move"]');
-      var v = s ? basketMove(s) : null;
-      if (mv && v != null) { mv.textContent = pct(v); mv.className = 'catalog__move ' + (v >= 0 ? 'up' : 'down'); }
-    });
     $all('[data-strategy]').forEach(function (card) {
       var s = state.strategies.find(function (x) { return x.id === card.getAttribute('data-strategy'); });
       if (!s) return;
       var c = constituents(s);
       var screened = s.construction === 'equal-weight-screened' || s.construction === 'market-cap-screened';
       var pos = card.querySelector('[data-field="positions"]');
-      if (pos) pos.textContent = screened ? c.included.length + '/' + s.targets.length : String(c.included.length);
-      var acc = 0, w = 0;
-      c.included.forEach(function (x) { var ch = changeOf(x.mint); if (ch != null) { acc += ch * x.weightBps; w += x.weightBps; } });
+      if (pos) pos.textContent = String(c.included.length);
       var mv = card.querySelector('[data-field="move"]');
-      if (mv && w) { var v = acc / w; mv.textContent = pct(v); mv.className = 'v ' + (v >= 0 ? 'up' : 'down'); }
+      var v = basketMove(s);
+      if (mv && v != null) mv.innerHTML = move(v);
       var bars = card.querySelector('[data-field="bars"]');
       if (!bars) return;
       var rows = c.included.slice().sort(function (a, b) { return b.weightBps - a.weightBps; });
-      var peak = rows.length ? rows[0].weightBps : 1;
-      var html = rows.slice(0, 6).map(function (r) {
-        var icon = iconOf(r.mint);
-        return '<div class="bar">' +
-          (icon ? '<img src="' + esc(icon) + '" alt="" width="24" height="24" loading="lazy" decoding="async" />' : '<span></span>') +
-          '<span class="bar__sym">' + esc(r.symbol) + '</span>' +
-          '<span class="bar__track"><span class="bar__fill" style="width:' + (r.weightBps / peak * 100).toFixed(2) + '%"></span></span>' +
+      var shown = rows.length <= 7 ? rows : rows.slice(0, 6);
+      var html = shown.map(function (r) {
+        return '<div class="bar"><span class="bar__sym">' + esc(r.symbol) + '</span>' +
+          '<span class="bar__track"><span class="bar__fill" style="width:' + Math.min(100, r.weightBps / BAR_SCALE_BPS * 100).toFixed(2) + '%"></span></span>' +
           '<span class="bar__w">' + (r.weightBps / 100).toFixed(r.weightBps < 1000 ? 2 : 1) + '%</span></div>';
       }).join('');
-      if (rows.length > 6) html += '<div class="bars__more">+' + (rows.length - 6) + ' more' + (screened && c.excluded.length ? ' · ' + c.excluded.length + ' not held today' : '') + '</div>';
+      if (rows.length > shown.length) html += '<div class="bars__more">+' + (rows.length - shown.length) + ' more' + (screened ? ' · screened from ' + s.targets.length + ' names' : '') + '</div>';
+      else if (screened) html += '<div class="bars__more">Screened from ' + s.targets.length + ' names</div>';
       bars.innerHTML = html;
     });
   }
 
   function renderMonitor() {
-    var grid = $('#monitor');
+    var grid = $('#monitor'), strip = $('#monitorStrip'), toggle = $('#monitorToggle');
     var uni = universeStrategy();
     if (!grid || !uni) return;
     var inc = {};
@@ -473,24 +522,38 @@
       var ia = inc[a.mint] ? 1 : 0, ib = inc[b.mint] ? 1 : 0;
       return ib - ia || liquidityOf(b.mint) - liquidityOf(a.mint);
     });
+    if (strip) {
+      var s = cells.map(function (t) { return '<span' + (inc[t.mint] ? ' class="is-in"' : '') + '></span>'; }).join('');
+      if (strip.__html !== s) { strip.innerHTML = s; strip.__html = s; }
+    }
+    if (toggle && toggle.hidden) {
+      toggle.hidden = false;
+      toggle.textContent = 'Show all ' + cells.length + ' names';
+      toggle.addEventListener('click', function () {
+        var open = grid.hidden;
+        grid.hidden = !open;
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.textContent = open ? 'Hide the names' : 'Show all ' + uni.targets.length + ' names';
+      });
+    }
     if (!grid.__tipAlign) {
       grid.__tipAlign = true;
-      var align = function (e) {
+      grid.addEventListener('mouseover', function (e) {
         var cell = e.target.closest && e.target.closest('.cell');
         if (!cell) return;
         var g = grid.getBoundingClientRect(), r = cell.getBoundingClientRect();
         var x = (r.left + r.width / 2 - g.left) / g.width;
         cell.classList.toggle('tip-left', x < 0.3);
         cell.classList.toggle('tip-right', x > 0.7);
-      };
-      grid.addEventListener('mouseover', align);
-      grid.addEventListener('focusin', align);
+      });
     }
-    grid.innerHTML = cells.map(function (t) {
+    // Rewritten only when something changed; cells are plain list items, so no focus or live region is disturbed.
+    var html = cells.map(function (t) {
       var on = !!inc[t.mint];
       var tip = esc(t.symbol) + ' · liquidity ' + compactUsd(liquidityOf(t.mint)) + ' · 24h vol ' + compactUsd(volumeOf(t.mint)) + (on ? ' · investable' : ' · watchlist');
-      return '<div class="cell' + (on ? ' is-in' : '') + '" tabindex="0" aria-label="' + tip + '">' + esc(t.symbol.replace(/x$/, '')) + '<span class="cell__tip">' + tip + '</span></div>';
+      return '<li class="cell' + (on ? ' is-in' : '') + '">' + esc(t.symbol.replace(/x$/, '')) + '<span class="cell__tip">' + tip + '</span></li>';
     }).join('');
+    if (grid.__html !== html) { grid.innerHTML = html; grid.__html = html; }
   }
 
   function renderAll() {
@@ -500,13 +563,17 @@
     renderMonitor();
   }
 
-  function refreshPrices() {
-    if (!state.strategies || document.hidden) return Promise.resolve();
-    var mints = allMints();
-    return loadPrices(mints).then(function (p) {
-      storePrices(p);
-      renderAll();
-    });
+  function showDataStatus(msg) {
+    var el = document.getElementById('dataStatus');
+    if (!el && msg) {
+      el = document.createElement('p');
+      el.id = 'dataStatus';
+      el.className = 'data-status';
+      el.setAttribute('role', 'status');
+      var anchor = $('.strats__note');
+      if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(el, anchor.nextSibling);
+    }
+    if (el) { el.textContent = msg || ''; el.hidden = !msg; }
   }
 
   function allMints() {
@@ -519,18 +586,43 @@
     return Object.keys(set);
   }
 
+  // Market data renders only from a complete set: prices for every chunk and token stats (the liquidity screen
+  // and the index weights need both). Otherwise the page keeps its last good figures, or its placeholders.
+  var hasLive = false, refreshDelay = 60000, refreshTimer = 0;
+  function loadMarket() {
+    var mints = allMints();
+    var needTokens = !Object.keys(state.tokens).length;
+    return Promise.all([loadPrices(mints), needTokens ? loadTokens(mints.filter(function (m) { return m !== USDC; })) : Promise.resolve(null)])
+      .then(function (res) {
+        if (res[1]) state.tokens = res[1];
+        storePrices(res[0]);
+        hasLive = true;
+        showDataStatus('');
+        renderAll();
+      });
+  }
+  function scheduleRefresh(ms) {
+    clearTimeout(refreshTimer);
+    refreshTimer = setTimeout(function tick() {
+      if (document.hidden) { refreshTimer = setTimeout(tick, 15000); return; }
+      loadMarket().then(function () { refreshDelay = 60000; scheduleRefresh(refreshDelay); }, function () {
+        refreshDelay = Math.min(refreshDelay * 2, 300000);
+        if (!hasLive) showDataStatus('Live prices are unavailable right now. The Terminal has the latest.');
+        scheduleRefresh(refreshDelay);
+      });
+    }, ms);
+  }
+
   Promise.all([loadStrategies(), loadUniverse()]).then(function (loaded) {
     var s = loaded[0];
     if (!s) return;
     state.strategies = s;
     state.universe = loaded[1];
-    var mints = allMints();
-    // SOL is included so its icon shows in cards that hold it (the screens and the tape skip SOL).
-    return Promise.all([loadPrices(mints), loadTokens(mints.filter(function (m) { return m !== USDC; }))]).then(function (res) {
-      storePrices(res[0]);
-      state.tokens = res[1];
-      renderAll();
-      setInterval(refreshPrices, 60000);
+    renderCatalogFacts();
+    buildCatalog();
+    return loadMarket().then(function () { scheduleRefresh(60000); }, function () {
+      showDataStatus('Live prices are unavailable right now. Retrying shortly; the Terminal has the latest.');
+      scheduleRefresh(20000);
     });
   }).catch(function () { /* the static page still works without live data */ });
 })();

@@ -672,7 +672,7 @@
     "status": "active",
     "featured": false,
     "riskLevel": 3,
-    "tagline": "A one-click core allocation in tokenized ETFs: US large caps, growth and gold.",
+    "tagline": "A core allocation in tokenized ETFs: US large caps, growth and gold.",
     "description": "A simple core allocation held as tokenized ETFs: the S&P 500, a Nasdaq-100 growth tilt and gold. A planned 15% T-bill sleeve is added by a GIC decision once its token trades deeply enough.",
     "methodology": [
       "Strategic target: 50% S&P 500 (SPYx), 20% Nasdaq-100 (QQQx), 15% gold (GLDx) and 15% T-bills (TBLLx).",

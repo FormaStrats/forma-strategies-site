@@ -1,0 +1,6 @@
+Fonts in this folder are distributed under the SIL Open Font License, Version 1.1
+(https://openfontlicense.org). They are unmodified latin subsets served by Google Fonts.
+
+- Noto Serif Display (noto-serif-display.woff2, noto-serif-display-italic.woff2): Copyright The Noto Project Authors.
+- Hanken Grotesk (hanken-grotesk.woff2): Copyright The Hanken Grotesk Project Authors.
+- IBM Plex Mono (ibm-plex-mono-400.woff2, ibm-plex-mono-500.woff2): Copyright IBM Corp.
