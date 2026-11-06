@@ -89,27 +89,6 @@
   }
   function chunk(arr, n) { var out = []; for (var i = 0; i < arr.length; i += n) out.push(arr.slice(i, i + n)); return out; }
 
-  // ── US market session (America/New_York) ───────────────────────────────
-  var HOLIDAYS = ['2026-01-01', '2026-01-19', '2026-02-16', '2026-04-03', '2026-05-25', '2026-06-19', '2026-07-03', '2026-09-07', '2026-11-26', '2026-12-25',
-    '2027-01-01', '2027-01-18', '2027-02-15', '2027-03-26', '2027-05-31', '2027-06-18', '2027-07-05', '2027-09-06', '2027-11-25', '2027-12-24'];
-  // 1:00pm ET early closes, as in the Terminal (dapp/src/lib/market.ts).
-  var EARLY_CLOSE = ['2026-11-27', '2026-12-24', '2027-11-26'];
-  function session() {
-    var f = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false, weekday: 'short' });
-    var p = {}; f.formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
-    var key = p.year + '-' + p.month + '-' + p.day;
-    var h = Number(p.hour) % 24, m = Number(p.minute), mins = h * 60 + m;
-    var close = EARLY_CLOSE.indexOf(key) !== -1 ? 780 : 960;
-    if (p.weekday === 'Sat' || p.weekday === 'Sun') return 'Weekend';
-    if (HOLIDAYS.indexOf(key) !== -1) return 'Holiday';
-    if (mins >= 570 && mins < close) return '<span class="session-dot" aria-hidden="true"></span>Open';
-    if (mins >= 240 && mins < 570) return 'Pre-market';
-    if (mins >= close && mins < 1200) return 'After hours';
-    return 'Overnight';
-  }
-  setLive('session', session());
-  setInterval(function () { setLive('session', session()); }, 60000);
-
   // ── Data ───────────────────────────────────────────────────────────────
   var state = { strategies: null, universe: null, prices: {}, tokens: {} };
 
@@ -386,40 +365,12 @@
     if (mins.length) setLive('minDeploy', usd(Math.min.apply(null, mins), 0));
   }
 
-  function renderStatbar() {
+  function renderScreenCount() {
     var uni = universeStrategy();
     if (!uni) return;
     var n = constituents(uni).included.length;
-    setLive('investableOf', n + '<small> of ' + uni.targets.length + '</small>');
     setLive('investable', String(n));
     setLive('universeSize', String(uni.targets.length));
-  }
-
-  var tapeBand = document.getElementById('tapeBand');
-  var pauseBtn = tapeBand && tapeBand.querySelector('.tape__pause');
-  if (pauseBtn) pauseBtn.addEventListener('click', function () {
-    var paused = !tapeBand.classList.contains('is-paused');
-    tapeBand.classList.toggle('is-paused', paused);
-    pauseBtn.setAttribute('aria-pressed', paused ? 'true' : 'false');
-    pauseBtn.setAttribute('aria-label', paused ? 'Play live prices' : 'Pause live prices');
-  });
-
-  function renderTape() {
-    var track = $('#tape');
-    if (!track || !state.strategies) return;
-    var mints = {};
-    liveStrategies().forEach(function (s) { s.targets.forEach(function (t) { if (t.mint !== SOL) mints[t.mint] = t.symbol; }); });
-    var rows = Object.keys(mints).filter(function (m) { return markOf(m) != null; })
-      .sort(function (a, b) { return liquidityOf(b) - liquidityOf(a); })
-      .slice(0, 36)
-      .map(function (m) {
-        var ch = changeOf(m);
-        return '<span class="tick"><b>' + esc(mints[m]) + '</b><span class="px">' + usd(markOf(m)) + '</span>' + (ch == null ? '' : move(ch)) + '</span>';
-      }).join('');
-    if (!rows) return;
-    // The second copy only makes the loop seamless, so assistive technology skips it.
-    track.innerHTML = '<div class="tape__set">' + rows + '</div><div class="tape__set" aria-hidden="true">' + rows + '</div>';
-    if (tapeBand) tapeBand.hidden = false;
   }
 
   function tagsFor(s) {
@@ -557,8 +508,7 @@
   }
 
   function renderAll() {
-    renderStatbar();
-    renderTape();
+    renderScreenCount();
     renderStrategies();
     renderMonitor();
   }
