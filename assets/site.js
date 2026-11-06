@@ -400,7 +400,6 @@
   if (pauseBtn) pauseBtn.addEventListener('click', function () {
     var paused = !tapeBand.classList.contains('is-paused');
     tapeBand.classList.toggle('is-paused', paused);
-    pauseBtn.setAttribute('aria-pressed', paused ? 'true' : 'false');
     pauseBtn.setAttribute('aria-label', paused ? 'Play live prices' : 'Pause live prices');
   });
 
@@ -556,12 +555,51 @@
     if (grid.__html !== html) { grid.innerHTML = html; grid.__html = html; }
   }
 
+  // Homepage tiles: the live holding count and a slim weight bar (one grey ramp, largest holding lightest).
+  function renderTiles() {
+    $all('[data-tile]').forEach(function (tile) {
+      var s = state.strategies && state.strategies.find(function (x) { return x.id === tile.getAttribute('data-tile'); });
+      if (!s) return;
+      var rows = constituents(s).included.slice().sort(function (a, b) { return b.weightBps - a.weightBps; });
+      if (!rows.length) return;
+      var count = tile.querySelector('[data-field="count"]');
+      if (count) count.textContent = String(rows.length);
+      var bar = tile.querySelector('[data-field="bar"]');
+      if (!bar) return;
+      var top = rows.slice(0, 10), rest = rows.slice(10).reduce(function (a, r) { return a + r.weightBps; }, 0);
+      var segs = top.map(function (r) { return r.weightBps; });
+      if (rest > 0) segs.push(rest);
+      var light = [228, 228, 232], dark = [74, 74, 80];
+      bar.innerHTML = segs.map(function (w, i) {
+        var k = segs.length > 1 ? i / (segs.length - 1) : 0;
+        var c = light.map(function (v, j) { return Math.round(v + (dark[j] - v) * k); });
+        return '<i style="flex:' + w + ';background:rgb(' + c.join(',') + ')"></i>';
+      }).join('');
+    });
+  }
+
   function renderAll() {
     renderStatbar();
     renderTape();
     renderStrategies();
     renderMonitor();
+    renderTiles();
   }
+
+  // A read-only view of a strategy's live allocation, used by the homepage simulation (assets/forma-sim.js).
+  // Null until a complete market data set has loaded, so the simulation never shows partial holdings.
+  window.FormaSite = {
+    allocation: function (id) {
+      if (!hasLive || !state.strategies) return null;
+      var s = state.strategies.find(function (x) { return x.id === id; });
+      if (!s) return null;
+      var rows = constituents(s).included
+        .map(function (c) { return { symbol: c.symbol, weightBps: c.weightBps, price: markOf(c.mint) }; })
+        .filter(function (r) { return r.weightBps > 0 && r.price > 0; })
+        .sort(function (a, b) { return b.weightBps - a.weightBps; });
+      return rows.length ? rows : null;
+    },
+  };
 
   function showDataStatus(msg) {
     var el = document.getElementById('dataStatus');
@@ -570,7 +608,7 @@
       el.id = 'dataStatus';
       el.className = 'data-status';
       el.setAttribute('role', 'status');
-      var anchor = $('.strats__note');
+      var anchor = $('.strats__note') || $('#tiles'); // How it works, or the homepage's tiles
       if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(el, anchor.nextSibling);
     }
     if (el) { el.textContent = msg || ''; el.hidden = !msg; }
@@ -599,6 +637,7 @@
         hasLive = true;
         showDataStatus('');
         renderAll();
+        document.dispatchEvent(new CustomEvent('forma:live'));
       });
   }
   function scheduleRefresh(ms) {
