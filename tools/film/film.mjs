@@ -1,7 +1,7 @@
 // Render the homepage simulation as video, as the share card, or as stills, frame by frame through FormaSim.seek(t).
 //   node tools/film/film.mjs wide brand/film/forma-film-16x9.mp4 [base]
 //   node tools/film/film.mjs tall brand/film/forma-film-9x16.mp4 [base]
-//   node tools/film/film.mjs og brand/og-1200x630.jpg [base]
+//   node tools/film/film.mjs og brand/og-film-1200x630.jpg [base]
 //   node tools/film/film.mjs wide /tmp/stills [base] 1,9.5,21     (PNG stills at those seconds of the film)
 // base: where the site is served (default http://127.0.0.1:8000/forma-strategies-site/). Needs Chrome, ffmpeg and
 // puppeteer-core (cd tools/film && npm install --no-save puppeteer-core@23). CHROME_PATH overrides Chrome's path.
@@ -15,7 +15,7 @@ if (!out || !['wide', 'tall', 'og'].includes(mode)) {
   process.exit(1);
 }
 const [W, H] = { wide: [1920, 1080], tall: [1080, 1920], og: [1920, 1008] }[mode];
-const FPS = 30, END = 3; // END: seconds from the sim's last frame to the end of the film, mostly the end card
+const FPS = 30, END = 8; // END: seconds from the sim's last frame to the end of the film, mostly the end card (time to read it)
 
 const browser = await puppeteer.launch({
   executablePath: process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',

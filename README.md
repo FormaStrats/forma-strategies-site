@@ -12,8 +12,8 @@ Live: https://formastrats.github.io/forma-strategies-site/ (GitHub Pages, `main`
 | `assets/forma-chrome.js` | The 3D chrome Forma mark beside the governance line, rendered live on the visitor's GPU with three.js (vendored in `assets/vendor/`, MIT). A transparent poster (`brand/forma-chrome-1200.webp`) shows until it is ready, and stays for reduced-motion, Save-Data and low-memory devices. |
 | `assets/fonts/` | Self-hosted brand fonts: Noto Serif Display, Hanken Grotesk and IBM Plex Mono (SIL Open Font License 1.1, see `LICENSE.txt`). No third-party font requests. |
 | `brand/` | The Sterling brand: vector marks (`forma-mark.svg`, `forma-mark-flat.svg`, `forma-glyph.svg`), 1920×1080 and 3840×2160 chrome renders, the share card, app icons. Renders come from the same scene as the hero. |
-| `brand/film/` | The film as video for posts: `forma-film-9x16.mp4` (1080×1920, for X, LinkedIn, TikTok, Reels and Shorts; it keeps clear of their on-screen controls) and `forma-film-16x9.mp4` (1920×1080, for desktop and YouTube). About 27 s each, ending on a card with the address and the eligibility, not-advice and tokenized-stock lines; repeat those lines in the post text. |
-| `tools/film/` | The film's video layout (`film.html`, which borrows the phone from `index.html`) and its frame-by-frame renderer (`film.mjs`), which also renders the share card `brand/og-1200x630.jpg`. |
+| `brand/film/` | The film as video for posts: `forma-film-9x16.mp4` (1080×1920, for X, LinkedIn, TikTok, Reels and Shorts; it keeps clear of their on-screen controls) and `forma-film-16x9.mp4` (1920×1080, for desktop and YouTube). About 32 s each, ending on a card with the address and the eligibility, not-advice, risk and tokenized-stock lines. Repeat those lines in the post text, and add that a real deploy also needs a little SOL for network fees. |
+| `tools/film/` | The film's video layout (`film.html`, which borrows the phone from `index.html`) and its frame-by-frame renderer (`film.mjs`), which also renders the share card `brand/og-film-1200x630.jpg`. |
 | `terminal/` | The built Forma Terminal (source: `FormaStrats/Forma-Strategies-Landing-Terminal/dapp`). `terminal/data/strategies.json` is generated from the Terminal's strategy definitions and read by the landing page. |
 | `terminal/equity/`, `terminal/activity/` | Standalone research / activity pages kept alongside the app. |
 | `product-guide-flipbook.html` | v1 catalog flipbook. |
@@ -58,7 +58,7 @@ node tools/film/film.mjs tall brand/film/forma-film-9x16.mp4
 ```
 
 ```bash
-node tools/film/film.mjs og brand/og-1200x630.jpg
+node tools/film/film.mjs og brand/og-film-1200x630.jpg
 ```
 
 The films and the share card use the snapshot in `assets/forma-sim.js`. When you refresh `SNAPSHOT` and `AS_OF`, re-render all three.

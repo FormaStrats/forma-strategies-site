@@ -153,9 +153,9 @@
 
     // Wallet contents: the USDC leaves, the balance shows the after-cost value, and the holdings arrive.
     var usdcOut = back ? seg(t, p.wallet + 0.35, p.wallet + 0.75) : 0;
-    var balText = money(back && t >= p.wallet + 0.45 ? AFTER : DEPOSIT);
+    var balText = money(back && t >= p.wallet + 0.7 ? AFTER : DEPOSIT); // once the USDC row has gone
     if (el.bal.textContent !== balText) el.bal.textContent = balText;
-    style(el.balnote, back ? seg(t, p.wallet + 1.1, p.wallet + 1.5) : 0, null);
+    style(el.balnote, back ? seg(t, p.wallet + 0.7, p.wallet + 1.05) : 0, null); // the number and its label arrive together
     style(usdcRow, 1 - usdcOut, 'translateX(' + (-24 * usdcOut).toFixed(1) + 'px)');
     if (usdcRow) usdcRow.style.height = (60 * (1 - usdcOut)).toFixed(1) + 'px';
     for (var i = 0; i < rowEls.length; i++) {

@@ -22,7 +22,7 @@
   .film .steps-live li > span:last-child { font-size: 22px; }
   .film .sim__device { transform-origin: 50% 18%; }
   .tall .sim__device { transform-origin: 50% 0; } /* grows down, clear of the caption */
-  .film .sx-done { top: 52px; bottom: auto; } /* stays in frame when the camera moves in */
+  .film .sx-done { top: 2px; bottom: auto; } /* in the status bar, like a notification: in frame when the camera moves in, clear of the wallet header */
   .url { margin: 0; font: 400 21px/1.2 var(--mono); letter-spacing: 0.03em; color: var(--mist); }
   .note { margin: 0; font: 400 24px/1.35 var(--sans); color: var(--mist); }
 
@@ -38,9 +38,13 @@
   .og { padding: 72px 200px 64px 150px; grid-template-columns: minmax(0, 1fr) 400px; }
   .og .f-steps { margin-top: 48px; }
   .og .sim__device { width: 400px !important; }
+  .og { grid-template-rows: auto 1fr auto auto auto 1fr; grid-template-areas: "lock sim" ". sim" "h sim" "steps sim" "foot sim" ". sim"; }
+  .og .f-foot { margin-top: 30px; }
+  .og .f-foot .url { display: none; }
+  .og .note { font-size: 34px; } /* the card's one qualifier, legible at feed size */
 
   /* 9:16: everything sits in the area TikTok, Reels, Shorts and X leave clear (below 210 px, above the last 400 px) */
-  .tall { --gx: 50%; --gy: 55%; padding: 210px 72px 400px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto 1fr; row-gap: 30px;
+  .tall { --gx: 50%; --gy: 55%; padding: 210px 72px 400px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto 1fr; row-gap: 18px;
           grid-template-areas: "h" "steps" "foot" "sim"; justify-items: center; text-align: center; }
   .tall .f-lock, .tall .f-foot .url { display: none; }
   .tall .f-h { font-size: 84px; }
@@ -50,7 +54,6 @@
   .tall .steps-live li { grid-template-columns: 1fr; justify-items: center; gap: 10px; padding: 22px 0 0; border-bottom: 0; border-top: 2px solid var(--line-d2); }
   .tall .steps-live li.is-done { border-top-color: rgba(255, 255, 255, 0.42); }
   .tall .steps-live li.is-on { border-top-color: var(--white); }
-  .tall .steps-live li > span:last-child { display: none; }
   .tall .f-foot { justify-items: center; }
 
   /* End card: where to go, and the lines a post needs */
@@ -60,9 +63,11 @@
   .end h2 { margin: 0; font-size: 104px; line-height: 1.02; }
   .end .url { font-size: 32px; color: var(--white); }
   .end .legal { margin: 0; max-width: 1100px; font: 400 32px/1.4 var(--sans); color: var(--mist); }
-  .end .asof { margin: -10px 0 0; font: 400 22px/1.3 var(--mono); color: var(--steel); }
+  .end .asof { margin: -8px 0 0; font: 400 28px/1.3 var(--mono); color: var(--mist); }
+  .wide .end .legal { font-size: 44px; max-width: 1500px; }
   .tall .end h2 { font-size: 88px; }
   .tall .end .legal { max-width: 860px; font-size: 30px; }
+  .tall .end .url { font-size: 30px; }
 </style>
 </head>
 <body class="home">
@@ -79,7 +84,7 @@
     <span class="lockup"><img src="../../brand/forma-mark.svg" alt=""><span class="lockup__word"><span class="lockup__name">Forma</span><span class="lockup__sub">Strategies</span></span></span>
     <h2 class="display"><span class="nw">Stock portfolios,</span><br><em>in your wallet.</em></h2>
     <p class="url">formastrats.github.io/forma-strategies-site</p>
-    <p class="legal">Tokenized stocks are not the underlying shares. Not investment advice. Not available to U.S. persons or in restricted jurisdictions.</p>
+    <p class="legal">Tokenized stocks are not the underlying shares. You can lose money. Not investment advice. Not available to U.S. persons or in restricted jurisdictions.</p>
     <p class="asof">Model weights as of <span id="asOf"></span></p>
   </div>
 </div>
