@@ -10,7 +10,7 @@ Live: https://formastrats.github.io/forma-strategies-site/ (GitHub Pages, `main`
 | `assets/forma-chrome.js` | The hero's 3D chrome Forma mark, rendered live on the visitor's GPU with three.js (vendored in `assets/vendor/`, MIT). A transparent poster (`brand/forma-chrome-1200.webp`) shows until it is ready, and stays for reduced-motion, Save-Data and low-memory devices. |
 | `assets/fonts/` | Self-hosted brand fonts: Noto Serif Display, Hanken Grotesk and IBM Plex Mono (SIL Open Font License 1.1, see `LICENSE.txt`). No third-party font requests. |
 | `brand/` | The Sterling brand: vector marks (`forma-mark.svg`, `forma-mark-flat.svg`, `forma-glyph.svg`), 1920×1080 and 3840×2160 chrome renders, the share card, app icons. Renders come from the same scene as the hero. |
-| `terminal/` | The built Forma Terminal (source: `FormaStrats/Forma-Strategies-Landing-Terminal/dapp`). `terminal/data/strategies.json` is generated from the Terminal's strategy definitions and read by the landing page. |
+| `terminal/` | The built Forma Terminal (source: `dapp/` in the private Terminal repository). `terminal/data/strategies.json` is generated from the Terminal's strategy definitions and read by the landing page. |
 | `terminal/equity/` | Standalone research pages kept alongside the app. |
 | `experience.html`, `experience-2026.html`, `product-guide-flipbook.html` | Retired pages. Each redirects to the homepage; the old versions are in git history (for example `git show d2b1733:experience-2026.html`). |
 | `FormaStrategiesBanner4k.jpeg` etc. | Legacy filenames, now holding the Sterling renders so older pages match the brand. |
