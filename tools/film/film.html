@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Forma film</title>
+<!-- The homepage simulation laid out for video and for the share card. Render it with film.mjs (see the README). -->
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="../../assets/site.css">
+<style>
+  html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #0A0A0B; }
+  .sim__cap { display: none; }
+  .film { position: relative; width: 100%; height: 100%; box-sizing: border-box; display: grid;
+          background: radial-gradient(1100px 900px at var(--gx, 74%) var(--gy, 50%), rgba(255, 255, 255, 0.065), transparent 64%), #0A0A0B; }
+  .f-lock { grid-area: lock; } .f-h { grid-area: h; } .f-steps { grid-area: steps; } .f-sim { grid-area: sim; align-self: center; } .f-foot { grid-area: foot; display: grid; gap: 10px; }
+  .film .lockup { gap: 16px; } .film .lockup img { width: 34px; } .film .lockup__name { font-size: 27px; } .film .lockup__sub { font-size: 13px; margin-top: 8px; }
+  .film .display em { font-style: italic; background: var(--metal); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: 0.06em; }
+  .film .nw { white-space: nowrap; }
+  .f-h { margin: 0; line-height: 1.02; }
+  .film .steps-live__n { width: 38px; height: 38px; font-size: 16px; }
+  .film .steps-live b { font-size: 31px; }
+  .film .steps-live li > span:last-child { font-size: 22px; }
+  .film .sim__device { transform-origin: 50% 18%; }
+  .tall .sim__device { transform-origin: 50% 0; } /* grows down, clear of the caption */
+  .film .sx-done { top: 2px; bottom: auto; } /* in the status bar, like a notification: in frame when the camera moves in, clear of the wallet header */
+  .url { margin: 0; font: 400 21px/1.2 var(--mono); letter-spacing: 0.03em; color: var(--mist); }
+  .note { margin: 0; font: 400 24px/1.35 var(--sans); color: var(--mist); }
+
+  /* 16:9 */
+  .wide { --gx: 73%; padding: 84px 190px 80px 150px; grid-template-columns: minmax(0, 1fr) 440px; grid-template-rows: auto 1fr auto auto 1fr auto;
+          grid-template-areas: "lock sim" ". sim" "h sim" "steps sim" ". sim" "foot sim"; }
+  .wide .f-h { font-size: 108px; }
+  .wide .f-steps { margin-top: 60px; max-width: 660px; }
+  .wide .steps-live li { grid-template-columns: 60px auto 1fr; gap: 0 18px; padding: 21px 0; }
+  .wide .sim__device { width: 440px !important; min-width: 0; }
+
+  /* Share card: rendered at 1920 x 1008, saved at 1200 x 630 */
+  .og { padding: 72px 200px 64px 150px; grid-template-columns: minmax(0, 1fr) 400px; }
+  .og .f-steps { margin-top: 48px; }
+  .og .sim__device { width: 400px !important; }
+  .og { grid-template-rows: auto 1fr auto auto auto 1fr; grid-template-areas: "lock sim" ". sim" "h sim" "steps sim" "foot sim" ". sim"; }
+  .og .f-foot { margin-top: 30px; }
+  .og .f-foot .url { display: none; }
+  .og .note { font-size: 34px; } /* the card's one qualifier, legible at feed size */
+
+  /* 9:16: everything sits in the area TikTok, Reels, Shorts and X leave clear (below 210 px, above the last 400 px) */
+  .tall { --gx: 50%; --gy: 55%; padding: 210px 72px 400px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto 1fr; row-gap: 18px;
+          grid-template-areas: "h" "steps" "foot" "sim"; justify-items: center; text-align: center; }
+  .tall .f-lock, .tall .f-foot .url { display: none; }
+  .tall .f-h { font-size: 84px; }
+  .tall .f-sim { align-self: start; text-align: left; }
+  .tall .sim__device { width: 432px !important; min-width: 0; }
+  .tall .f-steps { width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 22px; border-top: 0; }
+  .tall .steps-live li { grid-template-columns: 1fr; justify-items: center; gap: 10px; padding: 22px 0 0; border-bottom: 0; border-top: 2px solid var(--line-d2); }
+  .tall .steps-live li.is-done { border-top-color: rgba(255, 255, 255, 0.42); }
+  .tall .steps-live li.is-on { border-top-color: var(--white); }
+  .tall .f-foot { justify-items: center; }
+
+  /* End card: where to go, and the lines a post needs */
+  .end { position: absolute; inset: 0; z-index: 5; display: grid; place-content: center; justify-items: center; gap: 34px; padding: 0 72px; text-align: center; opacity: 0;
+         background: radial-gradient(900px 700px at 50% 50%, rgba(255, 255, 255, 0.07), transparent 66%), #0A0A0B; }
+  .end .lockup { justify-self: center; } .end .lockup img { width: 46px; } .end .lockup__name { font-size: 36px; } .end .lockup__sub { font-size: 15px; margin-top: 10px; }
+  .end h2 { margin: 0; font-size: 104px; line-height: 1.02; }
+  .end .url { font-size: 32px; color: var(--white); }
+  .end .legal { margin: 0; max-width: 1100px; font: 400 32px/1.4 var(--sans); color: var(--mist); }
+  .end .asof { margin: -8px 0 0; font: 400 28px/1.3 var(--mono); color: var(--mist); }
+  .wide .end .legal { font-size: 44px; max-width: 1500px; }
+  .tall .end h2 { font-size: 88px; }
+  .tall .end .legal { max-width: 860px; font-size: 30px; }
+  .tall .end .url { font-size: 30px; }
+</style>
+</head>
+<body class="home">
+<div class="film" id="film">
+  <div class="f-lock"><span class="lockup"><img src="../../brand/forma-mark.svg" alt=""><span class="lockup__word"><span class="lockup__name">Forma</span><span class="lockup__sub">Strategies</span></span></span></div>
+  <h1 class="display f-h"><span class="nw">Stock portfolios,</span><br><em>in your wallet.</em></h1>
+  <div id="slotSteps"></div>
+  <div id="slotSim"></div>
+  <div class="f-foot">
+    <p class="url">formastrats.github.io/forma-strategies-site</p>
+    <p class="note" id="note">Simulation, sped up, with illustrative costs. Not a real account.</p>
+  </div>
+  <div class="end" id="end" aria-hidden="true">
+    <span class="lockup"><img src="../../brand/forma-mark.svg" alt=""><span class="lockup__word"><span class="lockup__name">Forma</span><span class="lockup__sub">Strategies</span></span></span>
+    <h2 class="display"><span class="nw">Stock portfolios,</span><br><em>in your wallet.</em></h2>
+    <p class="url">formastrats.github.io/forma-strategies-site</p>
+    <p class="legal">Tokenized stocks are not the underlying shares. You can lose money. Not investment advice. Not available to U.S. persons or in restricted jurisdictions.</p>
+    <p class="asof">Model weights as of <span id="asOf"></span></p>
+  </div>
+</div>
+<script type="module">
+  const mode = new URLSearchParams(location.search).get('v') || 'wide';
+  const film = document.getElementById('film');
+  film.classList.add(mode === 'tall' ? 'tall' : 'wide');
+  if (mode === 'og') {
+    film.classList.add('og');
+    document.getElementById('note').textContent = 'Simulation with illustrative costs. Not a real account.';
+  }
+  // One copy of the film: take the phone and the steps from the homepage.
+  const home = new DOMParser().parseFromString(await (await fetch('../../index.html')).text(), 'text/html');
+  const sim = home.getElementById('sim'), steps = home.getElementById('simSteps');
+  sim.classList.add('f-sim'); steps.classList.add('f-steps');
+  document.getElementById('slotSim').replaceWith(sim);
+  document.getElementById('slotSteps').replaceWith(steps);
+  const js = document.createElement('script');
+  js.src = '../../assets/forma-sim.js';
+  js.onload = () => { document.getElementById('asOf').textContent = window.FormaSim.asOf; document.documentElement.dataset.ready = '1'; };
+  document.body.append(js);
+</script>
+</body>
+</html>

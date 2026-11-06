@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Forma Strategies · Onchain Asset Management</title>
-  <meta name="description" content="Forma Strategies builds committee-approved model portfolios of tokenized stocks that you deploy to your own wallet. Self-custodied, on Solana." />
+  <title>Forma Strategies · Stock portfolios in your wallet</title>
+  <meta name="description" content="Committee-approved portfolios of tokenized stocks, deployed to your own wallet. One deposit, a whole portfolio, self-custodied on Solana." />
   <meta name="theme-color" content="#0A0A0B" />
   <link rel="canonical" href="https://formastrats.github.io/forma-strategies-site/" />
   <link rel="icon" type="image/svg+xml" href="brand/forma-mark-flat.svg" />
@@ -13,23 +13,24 @@
   <link rel="manifest" href="site.webmanifest" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Forma Strategies" />
-  <meta property="og:title" content="Forma Strategies · Asset management, rebuilt onchain" />
-  <meta property="og:description" content="Committee-approved model portfolios of tokenized stocks, deployed to your own wallet. You choose, you sign, you hold." />
+  <meta property="og:title" content="Forma Strategies · Stock portfolios, in your wallet" />
+  <meta property="og:description" content="One deposit. A whole portfolio of tokenized stocks." />
   <meta property="og:url" content="https://formastrats.github.io/forma-strategies-site/" />
-  <meta property="og:image" content="https://formastrats.github.io/forma-strategies-site/brand/og-1200x630.jpg" />
+  <meta property="og:image" content="https://formastrats.github.io/forma-strategies-site/brand/og-film-1200x630.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@FormaStrats" />
-  <meta name="twitter:image" content="https://formastrats.github.io/forma-strategies-site/brand/og-1200x630.jpg" />
+  <meta name="twitter:image" content="https://formastrats.github.io/forma-strategies-site/brand/og-film-1200x630.jpg" />
   <script>document.documentElement.classList.add('js');</script>
+  <script>/* Sections that moved to How it works keep their old links. */ (function () { var h = location.hash.slice(1); if (/^(strategies|catalog|monitor|how|terminalShot|platform|manager|security|governance)$/.test(h)) location.replace('how-it-works.html#' + h); })();</script>
   <link rel="preconnect" href="https://api.jup.ag" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/noto-serif-display.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/hanken-grotesk.woff2" crossorigin />
-  <link rel="preload" as="image" href="brand/forma-chrome-1200.webp" type="image/webp" fetchpriority="high" />
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/ibm-plex-mono-400.woff2" crossorigin />
   <link rel="stylesheet" href="assets/site.css" />
 </head>
-<body>
+<body class="home">
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="nav" id="nav">
@@ -39,10 +40,9 @@
         <span class="lockup__word"><span class="lockup__name">Forma</span><span class="lockup__sub">Strategies</span></span>
       </a>
       <nav class="nav__links" aria-label="Primary">
-        <a href="#strategies">Strategies</a>
-        <a href="#how">How it works</a>
-        <a href="#platform">Platform</a>
-        <a href="#governance">Governance</a>
+        <a href="#portfolios">Portfolios</a>
+        <a href="how-it-works.html">How it works</a>
+        <a href="terminal/?tab=committee">Committee</a>
       </nav>
       <div class="nav__cta">
         <a class="iconlink" href="https://x.com/FormaStrats" target="_blank" rel="noopener noreferrer" aria-label="Forma Strategies on X">
@@ -54,12 +54,9 @@
     </div>
     <div class="nav__sheet" id="navSheet" hidden>
       <nav class="wrap" aria-label="Sections">
-        <a href="#strategies">Strategies</a>
-        <a href="#how">How it works</a>
-        <a href="#platform">Platform</a>
-        <a href="#manager">Strategy Manager Agent</a>
-        <a href="#security">Execution and custody</a>
-        <a href="#governance">Governance</a>
+        <a href="#portfolios">Portfolios</a>
+        <a href="how-it-works.html">How it works</a>
+        <a href="terminal/?tab=committee">Committee</a>
         <a href="https://x.com/FormaStrats" target="_blank" rel="noopener noreferrer">X · @FormaStrats</a>
         <a class="btn btn--silver nav__sheet-cta" href="terminal/">Open the Terminal</a>
       </nav>
@@ -68,265 +65,195 @@
 
   <main id="main">
 
-    <section class="hero" id="top">
-      <div class="wrap hero__inner">
-        <div class="hero__copy">
-          <p class="label">Model portfolios · Self-custody · Solana</p>
-          <h1 class="display"><span class="nw">Asset management,</span> <em>rebuilt onchain.</em></h1>
-          <p class="lead">Committee-approved model portfolios of tokenized stocks, deployed to your own wallet in three steps. You choose, you sign, you hold.</p>
+    <!-- HERO: four words and the film -->
+    <section class="show" id="top">
+      <div class="wrap show__grid">
+        <div class="show__copy">
+          <h1 class="display"><span class="nw">Stock portfolios,</span> <em>in your wallet.</em></h1>
+          <p class="lead">One deposit. A whole portfolio of tokenized stocks.</p>
           <div class="actions">
-            <a class="btn btn--silver" href="terminal/">Open the Terminal</a>
-            <a class="btn btn--line" href="#strategies">View strategies</a>
+            <a class="btn btn--silver" href="terminal/">Get started</a>
+            <a class="textlink" href="#portfolios">See the portfolios</a>
           </div>
           <p class="eligibility">Not available to U.S. persons or in restricted jurisdictions.</p>
+          <ol class="steps-live" id="simSteps" role="list" aria-label="How it works, in four steps">
+            <li data-step="0"><span class="steps-live__n">1</span><b>Connect</b><span>your wallet</span></li>
+            <li data-step="1"><span class="steps-live__n">2</span><b>Choose</b><span>a portfolio</span></li>
+            <li data-step="2"><span class="steps-live__n">3</span><b>Approve</b><span>in your wallet</span></li>
+            <li data-step="3"><span class="steps-live__n">4</span><b>Receive</b><span>tokenized stocks</span></li>
+          </ol>
         </div>
-        <div class="hero__visual" aria-hidden="true">
-          <img class="hero__poster" id="heroPoster" src="brand/forma-chrome-1200.webp" alt="" width="1200" height="1200" decoding="async" />
-          <canvas class="hero__canvas" id="heroChrome"></canvas>
-        </div>
-      </div>
-      <div class="wrap">
-        <dl class="statbar" aria-label="Forma at a glance">
-          <div><dt class="label">Strategies live</dt><dd data-live="strategyCount">8</dd></div>
-          <div><dt class="label">Investable now</dt><dd data-live="investableOf">—</dd></div>
-          <div><dt class="label">Minimums from</dt><dd data-live="minDeploy">$50</dd></div>
-          <div><dt class="label">Custody</dt><dd>Your wallet</dd></div>
-          <div><dt class="label">US market</dt><dd data-live="session">—</dd></div>
-        </dl>
+
+        <figure class="sim" id="sim">
+          <div class="sim__device" role="img" aria-label="A simulation: a wallet holding 1,000 US dollars in USDC connects to Forma, chooses the Total Tokenized Stock Index, approves in the wallet, and receives the index’s tokenized stocks.">
+            <div class="sim__phone" aria-hidden="true">
+              <div class="sim__screen" id="simScreen">
+                <div class="sx-status"><span>10:24</span><i class="sx-batt"></i></div>
+
+                <!-- The wallet -->
+                <div class="sx-layer sx-wallet" data-x="wallet">
+                  <div class="sx-whead"><span class="sx-wtitle">Wallet</span><span class="sx-addr">7xKX…9fQa</span></div>
+                  <div class="sx-bal">
+                    <span class="sx-cap">Balance</span>
+                    <span class="sx-amt" data-x="bal">$1,000.00</span>
+                    <span class="sx-balnote" data-x="balnote">21 holdings <span>· after trading costs</span></span>
+                  </div>
+                  <div class="sx-tabs"><span class="is-on">Tokens</span><span>Activity</span></div>
+                  <div class="sx-list"><div class="sx-rows" data-x="rows"></div></div>
+                </div>
+
+                <!-- Forma, opened in the wallet's browser -->
+                <div class="sx-layer sx-dapp" data-x="dapp">
+                  <div class="sx-url">formastrats.github.io</div>
+                  <div class="sx-dhead">
+                    <svg viewBox="120 104 280 296" width="18" height="19" aria-hidden="true"><g transform="translate(-3 4)" fill="currentColor"><polygon points="150,186 368,131.5 368,185.5 150,240"/><polygon points="150,262 328,217.5 328,261.5 150,306"/><polygon points="150,328 210,313 210,357 150,372"/></g></svg>
+                    <span class="sx-brand">Forma</span>
+                    <span class="sx-pill" data-x="pill"><i></i>7xKX…9fQa</span>
+                  </div>
+
+                  <div class="sx-pane sx-intro" data-x="intro">
+                    <p class="sx-h">Connect your wallet.</p>
+                    <span class="sx-btn sx-select" data-x="select">Select wallet</span>
+                  </div>
+
+                  <div class="sx-pane sx-choose" data-x="choose">
+                    <p class="sx-cap">Choose a portfolio</p>
+                    <div class="sx-card" data-x="card0">
+                      <b>Total Tokenized Stock Index</b>
+                      <span class="sx-meta" data-x="card0meta">21 holdings · Risk 3/5</span>
+                      <span class="sx-mini" data-x="mini"></span>
+                    </div>
+                    <div class="sx-card" data-x="card1"><b>Core ETF Portfolio</b><span class="sx-meta">3 ETFs · Risk 3/5</span></div>
+                    <div class="sx-card" data-x="card2"><b>Magnificent 7</b><span class="sx-meta">7 stocks · Risk 4/5 · Concentrated</span></div>
+                    <div class="sx-field" data-x="field"><span class="sx-cap">Amount</span><span class="sx-input"><span data-x="amount"></span><i class="sx-caret" data-x="caret"></i></span><span class="sx-usdc">USDC</span></div>
+                    <span class="sx-btn sx-deploy" data-x="deploy">Deploy</span>
+                  </div>
+
+                  <div class="sx-pane sx-engine" data-x="engine">
+                    <p class="sx-cap">Delivering your portfolio</p>
+                    <p class="sx-count"><span data-x="done">0</span><small> / <span data-x="total">21</span></small></p>
+                    <div class="sx-prog"><i data-x="prog"></i></div>
+                    <div class="sx-legs"><div class="sx-legs-track" data-x="legs"></div></div>
+                    <p class="sx-via">Routed through Jupiter · settles on Solana</p>
+                  </div>
+
+                  <div class="sx-modal" data-x="picker">
+                    <p class="sx-cap">Connect a wallet</p>
+                    <div class="sx-wrow" data-x="phantom"><i>P</i>Phantom<span class="sx-state" data-x="phstate"></span></div>
+                    <div class="sx-wrow"><i>S</i>Solflare</div>
+                    <div class="sx-wrow"><i>B</i>Backpack</div>
+                  </div>
+                </div>
+
+                <!-- The wallet's approval sheet -->
+                <div class="sx-sheet" data-x="sheet">
+                  <span class="sx-grab"></span>
+                  <p class="sx-cap">Wallet · Approve</p>
+                  <p class="sx-sheet-title" data-x="sheetTitle">20 transactions</p>
+                  <p class="sx-sheet-meta" data-x="sheetMeta">Forma · Total Tokenized Stock Index · 1 of 2</p>
+                  <div class="sx-sheet-rows" data-x="sheetRows"></div>
+                  <div class="sx-sheet-btns"><span class="sx-btn sx-ghost">Cancel</span><span class="sx-btn sx-approve" data-x="approve">Approve</span></div>
+                </div>
+
+                <span class="sx-tap" data-x="tap"></span>
+                <span class="sx-done" data-x="check"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span data-x="checkN">21</span>&nbsp;holdings delivered</span></span>
+              </div>
+            </div>
+          </div>
+          <figcaption class="sim__cap">
+            <button class="sim__play" id="simToggle" type="button" aria-label="Pause the simulation">
+              <svg class="i-pause" viewBox="0 0 12 12" width="11" height="11" aria-hidden="true"><path d="M3 2h2v8H3zM7 2h2v8H7z" fill="currentColor"/></svg>
+              <svg class="i-play" viewBox="0 0 12 12" width="11" height="11" aria-hidden="true"><path d="M3 2l7 4-7 4z" fill="currentColor"/></svg>
+            </button>
+            <span>Simulation, sped up. <span data-sim="src">Total Tokenized Stock Index weights as of 5&nbsp;Nov&nbsp;2026.</span></span>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
     <section class="tape" id="tapeBand" aria-label="Live tokenized stock prices" hidden>
       <div class="tape__label">
-        <button class="tape__pause" type="button" aria-pressed="false" aria-label="Pause live prices">
+        <button class="tape__pause" type="button" aria-label="Pause live prices">
           <svg class="i-pause" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M3 2h2v8H3zM7 2h2v8H7z" fill="currentColor"/></svg>
           <svg class="i-play" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M3 2l7 4-7 4z" fill="currentColor"/></svg>
         </button>
-        Live prices
+        Live
       </div>
       <div class="tape__viewport"><div class="tape__track" id="tape"></div></div>
     </section>
 
-    <section class="section" id="strategies">
+    <!-- PORTFOLIOS: pick one -->
+    <section class="section" id="portfolios">
       <div class="wrap">
-        <header class="section__head section__head--split reveal">
-          <div>
-            <p class="label">Strategies</p>
-            <h2 class="display">Model portfolios, priced live.</h2>
-          </div>
-          <p class="section__lead">Index, thematic, tracker, multi-asset and active, each held to published risk limits in code. Holdings and weights below update from live onchain markets.</p>
+        <header class="section__head section__head--row reveal">
+          <h2 class="display">Choose a portfolio.</h2>
+          <a class="textlink" href="terminal/?tab=deploy"><span>All <span data-live="strategyCount">8</span> strategies</span></a>
         </header>
-
-        <div class="strats" id="strats">
-          <article class="strat reveal" data-strategy="total-tokenized-stock-index">
-            <div class="strat__top"><span class="tag tag--code">FTTI</span><span class="tag">Index</span><span class="tag">Quarterly rebalance</span></div>
-            <h3 id="st-total-tokenized-stock-index">Total Tokenized Stock Index Strategy</h3>
-            <p class="strat__tag">The largest investable tokenized companies in one deposit, weighted by size.</p>
-            <div class="strat__stats">
-              <div><div class="k">Positions</div><div class="v" data-field="positions">—</div></div>
-              <div><div class="k">24h move</div><div class="v" data-field="move">—</div></div>
-              <div><div class="k">Risk</div><div class="v">3/5</div></div>
-              <div><div class="k">Minimum</div><div class="v">$250</div></div>
-            </div>
-            <div class="strat__label">Market-cap weight · largest holdings</div>
-            <div class="bars" data-field="bars"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
-            <div class="strat__notes"><p class="strat__note">It does not own the whole US stock market and is not affiliated with, or designed to track, any index provider's index.</p></div>
-            <a class="strat__link" href="terminal/?tab=deploy&amp;strategy=total-tokenized-stock-index">Open <span class="sr-only">Total Tokenized Stock Index Strategy </span>in the Terminal <span aria-hidden="true">→</span></a>
-          </article>
-          <article class="strat reveal" data-strategy="core-etf-portfolio">
-            <div class="strat__top"><span class="tag tag--code">FCEP</span><span class="tag">Multi-asset</span><span class="tag">Quarterly rebalance</span></div>
-            <h3 id="st-core-etf-portfolio">Core ETF Portfolio</h3>
-            <p class="strat__tag">A core allocation in tokenized ETFs: US large caps, growth and gold.</p>
-            <div class="strat__stats">
-              <div><div class="k">Positions</div><div class="v" data-field="positions">—</div></div>
-              <div><div class="k">24h move</div><div class="v" data-field="move">—</div></div>
-              <div><div class="k">Risk</div><div class="v">3/5</div></div>
-              <div><div class="k">Minimum</div><div class="v">$50</div></div>
-            </div>
-            <div class="strat__label">Top positions · model weight</div>
-            <div class="bars" data-field="bars"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
-            <div class="strat__notes"><p class="strat__note">Not affiliated with the sponsors of SPY, QQQ or GLD or with any index provider.</p></div>
-            <a class="strat__link" href="terminal/?tab=deploy&amp;strategy=core-etf-portfolio">Open <span class="sr-only">Core ETF Portfolio </span>in the Terminal <span aria-hidden="true">→</span></a>
-          </article>
+        <div class="tiles" id="tiles">
+          <a class="tile reveal" href="terminal/?tab=deploy&amp;strategy=total-tokenized-stock-index" data-tile="total-tokenized-stock-index">
+            <span class="tile__name">Total Tokenized Stock Index</span>
+            <span class="tile__big"><b data-field="count">—</b> holdings</span>
+            <span class="tile__bar" data-field="bar"></span>
+            <span class="tile__meta"><span>Risk 3/5</span><span>From $250</span></span>
+          </a>
+          <a class="tile reveal" href="terminal/?tab=deploy&amp;strategy=core-etf-portfolio" data-tile="core-etf-portfolio">
+            <span class="tile__name">Core ETF Portfolio</span>
+            <span class="tile__big"><b data-field="count">3</b> ETFs</span>
+            <span class="tile__bar" data-field="bar"></span>
+            <span class="tile__meta"><span>Risk 3/5</span><span>From $50</span></span>
+          </a>
+          <a class="tile reveal" href="terminal/?tab=deploy&amp;strategy=magnificent-7" data-tile="magnificent-7">
+            <span class="tile__name">Magnificent 7</span>
+            <span class="tile__big"><b data-field="count">7</b> stocks</span>
+            <span class="tile__bar" data-field="bar"></span>
+            <span class="tile__meta"><span>Risk 4/5 · Concentrated</span><span>From $100</span></span>
+          </a>
+          <a class="tile reveal" href="terminal/?tab=deploy&amp;strategy=crypto-economy" data-tile="crypto-economy">
+            <span class="tile__name">Crypto Economy</span>
+            <span class="tile__big"><b data-field="count">6</b> holdings</span>
+            <span class="tile__bar" data-field="bar"></span>
+            <span class="tile__meta"><span>Risk 5/5 · Speculative</span><span>From $100</span></span>
+          </a>
         </div>
-        <p class="strats__note">24h move: the weighted price change of each model's current holdings. It is not an account return, and past moves don't predict future results.</p>
-
-        <div class="catalog" id="catalog" hidden>
-          <div class="catalog__head">
-            <span class="label">More strategies</span>
-            <a class="textlink" href="terminal/?tab=deploy"><span>All <span data-live="strategyCount">8</span> in the Terminal</span></a>
-          </div>
-          <div class="catalog__list" id="catalogList"></div>
-          <p class="catalog__review" id="catalogReview" hidden></p>
-        </div>
-
-        <div class="monitor reveal">
-          <div class="monitor__head">
-            <div>
-              <p class="label">Investability monitor · live</p>
-              <h3 class="monitor__title" id="monitorCount" aria-live="polite" aria-atomic="true"><span data-live="investable">—</span> of <span data-live="universeSize">—</span> tokenized stocks pass today's liquidity screen</h3>
-              <p class="monitor__sub">Index strategies hold only names that pass this screen. Watchlist names join as their markets deepen.</p>
-            </div>
-            <div class="legend" aria-hidden="true"><span><i class="sw sw--in"></i>Investable</span><span><i class="sw sw--out"></i>Watchlist</span></div>
-          </div>
-          <div class="monitor__strip" id="monitorStrip" aria-hidden="true"></div>
-          <button class="monitor__toggle" id="monitorToggle" type="button" aria-expanded="false" aria-controls="monitor" hidden>Show every name</button>
-          <ul class="monitor__grid" id="monitor" role="list" hidden></ul>
-        </div>
+        <p class="fineprint">Model portfolios, not advice. Not affiliated with any index provider, ETF sponsor, or users of the “Magnificent Seven” label.</p>
       </div>
     </section>
 
-    <section class="section section--paper" id="how">
-      <div class="wrap">
-        <header class="section__head reveal">
-          <p class="label">How it works</p>
-          <h2 class="display">Three steps. Settled in seconds.</h2>
-        </header>
-        <ol class="steps reveal">
-          <li><span class="steps__n">01</span><h3>Connect a wallet</h3><p>Phantom, Solflare, Backpack or another Solana wallet. Forma never holds keys or funds.</p></li>
-          <li><span class="steps__n">02</span><h3>Choose a strategy</h3><p>A committee-approved model portfolio and an amount. Minimums from $50.</p></li>
-          <li><span class="steps__n">03</span><h3>Approve in your wallet</h3><p>One approval covers up to 20 positions. They land in your wallet in seconds.</p></li>
-        </ol>
-
-        <figure class="shot reveal" id="terminalShot">
-          <img src="brand/terminal-deploy-2400.webp" srcset="brand/terminal-deploy-1600.webp 1600w, brand/terminal-deploy-2400.webp 2400w" sizes="(min-width: 1320px) 1232px, 100vw" alt="The Forma Terminal: the strategy catalog, with the deploy ticket open beside it." width="2400" height="1350" loading="lazy" decoding="async" />
-          <figcaption>The Forma Terminal. Choose a strategy, set an amount, approve in your wallet.</figcaption>
-        </figure>
-
-        <div class="compare reveal">
-          <p class="label" id="compareTitle">Versus a separately managed account</p>
-          <div class="compare__wrap">
-            <table class="compare__table" aria-labelledby="compareTitle">
-              <thead>
-                <tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col">Separately managed account</th><th scope="col" class="is-forma">With Forma</th></tr>
-              </thead>
-              <tbody>
-                <tr><th scope="row">Minimum</th><td data-label="Managed account">Often $100,000 or more</td><td class="is-forma" data-label="With Forma">From $50</td></tr>
-                <tr><th scope="row">Custody</th><td data-label="Managed account">A third-party custodian</td><td class="is-forma" data-label="With Forma">Your own wallet</td></tr>
-                <tr><th scope="row">Settlement</th><td data-label="Managed account">T+1 or T+2</td><td class="is-forma" data-label="With Forma">Seconds</td></tr>
-                <tr><th scope="row">Hours</th><td data-label="Managed account">Market hours</td><td class="is-forma" data-label="With Forma">24/7 onchain, deepest in US market hours</td></tr>
-                <tr><th scope="row">Fees</th><td data-label="Managed account">A percentage of assets, yearly</td><td class="is-forma" data-label="With Forma">Shown in full before you sign</td></tr>
-                <tr><th scope="row">Reporting</th><td data-label="Managed account">Periodic statements</td><td class="is-forma" data-label="With Forma">Every trade onchain</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <!-- BRAND: the chrome mark, one line -->
+    <section class="mark-band" aria-label="Governance">
+      <div class="mark-band__visual" aria-hidden="true">
+        <img class="hero__poster" id="heroPoster" src="brand/forma-chrome-1200.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async" />
+        <canvas class="hero__canvas" id="heroChrome"></canvas>
+      </div>
+      <div class="wrap mark-band__copy reveal">
+        <p class="display">Every strategy, approved <em>by committee.</em></p>
+        <p class="mark-band__note">Committee seats being filled</p>
+        <a class="textlink" href="terminal/?tab=committee">Read the decision log</a>
       </div>
     </section>
 
-    <section class="section" id="platform">
-      <div class="wrap">
-        <header class="section__head reveal">
-          <p class="label">Platform</p>
-          <h2 class="display">The same strategies, for investors and for AI agents.</h2>
-          <p class="section__lead">Investors use Forma today. AI agents are next, on the same strategies and the same engine.</p>
-        </header>
-        <div class="matrix reveal" role="table" aria-label="Forma products by client">
-          <div class="matrix__row matrix__row--head" role="row">
-            <div role="columnheader"><span class="sr-only">Client</span></div>
-            <div role="columnheader"><span class="label">Product 01</span><strong>Strategies</strong></div>
-            <div role="columnheader"><span class="label">Product 02</span><strong>Strategy Manager Agent</strong></div>
-          </div>
-          <div class="matrix__row" role="row">
-            <div role="rowheader"><strong>Investors</strong><span>Self-custody wallets</span></div>
-            <div role="cell">
-              <span class="matrix__ctx">Investors · Strategies</span>
-              <p>Deploy a model portfolio in three steps. Positions settle in your own wallet.</p>
-              <span class="status status--live">Live</span>
-            </div>
-            <div role="cell">
-              <span class="matrix__ctx">Investors · Strategy Manager Agent</span>
-              <p>Drift alerts and rebalances you approve.</p>
-              <span class="status">In development</span>
-            </div>
-          </div>
-          <div class="matrix__row" role="row">
-            <div role="rowheader"><strong>AI agents</strong><span>Autonomous wallets</span></div>
-            <div role="cell">
-              <span class="matrix__ctx">AI agents · Strategies</span>
-              <p>The catalog, live allocations and ready-to-sign transactions over API and MCP.</p>
-              <span class="status">In development</span>
-            </div>
-            <div role="cell">
-              <span class="matrix__ctx">AI agents · Strategy Manager Agent</span>
-              <p>Rebalancing on request. The agent keeps its own keys.</p>
-              <span class="status">In development</span>
-            </div>
-          </div>
+    <!-- NEXT: what's coming -->
+    <section class="next" aria-label="Coming next">
+      <div class="wrap next__row">
+        <div class="next__item reveal">
+          <span class="status">In development</span>
+          <b>Strategy Manager Agent</b>
+          <span>Keeps your portfolio on target. You approve every trade.</span>
         </div>
-      </div>
-    </section>
-
-    <section class="section section--line" id="manager">
-      <div class="wrap agent">
-        <div class="agent__copy reveal">
-          <p class="label">Strategy Manager Agent <span class="status">In development</span></p>
-          <h2 class="display">Your portfolio, kept on target.</h2>
-          <ol class="agent__points">
-            <li><span>01</span>Watches every account for drift.</li>
-            <li><span>02</span>Prepares the rebalance, trade by trade.</li>
-            <li><span>03</span>You approve every trade. It never holds your keys.</li>
-          </ol>
+        <div class="next__item reveal">
+          <span class="status">In development</span>
+          <b>For AI agents</b>
+          <span>The same portfolios, over API and MCP.</span>
         </div>
-        <figure class="drift reveal">
-          <div class="drift__head"><span class="label">Account drift</span><span class="label">Vs target</span></div>
-          <div class="drift__rows">
-            <div class="drift__row"><span class="drift__sym">NVDAx</span><span class="drift__track"><span class="drift__now" style="--w:92%"></span><span class="drift__target" style="--x:75%"></span></span><span class="drift__val">+3.4%</span></div>
-            <div class="drift__row"><span class="drift__sym">AAPLx</span><span class="drift__track"><span class="drift__now" style="--w:65.5%"></span><span class="drift__target" style="--x:75%"></span></span><span class="drift__val">−1.9%</span></div>
-            <div class="drift__row"><span class="drift__sym">MSFTx</span><span class="drift__track"><span class="drift__now" style="--w:63%"></span><span class="drift__target" style="--x:60%"></span></span><span class="drift__val">+0.6%</span></div>
-            <div class="drift__row"><span class="drift__sym">GOOGLx</span><span class="drift__track"><span class="drift__now" style="--w:46%"></span><span class="drift__target" style="--x:55%"></span></span><span class="drift__val">−1.8%</span></div>
-            <div class="drift__row"><span class="drift__sym">AMZNx</span><span class="drift__track"><span class="drift__now" style="--w:43.5%"></span><span class="drift__target" style="--x:45%"></span></span><span class="drift__val">−0.3%</span></div>
-          </div>
-          <div class="drift__foot"><span>Proposed rebalance</span><span>2 sells · 3 buys · you approve</span></div>
-          <figcaption>Bars show current weights; lines mark targets. Illustrative account, not live data.</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section class="section section--graphite" id="security">
-      <div class="wrap">
-        <header class="section__head reveal">
-          <p class="label">Execution and custody</p>
-          <h2 class="display">Nothing moves without your signature.</h2>
-        </header>
-        <div class="principles reveal">
-          <div><h3>Self-custody</h3><p>No vault, no pooled fund, no withdrawal queue. Positions stay in your wallet until you move them.</p></div>
-          <div><h3>Price limits</h3><p>Each trade is checked against a fair-value price, the underlying stock where available. If the route is worse than your limit (2.5% by default), that position waits in USDC.</p></div>
-          <div><h3>Batched approvals</h3><p>Up to 20 positions are signed together and routed through Jupiter.</p></div>
-          <div><h3>A receipt for every trade</h3><p>Each trade is a public Solana transaction. Receipts with cost basis link to every leg.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--paper" id="governance">
-      <div class="wrap gov">
-        <div class="reveal">
-          <p class="label">Governance</p>
-          <h2 class="display">Every decision on the record.</h2>
-          <p class="section__lead">Strategies launch only by a vote of Forma's Global Investment Committee (GIC), under a published charter. Risk limits are enforced in code.</p>
-          <p class="gov__status">Charter v1.0 · Committee seats being filled</p>
-          <a class="textlink textlink--dark" href="terminal/?tab=committee">Read the decision log</a>
-        </div>
-        <ol class="gov__log reveal" aria-label="Committee decisions">
-          <li><span class="gov__id">4 Nov 2026 · GIC-2026-004</span><span class="gov__what">Category risk limits set, with documented exceptions</span></li>
-          <li><span class="gov__id">4 Nov 2026 · GIC-2026-003</span><span class="gov__what">Six strategies launched, three sent to review</span></li>
-          <li><span class="gov__id">4 Nov 2026 · GIC-2026-002</span><span class="gov__what">Pre-committee strategies reviewed</span></li>
-          <li><span class="gov__id">4 Nov 2026 · GIC-2026-001</span><span class="gov__what">Committee formed, charter v1.0 adopted</span></li>
-        </ol>
       </div>
     </section>
 
     <section class="cta">
-      <picture>
-        <source media="(max-width: 900px)" srcset="brand/cta-chrome-mobile-1200x900.jpg" />
-        <img class="cta__bg" src="brand/cta-chrome-2400x900.jpg" srcset="brand/cta-chrome-1600x600.jpg 1600w, brand/cta-chrome-2400x900.jpg 2400w" sizes="100vw" alt="" loading="lazy" decoding="async" />
-      </picture>
       <div class="wrap cta__inner reveal">
-        <h2 class="display">Put a model portfolio <em>in your wallet.</em></h2>
-        <p class="cta__sub">Minimums from $50. Self-custodied. You sign every trade.</p>
+        <h2 class="display">Put a portfolio <em>in your wallet.</em></h2>
         <div class="actions">
-          <a class="btn btn--silver" href="terminal/">Open the Terminal</a>
-          <a class="textlink" href="terminal/?tab=committee">Read the decision log</a>
+          <a class="btn btn--silver" href="terminal/">Get started</a>
+          <a class="textlink" href="how-it-works.html">How it works</a>
         </div>
         <p class="eligibility">Not available to U.S. persons or in restricted jurisdictions.</p>
       </div>
@@ -347,12 +274,13 @@
           <p class="label">Product</p>
           <a href="terminal/">Terminal</a>
           <a href="terminal/?tab=deploy">Strategies</a>
-          <a href="terminal/?tab=research">Research</a>
+          <a href="how-it-works.html">How it works</a>
           <a href="terminal/?tab=who-can-hold">Who can hold</a>
         </div>
         <div>
           <p class="label">Company</p>
           <a href="terminal/?tab=committee">Committee</a>
+          <a href="terminal/?tab=research">Research</a>
           <a href="https://x.com/FormaStrats" target="_blank" rel="noopener noreferrer">X · @FormaStrats</a>
         </div>
       </nav>
@@ -361,15 +289,14 @@
       <div class="footer__legal">
         <p>Forma Strategies provides non-custodial software and general model portfolios. It is not a broker-dealer, custodian or investment adviser, and nothing on this site is investment advice, a recommendation, or an offer to buy or sell any security.</p>
         <p>Tokenized stocks (for example xStocks, issued by Backed Assets (JE) Limited) track but are not the underlying shares. They carry no voting rights, carry issuer, custody and smart-contract risk, can be paused by their issuer, and can trade away from the underlying price, especially outside US market hours. They are not available to U.S. persons or in sanctioned or restricted jurisdictions; check yours in Who can hold.</p>
-        <p>Live prices are third-party data and can be delayed or wrong. Model moves are not account returns, and past moves don't predict future results. Digital assets are volatile and you can lose money. Every transaction is signed by you, from your own wallet. Products marked in development are not available yet.</p>
+        <p>The homepage simulation is illustrative: sped up, with the model’s live weights when available and an assumed trading cost (routing fees and spread). It is not a real account. A real deploy also needs a little SOL for network fees and refundable token-account deposits: about 0.06 SOL for 21 holdings. Live prices are third-party data and can be delayed or wrong. Digital assets are volatile and you can lose money. Every transaction is signed by you, from your own wallet. Products marked in development are not available yet.</p>
         <p>© 2026 Forma Strategies LLC.</p>
       </div>
     </div>
   </footer>
 
   <script>
-    // The 3D chrome mark loads only where it adds something: a desktop pointer, motion allowed, no data saver,
-    // and a working WebGL context. Everyone else keeps the poster, which is the same frame.
+    // The 3D chrome mark (governance band) loads only on desktop with motion allowed and WebGL available.
     (function () {
       var canvas = document.getElementById('heroChrome'), poster = document.getElementById('heroPoster');
       if (!canvas || !window.matchMedia) return;
@@ -384,15 +311,21 @@
         if (!gl) return;
         var lose = gl.getExtension('WEBGL_lose_context'); if (lose) lose.loseContext();
       } catch (e) { return; }
+      var started = false;
       function boot() {
+        if (started) return; started = true;
         import('./assets/forma-chrome.js').then(function (m) {
           m.createChrome(canvas, { fit: 0.8, onReady: function () { canvas.classList.add('is-live'); if (poster) poster.classList.add('is-hidden'); } });
         }).catch(function () { /* the poster stays */ });
       }
-      function idle() { if ('requestIdleCallback' in window) requestIdleCallback(boot, { timeout: 2500 }); else setTimeout(boot, 300); }
-      if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle, { once: true });
+      // Start the 3D only when the band comes near the screen.
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); boot(); } }, { rootMargin: '400px' });
+        io.observe(canvas);
+      } else { window.addEventListener('load', boot, { once: true }); }
     })();
   </script>
   <script src="assets/site.js"></script>
+  <script src="assets/forma-sim.js"></script>
 </body>
 </html>
