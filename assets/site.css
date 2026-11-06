@@ -208,7 +208,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   overflow: hidden;
   background:
     radial-gradient(900px 640px at 76% 42%, rgba(255, 255, 255, 0.06), transparent 62%),
-    linear-gradient(180deg, #0A0A0B 0%, #0C0C0E 100%);
+    linear-gradient(180deg, #0A0A0B 0%, #0A0A0B 100%);
 }
 @media (min-width: 901px) { .hero { min-height: calc(100svh - 52px); } }
 .hero > .wrap { width: 100%; } /* grid items with auto margins would otherwise shrink to their content */
@@ -224,36 +224,6 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .hero__poster.is-hidden { opacity: 0; }
 .hero__canvas { opacity: 0; transition: opacity 0.9s ease; }
 .hero__canvas.is-live { opacity: 1; }
-
-.statbar {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  margin: clamp(24px, 3vw, 44px) 0 0;
-  border-top: 1px solid var(--line-d);
-}
-.statbar > div { padding: 18px 20px 24px; min-width: 0; }
-.statbar > div + div { border-left: 1px solid var(--line-d); }
-.statbar > div:first-child { padding-left: 0; }
-.statbar dd { margin: 8px 0 0; font: 400 clamp(18px, 0.9vw + 9px, 22px)/1.2 var(--mono); color: var(--white); font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.statbar dd small { font-size: 0.7em; color: var(--steel); }
-.session-dot { display: inline-block; width: 7px; height: 7px; margin-right: 9px; border-radius: 50%; background: var(--up); vertical-align: 0.12em; }
-
-/* ── Live price band ────────────────────────────────────────────────── */
-.tape { display: flex; align-items: stretch; height: 52px; background: var(--ink-1); border-top: 1px solid var(--line-d); border-bottom: 1px solid var(--line-d); overflow: hidden; }
-.tape__label { flex: none; display: flex; align-items: center; gap: 10px; padding: 0 20px 0 var(--pad); border-right: 1px solid var(--line-d); font: 500 11px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel); }
-.tape__pause { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-left: -6px; border: 1px solid var(--line-d2); border-radius: 2px; background: transparent; color: var(--mist); cursor: pointer; }
-.tape__pause:hover { color: var(--white); border-color: rgba(255, 255, 255, 0.4); }
-.tape__pause .i-play, .tape.is-paused .tape__pause .i-pause { display: none; }
-.tape.is-paused .tape__pause .i-play { display: block; }
-.tape__viewport { position: relative; flex: 1; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); }
-.tape__track { display: flex; height: 100%; width: max-content; animation: tape 90s linear infinite; }
-.tape__set { display: flex; }
-.tape:hover .tape__track, .tape:focus-within .tape__track, .tape.is-paused .tape__track { animation-play-state: paused; }
-@keyframes tape { to { transform: translateX(-50%); } }
-.tick { display: inline-flex; align-items: center; gap: 10px; padding: 0 22px; border-right: 1px solid var(--line-d); font: 400 13px/1 var(--mono); color: var(--mist); white-space: nowrap; font-variant-numeric: tabular-nums; }
-.tick img { display: none; } /* issuer logos are coloured and uneven on black; symbols carry identity */
-.tick b { font-weight: 500; color: var(--white); }
-.tick .mv { font-size: 12px; color: var(--steel); }
 
 /* ── Sections ───────────────────────────────────────────────────────── */
 .section { padding-block: clamp(80px, 9vw, 128px); scroll-margin-top: var(--nav-h); }
@@ -445,11 +415,8 @@ a.catalog__row:hover .catalog__go { color: var(--white); }
 /* ── Motion and contrast preferences ────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .js .reveal, .js .reveal:not(.is-visible) { opacity: 1; transform: none; transition: none; }
-  .tape__track { animation: none; }
-  .tape__set + .tape__set { display: none; }
   .skel { animation: none; }
   .bar__fill { transition: none; transform: none; }
-  .tape__pause { display: none; }
 }
 @media (forced-colors: active) {
   .cell.is-in, .sw--in, .bar__fill, .drift__now, .monitor__strip span.is-in { forced-color-adjust: none; background: CanvasText; color: Canvas; }
@@ -463,10 +430,6 @@ a.catalog__row:hover .catalog__go { color: var(--white); }
   .principles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .principles > div:nth-child(3) { padding-left: 0; border-left: 0; }
   .principles > div:nth-child(n + 3) { border-top: 1px solid var(--line-d); }
-  .statbar { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-  .statbar > div:nth-child(-n + 3) { grid-column: span 2; }
-  .statbar > div:nth-child(n + 4) { grid-column: span 3; border-top: 1px solid var(--line-d); }
-  .statbar > div:nth-child(4) { padding-left: 0; border-left: 0; }
 }
 @media (max-width: 900px) {
   .hero__inner { grid-template-columns: minmax(0, 1fr); gap: 8px; }
@@ -512,11 +475,6 @@ a.catalog__row:hover .catalog__go { color: var(--white); }
   .nav .btn--sm { padding: 0 12px; }
   /* Copy first on phones, so the headline and the main button sit in the first screen. */
   .hero__visual { order: 1; width: min(62vw, 260px); margin: 12px -2% 0 0; }
-  .statbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .statbar > div, .statbar > div:nth-child(-n + 3), .statbar > div:nth-child(n + 4) { grid-column: auto; padding: 16px 16px 18px 0; border-left: 0; }
-  .statbar > div:nth-child(even) { padding-left: 16px; border-left: 1px solid var(--line-d); }
-  .statbar > div:nth-child(n + 3) { border-top: 1px solid var(--line-d); }
-  .statbar > div:last-child { grid-column: 1 / -1; }
   .principles { grid-template-columns: minmax(0, 1fr); }
   .principles > div, .principles > div + div { padding: 24px 0; border-left: 0; }
   .principles > div + div { border-top: 1px solid var(--line-d); }
@@ -524,7 +482,6 @@ a.catalog__row:hover .catalog__go { color: var(--white); }
   .catalog__go { display: none; }
   .drift__row { grid-template-columns: 58px minmax(0, 1fr) 52px; gap: 12px; }
   .bar { grid-template-columns: 58px minmax(0, 1fr) 52px; gap: 10px; }
-  .tape__label { padding-right: 14px; }
   .monitor__grid { grid-template-columns: repeat(auto-fill, minmax(58px, 1fr)); }
   /* On touch the detail reads out as a full-width line above the grid instead of a floating tip. */
   .cell { position: static; }
@@ -552,4 +509,49 @@ a.catalog__row:hover .catalog__go { color: var(--white); }
 @media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
   .hero__inner { grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); gap: 16px; }
   .hero__visual { order: 0; width: 100%; margin: 0; }
+}
+
+
+/* ── Mountain band: the hero's last grid row (replaces the stat bar and price tape) ──────────────
+   2880×1040 art (1200×900 on phones). The sky is transparent, so the hero background runs on behind
+   the peaks with no seam. From 74% of its height down the art is solid, opaque #0A0A0B, and
+   #strategies slides up over that tail, so the Strategies header always sits on settled page black. */
+.peaks {
+  /* How far the summits climb into the hero's empty lower area. Height-aware: the chrome F is sized
+     by the screen height, and on short screens it is no taller than the copy, so there is no slack
+     under the eligibility line and the rise falls back toward 16px. */
+  --peaks-rise: clamp(16px, calc(4.6% - 28px + max(0px, (min(600px, 100svh - 300px) - 440px) / 2)), 140px);
+  /* Wide screens: the art stops growing at 1800px so the tallest summit stays under the chrome F;
+     its sides feather into the page, the feather growing from 0 at 1800px to 144px. */
+  --peaks-feather: clamp(0px, (100vw - 1800px) / 2, 144px);
+  position: relative;
+  z-index: 1;                       /* over the hero background; under .hero__copy and .hero__visual (z-index 2) */
+  width: 100%;
+  max-width: 1800px;
+  justify-self: center;
+  margin-top: calc(-1 * var(--peaks-rise));
+  pointer-events: none;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--peaks-feather), #000 calc(100% - var(--peaks-feather)), transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 var(--peaks-feather), #000 calc(100% - var(--peaks-feather)), transparent);
+}
+.peaks picture, .peaks img { display: block; width: 100%; height: auto; }
+/* The art's bottom 26% is solid #0A0A0B, but lossy WebP (YUV 4:2:0) decodes it as #0A0A0A.
+   This box restores the exact page colour, so the band meets #strategies without even a 1-level step. */
+.peaks::after { content: ""; position: absolute; inset: auto 0 0 0; height: 26%; background: #0A0A0B; }
+.hero__visual { z-index: 2; }       /* the chrome F always paints in front of the tallest summit */
+#strategies {
+  /* The art's opaque tail is 26% of its height, i.e. 9.39% of its width (169px once the art is capped at 1800px).
+     Strategies slides up over it, keeping 12px of its own top padding above the label. */
+  --peaks-tail: min(9.39%, 169px);
+  position: relative;
+  z-index: 2;
+  margin-top: calc(-1 * (var(--peaks-tail) + clamp(80px, 9vw, 128px) - 12px));
+}
+@media (max-width: 900px) {         /* single-column hero: the band rises beside the F, below the copy */
+  .peaks { --peaks-rise: 7%; }
+}
+@media (max-width: 640px) {         /* phones: the 1200×900 art (three biggest summits) tucks under the F */
+  .peaks { --peaks-rise: 12%; }
+  #strategies { --peaks-tail: 19.5%; }
 }

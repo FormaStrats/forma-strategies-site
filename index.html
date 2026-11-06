@@ -85,26 +85,12 @@
           <canvas class="hero__canvas" id="heroChrome"></canvas>
         </div>
       </div>
-      <div class="wrap">
-        <dl class="statbar" aria-label="Forma at a glance">
-          <div><dt class="label">Strategies live</dt><dd data-live="strategyCount">8</dd></div>
-          <div><dt class="label">Investable now</dt><dd data-live="investableOf">—</dd></div>
-          <div><dt class="label">Minimums from</dt><dd data-live="minDeploy">$50</dd></div>
-          <div><dt class="label">Custody</dt><dd>Your wallet</dd></div>
-          <div><dt class="label">US market</dt><dd data-live="session">—</dd></div>
-        </dl>
+      <div class="peaks" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 640px)" srcset="brand/peaks/mobile.webp" type="image/webp" width="1200" height="900" />
+          <img src="brand/peaks/desktop.webp" alt="" width="2880" height="1040" decoding="async" />
+        </picture>
       </div>
-    </section>
-
-    <section class="tape" id="tapeBand" aria-label="Live tokenized stock prices" hidden>
-      <div class="tape__label">
-        <button class="tape__pause" type="button" aria-pressed="false" aria-label="Pause live prices">
-          <svg class="i-pause" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M3 2h2v8H3zM7 2h2v8H7z" fill="currentColor"/></svg>
-          <svg class="i-play" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M3 2l7 4-7 4z" fill="currentColor"/></svg>
-        </button>
-        Live prices
-      </div>
-      <div class="tape__viewport"><div class="tape__track" id="tape"></div></div>
     </section>
 
     <section class="section" id="strategies">
