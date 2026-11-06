@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // CONSOLE EASTER EGG
     // ============================================
     console.log('%cForma Strategies', 'font-size: 24px; font-weight: bold; color: #60a5fa;');
-    console.log('%cOnchain Asset Management', 'font-size: 14px; color: #94a3b8;');
+    console.log('%cModel portfolios of tokenized stocks', 'font-size: 14px; color: #94a3b8;');
     console.log('%cBuilt with ❤️ on Solana', 'font-size: 12px; color: #64748b;');
     console.log('%cInterested in joining our team? Reach out!', 'font-size: 12px; color: #60a5fa;');
     

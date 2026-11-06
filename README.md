@@ -12,8 +12,7 @@ Live: https://formastrats.github.io/forma-strategies-site/ (GitHub Pages, `main`
 | `brand/` | The Sterling brand: vector marks (`forma-mark.svg`, `forma-mark-flat.svg`, `forma-glyph.svg`), 1920×1080 and 3840×2160 chrome renders, the share card, app icons. Renders come from the same scene as the hero. |
 | `terminal/` | The built Forma Terminal (source: `FormaStrats/Forma-Strategies-Landing-Terminal/dapp`). `terminal/data/strategies.json` is generated from the Terminal's strategy definitions and read by the landing page. |
 | `terminal/equity/` | Standalone research pages kept alongside the app. |
-| `product-guide-flipbook.html` | v1 catalog flipbook. |
-| `experience-2026.html` | The previous landing page, kept for reference. |
+| `experience.html`, `experience-2026.html`, `product-guide-flipbook.html` | Retired pages. Each redirects to the homepage; the old versions are in git history (for example `git show d2b1733:experience-2026.html`). |
 | `FormaStrategiesBanner4k.jpeg` etc. | Legacy filenames, now holding the Sterling renders so older pages match the brand. |
 
 ## Update the Terminal
