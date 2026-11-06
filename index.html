@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Forma Strategies · Stock portfolios in your wallet</title>
-  <meta name="description" content="Committee-approved portfolios of tokenized stocks, deployed to your own wallet. One deposit, a whole portfolio, self-custodied on Solana." />
+  <meta name="description" content="Model portfolios of tokenized stocks, deployed to your own wallet. One deposit, a whole portfolio, self-custodied on Solana." />
   <meta name="theme-color" content="#0A0A0B" />
   <link rel="canonical" href="https://formastrats.github.io/forma-strategies-site/" />
   <link rel="icon" type="image/svg+xml" href="brand/forma-mark-flat.svg" />
@@ -23,7 +23,7 @@
   <meta name="twitter:site" content="@FormaStrats" />
   <meta name="twitter:image" content="https://formastrats.github.io/forma-strategies-site/brand/og-film-1200x630.jpg" />
   <script>document.documentElement.classList.add('js');</script>
-  <script>/* Sections that moved to How it works keep their old links. */ (function () { var h = location.hash.slice(1); if (/^(strategies|catalog|monitor|how|terminalShot|platform|manager|security|governance)$/.test(h)) location.replace('how-it-works.html#' + h); })();</script>
+  <script>/* Sections that moved to How it works keep their old links (#manager is now #tsa). */ (function () { var h = location.hash.slice(1); if (/^(strategies|catalog|monitor|how|terminalShot|platform|manager|security|governance)$/.test(h)) location.replace('how-it-works.html#' + (h === 'manager' ? 'tsa' : h)); })();</script>
   <link rel="preconnect" href="https://api.jup.ag" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/noto-serif-display.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/hanken-grotesk.woff2" crossorigin />
@@ -189,26 +189,26 @@
           <h2 class="display">Choose a portfolio.</h2>
           <a class="textlink" href="terminal/?tab=deploy"><span>All <span data-live="strategyCount">8</span> strategies</span></a>
         </header>
-        <div class="tiles" id="tiles">
-          <a class="tile reveal" href="terminal/?tab=deploy&amp;strategy=total-tokenized-stock-index" data-tile="total-tokenized-stock-index">
+        <div class="tiles reveal" id="tiles">
+          <a class="tile" href="terminal/?tab=deploy&amp;strategy=total-tokenized-stock-index" data-tile="total-tokenized-stock-index">
             <span class="tile__name">Total Tokenized Stock Index</span>
-            <span class="tile__big"><b data-field="count">—</b> holdings</span>
+            <span class="tile__big"><span class="tile__pre">Up to</span><b data-field="count">21</b> holdings</span>
             <span class="tile__bar" data-field="bar"></span>
             <span class="tile__meta"><span>Risk 3/5</span><span>From $250</span></span>
           </a>
-          <a class="tile reveal" href="terminal/?tab=deploy&amp;strategy=core-etf-portfolio" data-tile="core-etf-portfolio">
+          <a class="tile" href="terminal/?tab=deploy&amp;strategy=core-etf-portfolio" data-tile="core-etf-portfolio">
             <span class="tile__name">Core ETF Portfolio</span>
             <span class="tile__big"><b data-field="count">3</b> ETFs</span>
             <span class="tile__bar" data-field="bar"></span>
             <span class="tile__meta"><span>Risk 3/5</span><span>From $50</span></span>
           </a>
-          <a class="tile reveal" href="terminal/?tab=deploy&amp;strategy=magnificent-7" data-tile="magnificent-7">
+          <a class="tile" href="terminal/?tab=deploy&amp;strategy=magnificent-7" data-tile="magnificent-7">
             <span class="tile__name">Magnificent 7</span>
             <span class="tile__big"><b data-field="count">7</b> stocks</span>
             <span class="tile__bar" data-field="bar"></span>
             <span class="tile__meta"><span>Risk 4/5 · Concentrated</span><span>From $100</span></span>
           </a>
-          <a class="tile reveal" href="terminal/?tab=deploy&amp;strategy=crypto-economy" data-tile="crypto-economy">
+          <a class="tile" href="terminal/?tab=deploy&amp;strategy=crypto-economy" data-tile="crypto-economy">
             <span class="tile__name">Crypto Economy</span>
             <span class="tile__big"><b data-field="count">6</b> holdings</span>
             <span class="tile__bar" data-field="bar"></span>
@@ -226,8 +226,8 @@
         <canvas class="hero__canvas" id="heroChrome"></canvas>
       </div>
       <div class="wrap mark-band__copy reveal">
-        <p class="display">Every strategy, approved <em>by committee.</em></p>
-        <p class="mark-band__note">Committee seats being filled</p>
+        <p class="display">Every rule, <em>published.</em></p>
+        <p class="mark-band__note">Committee seats opening</p>
         <a class="textlink" href="terminal/?tab=committee">Read the decision log</a>
       </div>
     </section>
@@ -237,7 +237,7 @@
       <div class="wrap next__row">
         <div class="next__item reveal">
           <span class="status">In development</span>
-          <b>Strategy Manager Agent</b>
+          <b>Token Strategy Agent</b>
           <span>Keeps your portfolio on target. You approve every trade.</span>
         </div>
         <div class="next__item reveal">
@@ -267,7 +267,7 @@
           <img src="brand/forma-mark.svg" alt="" width="24" height="25" />
           <span class="lockup__word"><span class="lockup__name">Forma</span><span class="lockup__sub">Strategies</span></span>
         </a>
-        <p>Onchain asset management, built on Solana.</p>
+        <p>Tokenized stock portfolios, built on Solana.</p>
       </div>
       <nav class="footer__cols" aria-label="Footer">
         <div>
@@ -288,9 +288,9 @@
     <div class="wrap">
       <div class="footer__legal">
         <p>Forma Strategies provides non-custodial software and general model portfolios. It is not a broker-dealer, custodian or investment adviser, and nothing on this site is investment advice, a recommendation, or an offer to buy or sell any security.</p>
-        <p>Tokenized stocks (for example xStocks, issued by Backed Assets (JE) Limited) track but are not the underlying shares. They carry no voting rights, carry issuer, custody and smart-contract risk, can be paused by their issuer, and can trade away from the underlying price, especially outside US market hours. They are not available to U.S. persons or in sanctioned or restricted jurisdictions; check yours in Who can hold.</p>
-        <p>The homepage simulation is illustrative: sped up, with the model’s live weights when available and an assumed trading cost (routing fees and spread). It is not a real account. A real deploy also needs a little SOL for network fees and refundable token-account deposits: about 0.06 SOL for 21 holdings. Live prices are third-party data and can be delayed or wrong. Digital assets are volatile and you can lose money. Every transaction is signed by you, from your own wallet. Products marked in development are not available yet.</p>
-        <p>© 2026 Forma Strategies LLC.</p>
+        <p>Forma never holds your assets or keys; issuers can freeze or pause their tokens. Tokenized stocks (for example xStocks, issued by Backed Assets (JE) Limited) track but are not the underlying shares. They carry no voting rights, carry issuer, custody and smart-contract risk, and can trade away from the underlying price, especially outside US market hours. They are not available to U.S. persons or in sanctioned or restricted jurisdictions; check yours in Who can hold.</p>
+        <p>The homepage simulation is illustrative, not a real account: sped up, with the model’s live weights when available and an assumed trading cost (routing fees and spread). A real deploy also needs a little SOL for network fees and refundable token-account deposits: about 0.06 SOL for 21 holdings. Live prices are third-party data and can be delayed or wrong. Digital assets are volatile and you can lose money. Products marked in development are not available yet.</p>
+        <p class="footer__base"><span>© 2026 Forma Strategies LLC.</span><a href="risk.html">Risk</a><a href="fees.html">Fees</a><a href="privacy.html">Privacy</a></p>
       </div>
     </div>
   </footer>

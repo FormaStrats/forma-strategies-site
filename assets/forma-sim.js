@@ -163,7 +163,7 @@
       var q = back ? seg(t, r0, r0 + 0.45) : 0;
       style(rowEls[i], q, 'translateY(' + (14 * (1 - q)).toFixed(1) + 'px)');
     }
-    var scrollMax = Math.max(0, rowEls.length * 60 - 500);
+    var scrollMax = Math.max(0, rowEls.length * 60 - 400); // the last holding stops above the toast and the list's fade
     var scroll = back ? scrollMax * seg(t, p.wallet + 2.2, p.wallet + 3.8) : 0;
     el.rows.style.transform = 'translateY(' + (-scroll).toFixed(1) + 'px)';
     var toastIn = back ? seg(t, p.wallet + 1.35, p.wallet + 1.75) : 0;
@@ -218,7 +218,7 @@
     if (legEls.length > LEGS_IN_VIEW) {
       var prevA = started > 0 ? p.legs[started - 1] : null, nextA = started < p.legs.length ? p.legs[started] : null;
       var frac = prevA != null && nextA != null ? clamp((t - prevA) / Math.max(0.01, nextA - prevA), 0, 1) : 0;
-      off = clamp(started + frac - (LEGS_IN_VIEW - 4), 0, legEls.length - LEGS_IN_VIEW) * 20;
+      off = clamp(started + frac - (LEGS_IN_VIEW - 4), 0, legEls.length - LEGS_IN_VIEW + 1.25) * 20; // the last row ends clear of the 24px fade
     }
     var legT = off ? 'translateY(' + (-off).toFixed(1) + 'px)' : '';
     if (el.legs.__t !== legT) { el.legs.style.transform = legT; el.legs.__t = legT; }
@@ -243,6 +243,8 @@
     // The four steps beside the phone.
     var step = 0;
     for (var s = 0; s < p.steps.length; s++) if (t >= p.steps[s]) step = s;
+    // While a later approval sheet is up, and until its batch starts delivering, the wallet is asking: back to Approve.
+    for (var sb = 1; sb < p.sheets.length; sb++) if (t >= p.sheets[sb].open - 0.1 && t < p.legs[p.sheets[sb].from]) step = 2;
     for (var n = 0; n < stepItems.length; n++) {
       stepItems[n].classList.toggle('is-on', n === step);
       stepItems[n].classList.toggle('is-done', n < step);
@@ -292,9 +294,12 @@
     if (!rows || rows.length < 5) return;
     var next = build(rows, true);
     if (playing) { pending = next; return; } // swapped in at the loop's end, never mid-scene
+    pending = null; // newer data wins over an older one still queued for the wrap
+    var oldDone = plan.lastDone;
     apply(next);
     if (still) { render(plan.rest); markDone(); return; }
-    t = begun ? Math.min(t, plan.T - 0.001) : plan.start;
+    // A paused scene keeps its place relative to the delivery, and never lands in the closing fade.
+    t = begun ? (t > oldDone ? Math.min(plan.lastDone + (t - oldDone), plan.end - 0.6) : Math.min(t, plan.end - 0.6)) : plan.start;
     render(t);
   }
   document.addEventListener('forma:live', takeLive);

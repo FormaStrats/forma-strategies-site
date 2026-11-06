@@ -67,7 +67,7 @@ function buildMark(material) {
 /**
  * createChrome(canvas, options)
  *  still: render one frame for export (no loop, preserves the drawing buffer)
- *  time: scene time for a still frame, in seconds
+ *  time: scene time for a still frame (seconds)
  *  fit: share of the canvas height the mark fills (default 0.8)
  *  maxDpr: device-pixel-ratio cap (default 1.75)
  *  camera: optional { x, y, z, lookX, lookY, fov } to frame a close-up still

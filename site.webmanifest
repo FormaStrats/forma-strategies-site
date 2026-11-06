@@ -1,7 +1,7 @@
 {
   "name": "Forma Strategies",
   "short_name": "Forma",
-  "description": "Onchain asset management: committee-approved tokenized-stock portfolios, delivered to your own wallet.",
+  "description": "Model portfolios of tokenized stocks, delivered to your own wallet.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#0A0A0B",

@@ -28,6 +28,27 @@
     sheet.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !sheet.hidden) setMenu(false, true); });
     window.addEventListener('resize', function () { if (window.innerWidth >= 768 && !sheet.hidden) setMenu(false); });
+    // Tabbing out of the open menu closes it, so focus never sits on a link hidden under the panel (WCAG 2.4.11).
+    if (nav) nav.addEventListener('focusout', function (e) { if (!sheet.hidden && !nav.contains(e.relatedTarget)) setMenu(false); });
+  }
+
+  // ── Links to a section ─────────────────────────────────────────────────
+  // A link such as how-it-works.html#governance is scrolled to on load, before the catalog and the live figures add
+  // content above it. Once each has rendered, line the section up again, unless the visitor has started scrolling.
+  var userScrolled = false;
+  ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (type) {
+    window.addEventListener(type, function () { userScrolled = true; }, { passive: true, capture: true });
+  });
+  function realignToHash() {
+    if (userScrolled) return;
+    var id = location.hash.slice(1), target = null;
+    try { target = id && document.getElementById(decodeURIComponent(id)); } catch (e) { return; }
+    if (!target || !target.getClientRects().length) return;
+    // Jump, not glide: a smooth scroll still under way would otherwise head for the old position.
+    var root = document.documentElement, was = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    target.scrollIntoView({ block: 'start' });
+    root.style.scrollBehavior = was;
   }
 
   // ── Reveal on scroll ───────────────────────────────────────────────────
@@ -512,7 +533,7 @@
   }
 
   function renderMonitor() {
-    var grid = $('#monitor'), strip = $('#monitorStrip'), toggle = $('#monitorToggle');
+    var grid = $('#monitorGrid'), strip = $('#monitorStrip'), toggle = $('#monitorToggle');
     var uni = universeStrategy();
     if (!grid || !uni) return;
     var inc = {};
@@ -634,9 +655,11 @@
       .then(function (res) {
         if (res[1]) state.tokens = res[1];
         storePrices(res[0]);
+        var first = !hasLive;
         hasLive = true;
         showDataStatus('');
         renderAll();
+        if (first) realignToHash(); // the first render adds the price band and the live figures above later sections
         document.dispatchEvent(new CustomEvent('forma:live'));
       });
   }
@@ -652,15 +675,19 @@
     }, ms);
   }
 
-  Promise.all([loadStrategies(), loadUniverse()]).then(function (loaded) {
+  // Only pages that show strategies or live figures load them; the others (Risk, Fees, Privacy) never call Jupiter.
+  var showsData = !!document.querySelector('[data-strategy], [data-tile], [data-live], #tape, #sim');
+  if (showsData) Promise.all([loadStrategies(), loadUniverse()]).then(function (loaded) {
     var s = loaded[0];
     if (!s) return;
     state.strategies = s;
     state.universe = loaded[1];
     renderCatalogFacts();
     buildCatalog();
+    realignToHash(); // the catalog adds cards above every later section
     return loadMarket().then(function () { scheduleRefresh(60000); }, function () {
       showDataStatus('Live prices are unavailable right now. Retrying shortly; the Terminal has the latest.');
+      realignToHash(); // so does this status line
       scheduleRefresh(20000);
     });
   }).catch(function () { /* the static page still works without live data */ });

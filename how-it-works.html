@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>How Forma works · Forma Strategies</title>
-  <meta name="description" content="Forma Strategies builds committee-approved model portfolios of tokenized stocks that you deploy to your own wallet. Self-custodied, on Solana." />
+  <meta name="description" content="Forma Strategies builds model portfolios of tokenized stocks that you deploy to your own wallet. Self-custodied, on Solana." />
   <meta name="theme-color" content="#0A0A0B" />
   <link rel="canonical" href="https://formastrats.github.io/forma-strategies-site/how-it-works.html" />
   <link rel="icon" type="image/svg+xml" href="brand/forma-mark-flat.svg" />
@@ -56,7 +56,7 @@
         <a href="#strategies">Strategies</a>
         <a href="#how">How it works</a>
         <a href="#platform">Platform</a>
-        <a href="#manager">Strategy Manager Agent</a>
+        <a href="#tsa">Token Strategy Agent</a>
         <a href="#security">Execution and custody</a>
         <a href="#governance">Governance</a>
         <a href="https://x.com/FormaStrats" target="_blank" rel="noopener noreferrer">X · @FormaStrats</a>
@@ -139,7 +139,7 @@
           <p class="catalog__review" id="catalogReview" hidden></p>
         </div>
 
-        <div class="monitor reveal">
+        <div class="monitor reveal" id="monitor">
           <div class="monitor__head">
             <div>
               <p class="label">Investability monitor · live</p>
@@ -149,8 +149,8 @@
             <div class="legend" aria-hidden="true"><span><i class="sw sw--in"></i>Investable</span><span><i class="sw sw--out"></i>Watchlist</span></div>
           </div>
           <div class="monitor__strip" id="monitorStrip" aria-hidden="true"></div>
-          <button class="monitor__toggle" id="monitorToggle" type="button" aria-expanded="false" aria-controls="monitor" hidden>Show every name</button>
-          <ul class="monitor__grid" id="monitor" role="list" hidden></ul>
+          <button class="monitor__toggle" id="monitorToggle" type="button" aria-expanded="false" aria-controls="monitorGrid" hidden>Show every name</button>
+          <ul class="monitor__grid" id="monitorGrid" role="list" hidden></ul>
         </div>
       </div>
     </section>
@@ -159,12 +159,12 @@
       <div class="wrap">
         <header class="section__head reveal">
           <p class="label">How it works</p>
-          <h2 class="display">Three steps. Settled in seconds.</h2>
+          <h2 class="display">Three steps. Every holding, its own token.</h2>
         </header>
         <ol class="steps reveal">
           <li><span class="steps__n">01</span><h3>Connect a wallet</h3><p>Phantom, Solflare, Backpack or another Solana wallet. Forma never holds keys or funds.</p></li>
-          <li><span class="steps__n">02</span><h3>Choose a strategy</h3><p>A committee-approved model portfolio and an amount. Minimums from $50.</p></li>
-          <li><span class="steps__n">03</span><h3>Approve in your wallet</h3><p>One approval covers up to 20 positions. They land in your wallet in seconds.</p></li>
+          <li><span class="steps__n">02</span><h3>Choose a strategy</h3><p>A model portfolio and an amount. Minimums from $50.</p></li>
+          <li><span class="steps__n">03</span><h3>Approve in your wallet</h3><p>One approval covers up to 20 positions. Each arrives in your wallet as its own token: a claim on its issuer, not the share.</p></li>
         </ol>
 
         <figure class="shot reveal" id="terminalShot">
@@ -181,10 +181,10 @@
               </thead>
               <tbody>
                 <tr><th scope="row">Minimum</th><td data-label="Managed account">Often $100,000 or more</td><td class="is-forma" data-label="With Forma">From $50</td></tr>
-                <tr><th scope="row">Custody</th><td data-label="Managed account">A third-party custodian</td><td class="is-forma" data-label="With Forma">Your own wallet</td></tr>
-                <tr><th scope="row">Settlement</th><td data-label="Managed account">T+1 or T+2</td><td class="is-forma" data-label="With Forma">Seconds</td></tr>
-                <tr><th scope="row">Hours</th><td data-label="Managed account">Market hours</td><td class="is-forma" data-label="With Forma">24/7 onchain, deepest in US market hours</td></tr>
-                <tr><th scope="row">Fees</th><td data-label="Managed account">A percentage of assets, yearly</td><td class="is-forma" data-label="With Forma">Shown in full before you sign</td></tr>
+                <tr><th scope="row">What you hold</th><td data-label="Managed account">The shares, held in your name by a custodian</td><td class="is-forma" data-label="With Forma">One token per holding, in your own wallet. Each is a claim on its issuer, not the share.</td></tr>
+                <tr><th scope="row">Settlement</th><td data-label="Managed account">T+1 for US stocks</td><td class="is-forma" data-label="With Forma">Each swap settles onchain as it lands. Total time depends on approvals, liquidity and market hours.</td></tr>
+                <tr><th scope="row">Hours</th><td data-label="Managed account">Market hours</td><td class="is-forma" data-label="With Forma">24/7 onchain markets, deepest in US market hours. Forma also depends on Jupiter, our RPC provider and issuers.</td></tr>
+                <tr><th scope="row">Fees</th><td data-label="Managed account">A percentage of assets, yearly</td><td class="is-forma" data-label="With Forma">No holding fee from Forma. Trading costs are shown before you sign.</td></tr>
                 <tr><th scope="row">Reporting</th><td data-label="Managed account">Periodic statements</td><td class="is-forma" data-label="With Forma">Every trade onchain</td></tr>
               </tbody>
             </table>
@@ -204,7 +204,7 @@
           <div class="matrix__row matrix__row--head" role="row">
             <div role="columnheader"><span class="sr-only">Client</span></div>
             <div role="columnheader"><span class="label">Product 01</span><strong>Strategies</strong></div>
-            <div role="columnheader"><span class="label">Product 02</span><strong>Strategy Manager Agent</strong></div>
+            <div role="columnheader"><span class="label">Product 02</span><strong>Token Strategy Agent</strong></div>
           </div>
           <div class="matrix__row" role="row">
             <div role="rowheader"><strong>Investors</strong><span>Self-custody wallets</span></div>
@@ -214,7 +214,7 @@
               <span class="status status--live">Live</span>
             </div>
             <div role="cell">
-              <span class="matrix__ctx">Investors · Strategy Manager Agent</span>
+              <span class="matrix__ctx">Investors · Token Strategy Agent</span>
               <p>Drift alerts and rebalances you approve.</p>
               <span class="status">In development</span>
             </div>
@@ -227,7 +227,7 @@
               <span class="status">In development</span>
             </div>
             <div role="cell">
-              <span class="matrix__ctx">AI agents · Strategy Manager Agent</span>
+              <span class="matrix__ctx">AI agents · Token Strategy Agent</span>
               <p>Rebalancing on request. The agent keeps its own keys.</p>
               <span class="status">In development</span>
             </div>
@@ -236,10 +236,11 @@
       </div>
     </section>
 
-    <section class="section section--line" id="manager">
+    <div id="manager" aria-hidden="true"></div><!-- the section's old name: keeps how-it-works.html#manager links working -->
+    <section class="section section--line" id="tsa">
       <div class="wrap agent">
         <div class="agent__copy reveal">
-          <p class="label">Strategy Manager Agent <span class="status">In development</span></p>
+          <p class="label">Token Strategy Agent (TSA) <span class="status">In development</span></p>
           <h2 class="display">Your portfolio, kept on target.</h2>
           <ol class="agent__points">
             <li><span>01</span>Watches every account for drift.</li>
@@ -269,7 +270,7 @@
           <h2 class="display">Nothing moves without your signature.</h2>
         </header>
         <div class="principles reveal">
-          <div><h3>Self-custody</h3><p>No vault, no pooled fund, no withdrawal queue. Positions stay in your wallet until you move them.</p></div>
+          <div><h3>Self-custody</h3><p>Forma never holds your assets or keys; issuers can freeze or pause their tokens. No vault, no pooled fund, no withdrawal queue. Selling depends on market hours, liquidity and issuer status. <a href="risk.html">Read the risks</a>.</p></div>
           <div><h3>Price limits</h3><p>Each trade is checked against a fair-value price, the underlying stock where available. If the route is worse than your limit (2.5% by default), that position waits in USDC.</p></div>
           <div><h3>Batched approvals</h3><p>Up to 20 positions are signed together and routed through Jupiter.</p></div>
           <div><h3>A receipt for every trade</h3><p>Each trade is a public Solana transaction. Receipts with cost basis link to every leg.</p></div>
@@ -282,8 +283,8 @@
         <div class="reveal">
           <p class="label">Governance</p>
           <h2 class="display">Every decision on the record.</h2>
-          <p class="section__lead">Strategies launch only by a vote of Forma's Global Investment Committee (GIC), under a published charter. Risk limits are enforced in code.</p>
-          <p class="gov__status">Charter v1.0 · Committee seats being filled</p>
+          <p class="section__lead">Strategies launch under a published charter, and every decision of Forma's Global Investment Committee (GIC) is logged in the open. Risk limits are enforced in code.</p>
+          <p class="gov__status">Charter v1.0 · Committee seats opening</p>
           <a class="textlink textlink--dark" href="terminal/?tab=committee">Read the decision log</a>
         </div>
         <ol class="gov__log reveal" aria-label="Committee decisions">
@@ -319,7 +320,7 @@
           <img src="brand/forma-mark.svg" alt="" width="24" height="25" />
           <span class="lockup__word"><span class="lockup__name">Forma</span><span class="lockup__sub">Strategies</span></span>
         </a>
-        <p>Onchain asset management, built on Solana.</p>
+        <p>Tokenized stock portfolios, built on Solana.</p>
       </div>
       <nav class="footer__cols" aria-label="Footer">
         <div>
@@ -339,9 +340,9 @@
     <div class="wrap">
       <div class="footer__legal">
         <p>Forma Strategies provides non-custodial software and general model portfolios. It is not a broker-dealer, custodian or investment adviser, and nothing on this site is investment advice, a recommendation, or an offer to buy or sell any security.</p>
-        <p>Tokenized stocks (for example xStocks, issued by Backed Assets (JE) Limited) track but are not the underlying shares. They carry no voting rights, carry issuer, custody and smart-contract risk, can be paused by their issuer, and can trade away from the underlying price, especially outside US market hours. They are not available to U.S. persons or in sanctioned or restricted jurisdictions; check yours in Who can hold.</p>
+        <p>Forma never holds your assets or keys; issuers can freeze or pause their tokens. Tokenized stocks (for example xStocks, issued by Backed Assets (JE) Limited) track but are not the underlying shares. They carry no voting rights, carry issuer, custody and smart-contract risk, and can trade away from the underlying price, especially outside US market hours. They are not available to U.S. persons or in sanctioned or restricted jurisdictions; check yours in Who can hold.</p>
         <p>Live prices are third-party data and can be delayed or wrong. Model moves are not account returns, and past moves don't predict future results. Digital assets are volatile and you can lose money. Every transaction is signed by you, from your own wallet. Products marked in development are not available yet.</p>
-        <p>© 2026 Forma Strategies LLC.</p>
+        <p class="footer__base"><span>© 2026 Forma Strategies LLC.</span><a href="risk.html">Risk</a><a href="fees.html">Fees</a><a href="privacy.html">Privacy</a></p>
       </div>
     </div>
   </footer>
