@@ -25,6 +25,15 @@ From the Terminal repo:
 
 Then commit and push this repo.
 
+The deploy replaces `terminal/index.html` (title, description and share text included) with the
+Terminal's `dapp/index.html`, so copy changes to that page belong in the Terminal repository.
+
+## What gets published
+
+GitHub Pages serves this repository as-is (`.nojekyll` turns Jekyll off): every committed file is
+public at its own path, including Markdown, dotfiles and folders that start with `_`. Keep private
+notes, deploy instructions and private repository names out of this repo.
+
 ## Edit the landing page
 
 Edit `index.html` / `assets/site.css` directly. To preview locally with correct paths, serve the
